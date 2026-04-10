@@ -1,0 +1,6 @@
+{
+  "outputDirectory": "Strona",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

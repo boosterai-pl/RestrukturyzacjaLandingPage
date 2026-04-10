@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kancelaria restrukturyzacyjna — pełna automatyzacja | Booster AI</title>
+  <meta name="description" content="Case study: 5 obszarów, 45+ automatyzacji dla kancelarii restrukturyzacyjnej. Od leada do zamknięcia sprawy — pełne pokrycie procesu z CRM." />
+  <meta property="og:title" content="Kancelaria restrukturyzacyjna — pełna automatyzacja | Booster AI" />
+  <meta property="og:description" content="5 obszarów, 45+ wdrożonych automatyzacji. Case study automatyzacji kancelarii restrukturyzacyjnej od Booster AI." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================================================================
+     NAVIGATION
+     ================================================================ -->
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <img src="https://boosterai.pl/wp-content/uploads/2025/01/cropped-Blue-sygnet-with-background-1x1-1.png" alt="Booster AI sygnet" class="nav-logo-sygnet" />
+    <img src="https://boosterai.pl/wp-content/uploads/2025/01/Booster-logo-blue-no-background-e1736610804903.png" alt="Booster AI" class="nav-logo-wordmark" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#case-study">Case Study</a></li>
+    <li><a href="#obszary">Moduły</a></li>
+    <li><a href="#korzysci">Korzyści</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <a href="#kontakt" class="nav-cta">Umów konsultację</a>
+</nav>
+
+<!-- ================================================================
+     HERO
+     ================================================================ -->
+<section class="hero" id="case-study">
+  <div class="hero-inner">
+
+    <!-- Left: copy + form -->
+    <div class="hero-content">
+      <div class="hero-badge fade-up">
+        <div class="hero-badge-dot"></div>
+        Case Study · Booster AI
+      </div>
+
+      <h1 class="hero-title fade-up delay-1">
+        Kancelaria
+        restrukturyzacyjna
+        <em class="hero-title-accent"> pełna<br>automatyzacja</em>
+      </h1>
+
+      <p class="hero-desc fade-up delay-2">
+        5 obszarów, 45+ wdrożonych automatyzacji. Od leada do zamknięcia sprawy - każdy etap zoptymalizowany i połączony z CRM.
+      </p>
+
+      <form class="hero-form fade-up delay-3" id="leadForm">
+        <div class="hero-form-row">
+          <input
+            class="hero-input"
+            id="leadEmail"
+            type="email"
+            placeholder="Twój adres e-mail"
+            aria-label="Adres e-mail"
+            required
+          />
+          <button class="btn-primary" id="leadBtn" type="submit">
+            Umów konsultację <span class="btn-arrow">→</span>
+          </button>
+        </div>
+        <div class="hero-consent">
+          <input type="checkbox" id="consent" required />
+          <label for="consent">
+            Wyrażam zgodę na przetwarzanie moich danych osobowych zgodnie z
+            <a href="https://boosterai.pl/privacy-policy/">regulaminem i polityką prywatności</a>.
+          </label>
+        </div>
+        <div class="hero-form-msg" id="formMsg" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <!-- Right: image -->
+    <div class="hero-visual fade-up delay-2">
+      <div class="hero-image-wrap">
+        <!-- Dashboard UI mockup -->
+        <div class="hero-dashboard">
+
+          <!-- Top bar -->
+          <div class="hd-topbar">
+            <div class="hd-topbar-dots">
+              <span class="hd-dot" style="background:#ff5f57;"></span>
+              <span class="hd-dot" style="background:#febc2e;"></span>
+              <span class="hd-dot" style="background:#28c840;"></span>
+            </div>
+            <div class="hd-topbar-title">Booster AI — Panel kancelarii</div>
+            <div class="hd-topbar-live"><span class="hd-live-dot"></span>Na żywo</div>
+          </div>
+
+          <!-- Metric cards row -->
+          <div class="hd-metrics">
+            <div class="hd-metric">
+              <div class="hd-metric-label">Aktywne sprawy</div>
+              <div class="hd-metric-value">24</div>
+              <div class="hd-metric-delta hd-up">↑ +3 ten tydzień</div>
+            </div>
+            <div class="hd-metric">
+              <div class="hd-metric-label">Czas odpowiedzi</div>
+              <div class="hd-metric-value">4 min</div>
+              <div class="hd-metric-delta hd-up">↑ −82% vs. przed</div>
+            </div>
+            <div class="hd-metric">
+              <div class="hd-metric-label">Konwersja</div>
+              <div class="hd-metric-value">68%</div>
+              <div class="hd-metric-delta hd-up">↑ +35%</div>
+            </div>
+          </div>
+
+          <!-- Pipeline list -->
+          <div class="hd-pipeline">
+            <div class="hd-pipe-header">Pipeline spraw</div>
+            <div class="hd-pipe-row">
+              <div class="hd-pipe-dot" style="background:#3b5bdb;"></div>
+              <div class="hd-pipe-name">Kowalski & Syn Sp. z o.o.</div>
+              <div class="hd-pipe-stage" style="color:#3b5bdb;background:#eef1fd;">Nowy lead</div>
+              <div class="hd-pipe-bar"><div class="hd-pipe-fill" style="width:15%;background:#3b5bdb;"></div></div>
+            </div>
+            <div class="hd-pipe-row">
+              <div class="hd-pipe-dot" style="background:#0ea5e9;"></div>
+              <div class="hd-pipe-name">TechStart Polska S.A.</div>
+              <div class="hd-pipe-stage" style="color:#0369a1;background:#e0f2fe;">Wycena</div>
+              <div class="hd-pipe-bar"><div class="hd-pipe-fill" style="width:40%;background:#0ea5e9;"></div></div>
+            </div>
+            <div class="hd-pipe-row">
+              <div class="hd-pipe-dot" style="background:#f79009;"></div>
+              <div class="hd-pipe-name">Restaurant Group</div>
+              <div class="hd-pipe-stage" style="color:#b45309;background:#fffaeb;">Dokumenty</div>
+              <div class="hd-pipe-bar"><div class="hd-pipe-fill" style="width:65%;background:#f79009;"></div></div>
+            </div>
+            <div class="hd-pipe-row">
+              <div class="hd-pipe-dot" style="background:#12b76a;"></div>
+              <div class="hd-pipe-name">Logistyka Express Sp. k.</div>
+              <div class="hd-pipe-stage" style="color:#065f46;background:#ecfdf5;">Zamknięta</div>
+              <div class="hd-pipe-bar"><div class="hd-pipe-fill" style="width:100%;background:#12b76a;"></div></div>
+            </div>
+          </div>
+
+          <!-- Bottom automation notification -->
+          <div class="hd-notif">
+            <div class="hd-notif-icon">⚡</div>
+            <div class="hd-notif-text">
+              <strong>Automatyzacja uruchomiona</strong> — faktura wystawiona dla Logistyka Express · 1 min temu
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================================
+     STATS BAR
+     ================================================================ -->
+<div class="stats-bar">
+  <div class="stats-inner">
+
+    <div class="stat-item" data-animate="fade-up" data-delay="0">
+      <div class="stat-icon-wrap" style="background:#eef1fd;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b5bdb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="stat-num" style="color:#3b5bdb;">5</div>
+      <div class="stat-label">obszarów procesu</div>
+      <div class="stat-bar-line"><div class="stat-bar-fill" style="background:#3b5bdb;width:40%;"></div></div>
+    </div>
+
+    <div class="stat-item" data-animate="fade-up" data-delay="100">
+      <div class="stat-icon-wrap" style="background:#ecfdf5;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <div class="stat-num" style="color:#10b981;">45+</div>
+      <div class="stat-label">wdrożonych automatyzacji</div>
+      <div class="stat-bar-line"><div class="stat-bar-fill" style="background:#10b981;width:90%;"></div></div>
+    </div>
+
+    <div class="stat-item" data-animate="fade-up" data-delay="200">
+      <div class="stat-icon-wrap" style="background:#fffaeb;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="stat-num" style="color:#f59e0b;">−70%</div>
+      <div class="stat-label">czasu administracyjnego</div>
+      <div class="stat-bar-line"><div class="stat-bar-fill" style="background:#f59e0b;width:70%;"></div></div>
+    </div>
+
+    <div class="stat-item" data-animate="fade-up" data-delay="300">
+      <div class="stat-icon-wrap" style="background:#f5f3ff;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+      </div>
+      <div class="stat-num" style="color:#8b5cf6;">100%</div>
+      <div class="stat-label">pokrycia procesu</div>
+      <div class="stat-bar-line"><div class="stat-bar-fill" style="background:#8b5cf6;width:100%;"></div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================================================================
+     MODULES — INTERACTIVE TABS
+     ================================================================ -->
+<div class="modules-section" id="obszary">
+  <div class="modules-header">
+    <div class="section-tag">Moduły automatyzacji</div>
+    <h2 class="section-title">5 modułów. <em>Pełne pokrycie.</em></h2>
+    <p class="section-desc">
+      Każdy etap pracy kancelarii - od pozyskania leada po zamknięcie sprawy dobjęty automatyzacją. Łącznie 45+ wdrożonych funkcji.
+    </p>
+  </div>
+
+  <div class="modules-layout">
+
+    <!-- LEFT: sticky tab nav -->
+    <div class="modules-nav">
+      <button class="mod-tab active" onclick="switchModule(0)" data-idx="0">
+        <div class="mod-tab-color" style="background:#3b5bdb;"></div>
+        <div class="mod-tab-icon" style="color:#3b5bdb;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </div>
+        <div class="mod-tab-text">
+          <span class="mod-tab-title">Automatyzacja sprzedaży</span>
+          <span class="mod-tab-sub">Lead → CRM → wycena</span>
+        </div>
+        <span class="mod-tab-badge" style="background:#eef1fd;color:#3b5bdb;">15</span>
+      </button>
+
+      <button class="mod-tab" onclick="switchModule(1)" data-idx="1">
+        <div class="mod-tab-color" style="background:#10b981;"></div>
+        <div class="mod-tab-icon" style="color:#10b981;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+        </div>
+        <div class="mod-tab-text">
+          <span class="mod-tab-title">Proces restrukturyzacji</span>
+          <span class="mod-tab-sub">Dłużnik · wierzyciele</span>
+        </div>
+        <span class="mod-tab-badge" style="background:#ecfdf5;color:#10b981;">5</span>
+      </button>
+
+      <button class="mod-tab" onclick="switchModule(2)" data-idx="2">
+        <div class="mod-tab-color" style="background:#f59e0b;"></div>
+        <div class="mod-tab-icon" style="color:#f59e0b;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 12.5-8 8a2.119 2.119 0 1 1-3-3l8-8"/><path d="m16 16 6-6"/><path d="m8 8 6-6"/><path d="m9 7 8 8"/><path d="m21 11-8-8"/></svg>
+        </div>
+        <div class="mod-tab-text">
+          <span class="mod-tab-title">Etap sądowy</span>
+          <span class="mod-tab-sub">KRZ · obwieszczenia</span>
+        </div>
+        <span class="mod-tab-badge" style="background:#fffaeb;color:#f59e0b;">3</span>
+      </button>
+
+      <button class="mod-tab" onclick="switchModule(3)" data-idx="3">
+        <div class="mod-tab-color" style="background:#ef4444;"></div>
+        <div class="mod-tab-icon" style="color:#ef4444;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+        </div>
+        <div class="mod-tab-text">
+          <span class="mod-tab-title">Płatności i windykacja</span>
+          <span class="mod-tab-sub">Wyciągi · wezwania</span>
+        </div>
+        <span class="mod-tab-badge" style="background:#fef2f2;color:#ef4444;">9</span>
+      </button>
+
+      <button class="mod-tab" onclick="switchModule(4)" data-idx="4">
+        <div class="mod-tab-color" style="background:#8b5cf6;"></div>
+        <div class="mod-tab-icon" style="color:#8b5cf6;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
+        </div>
+        <div class="mod-tab-text">
+          <span class="mod-tab-title">Nadzór nad układem</span>
+          <span class="mod-tab-sub">Harmonogramy · archiwizacja</span>
+        </div>
+        <span class="mod-tab-badge" style="background:#f5f3ff;color:#8b5cf6;">7</span>
+      </button>
+
+
+    </div>
+
+    <!-- RIGHT: panels -->
+    <div class="modules-panel-wrap">
+
+      <!-- Panel 0 -->
+      <div class="mod-panel active" data-panel="0">
+        <div class="mod-panel-head" style="--accent:#3b5bdb;--accent-pale:#eef1fd;">
+          <div class="mod-panel-tag">Moduł 01</div>
+          <h3 class="mod-panel-title">Automatyzacja sprzedaży</h3>
+          <p class="mod-panel-desc">Od pierwszego kontaktu do podpisanej umowy — każdy krok zautomatyzowany i zsynchronizowany z CRM.</p>
+        </div>
+        <ul class="mod-features">
+          <li><span>Automatyczne tworzenie leadów w CRM z wielu źródeł</span></li>
+          <li><span>Transkrypcje rozmów telefonicznych + zapis automatyczny w CRM</span></li>
+          <li><span>Uzupełnianie danych firmy po NIP — integracja z API Regon (GUS)</span></li>
+          <li><span>Połączenie leadów mailowych z CRM (automatyczne przypisanie)</span></li>
+          <li><span>Połączenie leadów telefonicznych z CRM</span></li>
+          <li><span>Dynamiczna, interaktywna ankieta restrukturyzacyjna</span></li>
+          <li><span>Automatyczne drafty maili przy braku aktywności (1, 2 i 4 dni)</span></li>
+          <li><span>Integracja z Mailerlite (segmentacja i kampanie)</span></li>
+          <li><span>Automatyczny email do zarządu o konieczności wykonania wyceny</span></li>
+          <li><span>Teczka klienta na SharePoint z automatycznym odkładaniem dokumentów</span></li>
+          <li><span>Automatyczny draft szablonu ankiety restrukturyzacyjnej (.doc)</span></li>
+          <li><span>Automatyczny draft wstępnego planu restrukturyzacji (.doc)</span></li>
+          <li><span>Przypomnienia w CRM dotyczące follow-upu do klienta</span></li>
+          <li><span>Automatyczny status «Oczekiwanie na płatność» + draft maila</span></li>
+          <li><span>Przesłanie szansy do lejka + powiadomienie managera</span></li>
+        </ul>
+        <div class="mod-panel-footer">
+          <div class="mod-training-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+            Szkolenie: 2h
+          </div>
+          <div class="mod-count-badge" style="background:#eef1fd;color:#3b5bdb;">15 funkcji</div>
+        </div>
+      </div>
+
+      <!-- Panel 1 -->
+      <div class="mod-panel" data-panel="1">
+        <div class="mod-panel-head" style="--accent:#10b981;--accent-pale:#ecfdf5;">
+          <div class="mod-panel-tag">Moduł 02</div>
+          <h3 class="mod-panel-title">Proces restrukturyzacji</h3>
+          <p class="mod-panel-desc">Automatyczne generowanie dokumentów układowych, komunikacja z wierzycielami i dłużnikiem bez manualnej pracy.</p>
+        </div>
+        <ul class="mod-features">
+          <li><span>Automatyczne wysyłki wiadomości powitalnych do dłużnika, wierzycieli i komorników</span></li>
+          <li><span>Automatyczny draft planu restrukturyzacyjnego na podstawie wywiadu z dłużnikiem</span></li>
+          <li><span>Automatyczny szablon i draft testu prywatnego wierzyciela z gotowymi formułami</span></li>
+          <li><span>Automatyczne drafty do wierzycieli z propozycjami układowymi</span></li>
+          <li><span>Szablon pliku Excel do propozycji układowych (formatka)</span></li>
+        </ul>
+        <div class="mod-panel-footer">
+          <div class="mod-training-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+            Szkolenie: 2h
+          </div>
+          <div class="mod-count-badge" style="background:#ecfdf5;color:#10b981;">5 funkcji</div>
+        </div>
+      </div>
+
+      <!-- Panel 2 -->
+      <div class="mod-panel" data-panel="2">
+        <div class="mod-panel-head" style="--accent:#f59e0b;--accent-pale:#fffaeb;">
+          <div class="mod-panel-tag">Moduł 03</div>
+          <h3 class="mod-panel-title">Etap sądowy</h3>
+          <p class="mod-panel-desc">Automatyczny monitoring KRZ, alerty o zmianach statusów i obwieszczeniach — zero przeoczonych terminów.</p>
+        </div>
+        <ul class="mod-features">
+          <li><span>Automatyczne «nasłuchiwanie» publicznego KRZ — pobieranie obwieszczeń do folderu klienta na SharePoint z linkiem do CRM</span></li>
+          <li><span>Alert w CRM o każdej aktualizacji statusu sprawy w KRZ</span></li>
+          <li><span>Automatyczne zadanie o przygotowaniu maila informującego o obwieszczeniu w KRZ</span></li>
+        </ul>
+        <div class="mod-panel-footer">
+          <div class="mod-training-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+            Szkolenie: 2h
+          </div>
+          <div class="mod-count-badge" style="background:#fffaeb;color:#f59e0b;">3 funkcje</div>
+        </div>
+      </div>
+
+      <!-- Panel 3 -->
+      <div class="mod-panel" data-panel="3">
+        <div class="mod-panel-head" style="--accent:#ef4444;--accent-pale:#fef2f2;">
+          <div class="mod-panel-tag">Moduł 04</div>
+          <h3 class="mod-panel-title">Płatności i windykacja</h3>
+          <p class="mod-panel-desc">Monitoring przelewów, automatyczne wezwania do zapłaty i eskalacja windykacji bez angażowania prawnika.</p>
+        </div>
+        <ul class="mod-features">
+          <li><span>Automatyczne sprawdzanie przelewów na podstawie wyciągów z konta (tygodniowo)</span></li>
+          <li><span>Automatyczne przypomnienie o zbliżającej się płatności (mail + SMS)</span></li>
+          <li><span>Alerty przy niezaksięgowanej płatności w terminie</span></li>
+          <li><span>Automatyczne tworzenie zadania windykacyjnego w CRM (przypisanie do opiekuna)</span></li>
+          <li><span>Automatyczne wysyłki przypomnień o zaległościach do wierzycieli/dłużników</span></li>
+          <li><span>Tagowanie opóźnionych płatników + przesyłanie do etapu «Windykacja» w CRM</span></li>
+          <li><span>Automatyczna wysyłka wezwań do zapłaty (wersja uprzejma i formalna)</span></li>
+          <li><span>Automatyczny draft wypowiedzenia umowy z gotową strukturą</span></li>
+        </ul>
+        <div class="mod-panel-footer">
+          <div class="mod-training-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+            Szkolenie: 2h
+          </div>
+          <div class="mod-count-badge" style="background:#fef2f2;color:#ef4444;">9 funkcji</div>
+        </div>
+      </div>
+
+      <!-- Panel 4 -->
+      <div class="mod-panel" data-panel="4">
+        <div class="mod-panel-head" style="--accent:#8b5cf6;--accent-pale:#f5f3ff;">
+          <div class="mod-panel-tag">Moduł 05</div>
+          <h3 class="mod-panel-title">Nadzór nad wykonywaniem układu</h3>
+          <p class="mod-panel-desc">Automatyczne harmonogramy, kwartalne sprawozdania i archiwizacja zamkniętych spraw bez ręcznej obsługi.</p>
+        </div>
+        <ul class="mod-features">
+          <li><span>Automatyczne generowanie harmonogramu spłat na podstawie planu układu</span></li>
+          <li><span>Automatyczny draft maila z harmonogramem spłat dla dłużnika</span></li>
+          <li><span>Przypomnienia do dłużnika o konieczności przesłania potwierdzeń przelewów</span></li>
+          <li><span>Kwartalne przypomnienia o sprawozdaniach</span></li>
+          <li><span>Cykliczne prośby o potwierdzenia przelewów</span></li>
+          <li><span>Automatyczna archiwizacja po zamknięciu sprawy</span></li>
+          <li><span>Powiadomienie managera o zamknięciu sprawy</span></li>
+        </ul>
+        <div class="mod-panel-footer">
+          <div class="mod-training-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+            Szkolenie: 2h
+          </div>
+          <div class="mod-count-badge" style="background:#f5f3ff;color:#8b5cf6;">7 funkcji</div>
+        </div>
+      </div>
+
+    </div><!-- /panels -->
+  </div><!-- /layout -->
+</div>
+
+
+
+<!-- ================================================================
+     PROCESS TIMELINE + CRM MOCK
+     ================================================================ -->
+<div class="split-section-wrap">
+<div class="section">
+  <div class="split-section">
+
+    <!-- Timeline -->
+    <div>
+      <div class="section-tag">Jak to działa</div>
+      <h2 class="section-title">Od leada do <em>zamknięcia sprawy</em></h2>
+      <p class="section-desc">
+        Każdy krok wyzwalany jest automatycznie — bez e-maili wewnętrznych, bez ręcznego przekazywania zadań.
+      </p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3>Lead wpada do systemu</h3>
+          <p>Formularz, telefon, e-mail — wszystko ląduje w CRM i jest automatycznie tagowane oraz przypisywane do prawnika.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3>Kwalifikacja i wycena</h3>
+          <p>AI ocenia rodzaj sprawy, generuje wstępną wycenę i wysyła ofertę w ciągu kilku minut od zapytania.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3>Podpisanie umowy</h3>
+          <p>Umowa generowana automatycznie, wysyłana do e-podpisu i archiwizowana bez udziału człowieka.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3>Prowadzenie sprawy</h3>
+          <p>Terminy, dokumenty, komunikacja z klientem — wszystko zarządzane przez workflow w CRM.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3>Zamknięcie i faktura</h3>
+          <p>Faktura wystawiana automatycznie po zamknięciu sprawy. Prośba o opinię wysyłana 7 dni później.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CRM Mock -->
+    <div>
+      <div class="crm-panel">
+        <div class="crm-panel-header">
+          Widok CRM — Aktywne sprawy
+          <span>● Na żywo</span>
+        </div>
+        <div class="crm-rows">
+          <div class="crm-row">
+            <div class="crm-dot" style="background:#3b5bdb;"></div>
+            <div class="crm-name">Kowalski & Syn Sp. z o.o.</div>
+            <div class="crm-badge badge-new">Nowy lead</div>
+          </div>
+          <div class="crm-row">
+            <div class="crm-dot" style="background:#0ea5e9;"></div>
+            <div class="crm-name">Firma Budowlana M. Nowak</div>
+            <div class="crm-badge badge-proc">Wycena wysłana</div>
+          </div>
+          <div class="crm-row">
+            <div class="crm-dot" style="background:#12b76a;"></div>
+            <div class="crm-name">TechStart Polska S.A.</div>
+            <div class="crm-badge badge-done">Umowa podpisana</div>
+          </div>
+          <div class="crm-row">
+            <div class="crm-dot" style="background:#f79009;"></div>
+            <div class="crm-name">Restaurant Group Wiśniewscy</div>
+            <div class="crm-badge badge-wait">Dok. w trakcie</div>
+          </div>
+          <div class="crm-row">
+            <div class="crm-dot" style="background:#6b7280;"></div>
+            <div class="crm-name">Logistyka Express Sp. k.</div>
+            <div class="crm-badge badge-closed">Sprawa zamknięta</div>
+          </div>
+          <div class="crm-row">
+            <div class="crm-dot" style="background:#3b5bdb;"></div>
+            <div class="crm-name">Auto-Handel Zieliński</div>
+            <div class="crm-badge badge-inv">Faktura wystawiona</div>
+          </div>
+        </div>
+        <div class="crm-notify">
+          <div class="crm-notify-label">⚡ Ostatnia automatyzacja</div>
+          <div class="crm-notify-text">Prośba o opinię Google wysłana do Logistyka Express · 2 min temu</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ================================================================
+     BENEFITS
+     ================================================================ -->
+<div class="section-alt" id="korzysci">
+  <div class="section">
+    <div class="section-tag">Korzyści</div>
+    <h2 class="section-title">Co zyskuje <em>kancelaria?</em></h2>
+    <p class="section-desc">
+      Konkretne wyniki, które obserwujemy u każdego klienta po wdrożeniu systemu automatyzacji.
+    </p>
+
+    <div class="benefits-grid">
+      <div class="benefit-card bc-blue">
+        <div class="benefit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Czas odzysku −70%</h3>
+        <p>Prawnicy przestają tracić czas na administrację i wracają do pracy merytorycznej, która generuje przychód.</p>
+      </div>
+      <div class="benefit-card bc-green">
+        <div class="benefit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </div>
+        <h3>Konwersja leadów +35%</h3>
+        <p>Błyskawiczne odpowiedzi na zapytania i automatyczne follow-upy dramatycznie zwiększają skuteczność pozyskiwania klientów.</p>
+      </div>
+      <div class="benefit-card bc-amber">
+        <div class="benefit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Zero przeoczeń terminów</h3>
+        <p>Automatyczne kalendarze i przypomnienia eliminują ryzyko przeoczenia krytycznych terminów sądowych i procesowych.</p>
+      </div>
+      <div class="benefit-card bc-violet">
+        <div class="benefit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>Więcej spraw, ten sam zespół</h3>
+        <p>Wzrost obrotów bez proporcjonalnego wzrostu kosztów — kancelaria obsługuje więcej spraw tą samą liczbą pracowników.</p>
+      </div>
+      <div class="benefit-card bc-rose">
+        <div class="benefit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Wyższy NPS klientów</h3>
+        <p>Klienci otrzymują szybsze odpowiedzi, regularny status sprawy i proaktywną komunikację — co buduje lojalność i polecenia.</p>
+      </div>
+      <div class="benefit-card bc-sky">
+        <div class="benefit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        </div>
+        <h3>Dane w czasie rzeczywistym</h3>
+        <p>Pełny podgląd lejka sprzedaży, statusów spraw i wyników finansowych — bez ręcznego zbierania raportów.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     TESTIMONIAL
+     ================================================================ -->
+
+
+<!-- ================================================================
+     CTA
+     ================================================================ -->
+<div class="cta-section" id="kontakt">
+  <div class="cta-inner">
+    <div class="section-tag">Gotowy na automatyzację?</div>
+    <h2 class="section-title">Zbudujmy <em>Twój system</em><br>od podstaw</h2>
+    <p>Bezpłatna konsultacja - analizujemy Twój proces i pokazujemy, ile czasu i pieniędzy możesz odzyskać.</p>
+
+    <div class="cta-buttons">
+      <a href="#case-study" class="btn-white" id="ctaScrollBtn">
+        Umów bezpłatną konsultację →
+      </a>
+      <a href="#obszary" class="btn-outline-white">
+        Wróć do case study
+      </a>
+    </div>
+
+    <div class="cta-checks">
+      <span class="cta-check">Bezpłatna analiza procesu</span>
+      <span class="cta-check">Wdrożenie pod klucz</span>
+      <span class="cta-check">Wsparcie po wdrożeniu</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="https://boosterai.pl/wp-content/uploads/2025/01/cropped-Blue-sygnet-with-background-1x1-1.png" alt="Booster AI sygnet" class="footer-logo-sygnet" />
+      <img src="https://boosterai.pl/wp-content/uploads/2025/01/Booster-logo-blue-no-background-e1736610804903.png" alt="Booster AI" class="footer-logo-wordmark" />
+    </div>
+    <p>© 2026 Booster AI · Automatyzacja procesów biznesowych</p>
+    <p><a href="mailto:hello@boosterai.pl">kontakt@boosterai.pl</a></p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

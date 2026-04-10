@@ -1,0 +1,7 @@
+name = "clickup-lead-proxy"
+main = "src/worker.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+CLICKUP_LIST_ID = "901522723510"
+ALLOWED_ORIGIN = "https://boosterai.pl"
