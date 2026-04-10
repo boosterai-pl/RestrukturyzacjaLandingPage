@@ -3,6 +3,7 @@ export default {
     const origin = request.headers.get("Origin") || "";
     const isAllowed =
       origin === env.ALLOWED_ORIGIN ||
+      origin === "https://restrukturyzacja-landing-page.vercel.app" ||
       origin === "http://localhost:3000" ||
       origin === "http://127.0.0.1:5500";
 
