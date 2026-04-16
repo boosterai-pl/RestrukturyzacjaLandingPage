@@ -553,6 +553,84 @@
   }
   .footer-bottom .brand-note { color: #9ab3d6; }
 
+  /* ---------- Inline CTA (after sections) ---------- */
+  .inline-cta { text-align: center; margin-top: 48px; }
+  .inline-cta .hint { color: var(--ink-500); font-size: .92rem; margin-top: 12px; }
+
+  /* ---------- Modal ---------- */
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(6, 21, 48, 0.55);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 100;
+    padding: 20px;
+    opacity: 0; transition: opacity .2s ease;
+  }
+  .modal-backdrop[data-open="true"] { display: flex; opacity: 1; }
+  .modal {
+    background: white;
+    border-radius: var(--radius-lg);
+    max-width: 480px; width: 100%;
+    padding: 32px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    transform: translateY(8px);
+    transition: transform .2s ease;
+  }
+  .modal-backdrop[data-open="true"] .modal { transform: translateY(0); }
+  @media (min-width: 600px) { .modal { padding: 40px; } }
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    width: 34px; height: 34px; border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--ink-500);
+    transition: background-color .15s ease, color .15s ease;
+  }
+  .modal-close:hover { background: var(--navy-50); color: var(--navy-900); }
+  .modal h3 { font-size: 1.4rem; margin-bottom: 8px; }
+  .modal-lead { color: var(--ink-700); margin-bottom: 22px; font-size: .98rem; }
+  .modal-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: .85rem; font-weight: 600;
+    color: #0a8f7b; background: rgba(37,208,182,.15);
+    padding: 6px 12px; border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .modal-badge svg { width: 14px; height: 14px; }
+  .form-field { margin-bottom: 16px; }
+  .form-field label {
+    display: block; font-weight: 600; font-size: .88rem;
+    color: var(--navy-800); margin-bottom: 6px;
+  }
+  .form-field input {
+    width: 100%; padding: 14px 16px;
+    border: 1.5px solid var(--line); border-radius: 10px;
+    font-size: 1rem; font-family: inherit; color: var(--navy-900);
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .form-field input:focus {
+    outline: none; border-color: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(0,166,255,.18);
+  }
+  .form-field input::placeholder { color: var(--ink-300); }
+  .form-consent {
+    font-size: .78rem; color: var(--ink-500);
+    margin: 4px 0 20px; line-height: 1.5;
+  }
+  .form-consent a { color: var(--cyan-600); text-decoration: underline; }
+  .modal .btn-primary { width: 100%; justify-content: center; }
+  .form-success { display: none; text-align: center; padding: 8px 0; }
+  .form-success svg { width: 54px; height: 54px; color: #0a8f7b; margin: 0 auto 14px; }
+  .form-success h3 { margin-bottom: 10px; }
+  .form-success p { color: var(--ink-700); }
+  .modal[data-state="success"] form,
+  .modal[data-state="success"] .modal-badge,
+  .modal[data-state="success"] > h3,
+  .modal[data-state="success"] > .modal-lead { display: none; }
+  .modal[data-state="success"] .form-success { display: block; }
+
   /* ---------- A11y ---------- */
   .sr-only {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
@@ -756,6 +834,16 @@
         <div class="metric-lbl">przeoczonych terminów KRZ, płatności i sprawozdań — system pilnuje sam</div>
       </div>
     </div>
+
+    <div class="inline-cta">
+      <button type="button" class="btn btn-primary btn-lg"
+              data-modal-open="offer-modal"
+              data-cta="after-scope-offer">
+        Otrzymaj ofertę
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+      <div class="hint">Oddzwonimy w ciągu 2h w godzinach roboczych.</div>
+    </div>
   </div>
 </section>
 
@@ -953,6 +1041,17 @@
         <p>Harmonogramy, kwartalne sprawozdania, automatyczne zamknięcie teczki na SharePoint.</p>
       </div>
     </div>
+
+    <div class="inline-cta">
+      <a class="btn btn-primary btn-lg"
+         href="https://cal.com/szymon-bazan-iahn2z/15min"
+         target="_blank" rel="noopener"
+         data-cta="after-how-demo">
+        Zobacz demo
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </a>
+      <div class="hint">15 minut · bez przygotowania · działający system na żywo.</div>
+    </div>
   </div>
 </section>
 
@@ -1081,6 +1180,69 @@
 </main>
 
 <!-- ============================================================
+     OFFER MODAL
+     ============================================================ -->
+<div class="modal-backdrop" id="offer-modal" data-open="false" role="dialog"
+     aria-modal="true" aria-labelledby="offer-modal-title" aria-hidden="true">
+  <div class="modal" data-state="form">
+    <button type="button" class="modal-close" data-modal-close aria-label="Zamknij okno">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+    </button>
+
+    <div class="modal-badge" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Oddzwonimy w ciągu 2 godzin
+    </div>
+
+    <h3 id="offer-modal-title">Zostaw numer — wrócimy z ofertą</h3>
+    <p class="modal-lead">
+      Podaj numer telefonu, a skontaktujemy się w ciągu 2 godzin w godzinach roboczych (pn–pt 9:00–17:00)
+      i omówimy zakres wdrożenia dopasowany do Twojej kancelarii.
+    </p>
+
+    <form id="offer-form" novalidate>
+      <div class="form-field">
+        <label for="offer-phone">Numer telefonu</label>
+        <input
+          type="tel"
+          id="offer-phone"
+          name="phone"
+          required
+          autocomplete="tel"
+          inputmode="tel"
+          placeholder="+48 600 000 000"
+          pattern="^[\+\s0-9\-\(\)]{7,}$"
+        >
+      </div>
+      <div class="form-field">
+        <label for="offer-name">Imię (opcjonalnie)</label>
+        <input
+          type="text"
+          id="offer-name"
+          name="name"
+          autocomplete="given-name"
+          placeholder="Jak mamy się zwracać"
+        >
+      </div>
+      <div class="form-consent">
+        Klikając „Wyślij" wyrażasz zgodę na kontakt telefoniczny w sprawie oferty LegalFlo.
+        Szczegóły w <a href="https://boosterai.pl/privacy-policy/" target="_blank" rel="noopener">polityce prywatności</a>.
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg" data-cta="offer-submit">
+        Wyślij prośbę o kontakt
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </form>
+
+    <div class="form-success" role="status" aria-live="polite">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+      <h3>Dziękujemy!</h3>
+      <p>Zadzwonimy do Ciebie w ciągu 2 godzin w godzinach roboczych.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
      FOOTER
      ============================================================ -->
 <footer class="site-footer">
@@ -1113,7 +1275,7 @@
         <h4>Kontakt</h4>
         <a href="https://cal.com/szymon-bazan-iahn2z/30min" target="_blank" rel="noopener" data-cta="footer">Umów rozmowę</a>
         <a href="mailto:kontakt@boosterai.pl">kontakt@boosterai.pl</a>
-        <a href="/polityka-prywatnosci">Polityka prywatności</a>
+        <a href="https://boosterai.pl/privacy-policy/" target="_blank" rel="noopener">Polityka prywatności</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1151,6 +1313,71 @@
       // window.dataLayer && window.dataLayer.push({ event: 'cta_click', section: el.dataset.cta });
     });
   });
+
+  // Offer modal
+  (function() {
+    const modal = document.getElementById('offer-modal');
+    if (!modal) return;
+    const dialog = modal.querySelector('.modal');
+    const form = modal.querySelector('#offer-form');
+    const phoneInput = modal.querySelector('#offer-phone');
+    let lastFocus = null;
+
+    function open(trigger) {
+      lastFocus = trigger || document.activeElement;
+      modal.setAttribute('data-open', 'true');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      // Reset state if reopened after submit
+      dialog.setAttribute('data-state', 'form');
+      form && form.reset();
+      setTimeout(() => phoneInput && phoneInput.focus(), 80);
+    }
+    function close() {
+      modal.setAttribute('data-open', 'false');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    }
+
+    // Openers
+    document.querySelectorAll('[data-modal-open="offer-modal"]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        open(btn);
+      });
+    });
+    // Close by button or backdrop
+    modal.addEventListener('click', e => {
+      if (e.target === modal || e.target.closest('[data-modal-close]')) close();
+    });
+    // Close with ESC
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.getAttribute('data-open') === 'true') close();
+    });
+
+    // Submit (client-side only — POST endpoint do podpięcia po stronie serwera)
+    if (form) {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const phone = (phoneInput.value || '').trim();
+        if (!/^[\+\s0-9\-\(\)]{7,}$/.test(phone)) {
+          phoneInput.setAttribute('aria-invalid', 'true');
+          phoneInput.focus();
+          return;
+        }
+        phoneInput.removeAttribute('aria-invalid');
+
+        // TODO: podepnij fetch POST do backendu (np. /api/callback-request)
+        // fetch('/api/callback-request', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, name: form.elements.name.value }) });
+
+        dialog.setAttribute('data-state', 'success');
+        // window.dataLayer && window.dataLayer.push({ event: 'offer_form_submit' });
+        // Auto-close after 4s
+        setTimeout(() => { if (modal.getAttribute('data-open') === 'true') close(); }, 4000);
+      });
+    }
+  })();
 </script>
 </body>
 </html>
