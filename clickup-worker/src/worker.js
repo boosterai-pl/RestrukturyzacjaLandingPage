@@ -3,6 +3,7 @@ export default {
     const origin = request.headers.get("Origin") || "";
     const isAllowed =
       origin === env.ALLOWED_ORIGIN ||
+      origin === "https://restrukturyzacja.boosterai.pl" ||
       origin === "https://restrukturyzacja-landing-page.vercel.app" ||
       origin === "http://localhost:3000" ||
       origin === "http://127.0.0.1:5500";
@@ -26,11 +27,21 @@ export default {
     }
 
     try {
-      const { email } = await request.json();
+      const body = await request.json();
+      const email = typeof body.email === "string" ? body.email.trim() : "";
+      const phoneRaw = typeof body.phone === "string" ? body.phone.trim() : "";
+      const name = typeof body.name === "string" ? body.name.trim().slice(0, 120) : "";
+      const source = typeof body.source === "string" ? body.source.trim().slice(0, 80) : "";
 
-      if (!email || !email.includes("@")) {
+      // Basic validation
+      const hasValidEmail = email && email.includes("@") && email.length <= 160;
+      // Accept only digits, space, +, -, (, ); require min 7 digits after normalization
+      const phoneDigits = phoneRaw.replace(/[^0-9]/g, "");
+      const hasValidPhone = /^[\+\s0-9\-\(\)]{7,40}$/.test(phoneRaw) && phoneDigits.length >= 7;
+
+      if (!hasValidEmail && !hasValidPhone) {
         return new Response(
-          JSON.stringify({ error: "Invalid email" }),
+          JSON.stringify({ error: "Provide a valid email or phone" }),
           { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
@@ -44,11 +55,25 @@ export default {
         minute: "2-digit",
       });
 
+      // Task name: prefer phone (priority callback requests), then name, then email
+      const taskLabel = hasValidPhone ? phoneRaw : (name || email);
+      const taskName = hasValidPhone
+        ? `Oddzwoń w 2h: ${taskLabel}${name ? ` (${name})` : ""}`
+        : `Nowy lead: ${taskLabel}`;
+
+      const lines = [];
+      if (name)           lines.push(`**Imię:** ${name}`);
+      if (hasValidPhone)  lines.push(`**Telefon:** ${phoneRaw}`);
+      if (hasValidEmail)  lines.push(`**Email:** ${email}`);
+      lines.push(`**Źródło:** ${source || "Landing page - Kancelaria Restrukturyzacyjna"}`);
+      if (origin)         lines.push(`**Origin:** ${origin}`);
+      lines.push(`**Data:** ${dateStr}`);
+
       const taskData = {
-        name: `Nowy lead: ${email}`,
-        description: `**Email:** ${email}\n**Źródło:** Landing page - Kancelaria Restrukturyzacyjna\n**Data:** ${dateStr}`,
+        name: taskName,
+        description: lines.join("\n"),
         status: "to do",
-        priority: 2,
+        priority: hasValidPhone ? 1 : 2, // urgent gdy jest telefon (callback w 2h)
         notify_all: true,
       };
 

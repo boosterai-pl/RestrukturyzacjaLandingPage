@@ -1314,13 +1314,17 @@
     });
   });
 
-  // Offer modal
+  // Offer modal + ClickUp lead submission
   (function() {
+    const WORKER_URL = 'https://clickup-lead-proxy.szymon-sidor.workers.dev';
     const modal = document.getElementById('offer-modal');
     if (!modal) return;
     const dialog = modal.querySelector('.modal');
     const form = modal.querySelector('#offer-form');
     const phoneInput = modal.querySelector('#offer-phone');
+    const nameInput = modal.querySelector('#offer-name');
+    const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+    const submitBtnText = submitBtn ? submitBtn.innerHTML : '';
     let lastFocus = null;
 
     function open(trigger) {
@@ -1328,9 +1332,10 @@
       modal.setAttribute('data-open', 'true');
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
-      // Reset state if reopened after submit
       dialog.setAttribute('data-state', 'form');
       form && form.reset();
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = submitBtnText; }
+      clearError();
       setTimeout(() => phoneInput && phoneInput.focus(), 80);
     }
     function close() {
@@ -1339,13 +1344,25 @@
       document.body.style.overflow = '';
       if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
     }
+    function clearError() {
+      const existing = form && form.querySelector('.form-error');
+      if (existing) existing.remove();
+      phoneInput && phoneInput.removeAttribute('aria-invalid');
+    }
+    function showError(msg) {
+      clearError();
+      if (!form) return;
+      const el = document.createElement('div');
+      el.className = 'form-error';
+      el.setAttribute('role', 'alert');
+      el.style.cssText = 'color:#c53030;background:rgba(255,85,102,.08);padding:10px 14px;border-radius:8px;font-size:.88rem;margin-bottom:12px;';
+      el.textContent = msg;
+      form.insertBefore(el, form.firstChild);
+    }
 
     // Openers
     document.querySelectorAll('[data-modal-open="offer-modal"]').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.preventDefault();
-        open(btn);
-      });
+      btn.addEventListener('click', e => { e.preventDefault(); open(btn); });
     });
     // Close by button or backdrop
     modal.addEventListener('click', e => {
@@ -1356,25 +1373,54 @@
       if (e.key === 'Escape' && modal.getAttribute('data-open') === 'true') close();
     });
 
-    // Submit (client-side only — POST endpoint do podpięcia po stronie serwera)
     if (form) {
-      form.addEventListener('submit', e => {
+      form.addEventListener('submit', async e => {
         e.preventDefault();
+        clearError();
+
         const phone = (phoneInput.value || '').trim();
+        const name = (nameInput && nameInput.value || '').trim();
+
         if (!/^[\+\s0-9\-\(\)]{7,}$/.test(phone)) {
           phoneInput.setAttribute('aria-invalid', 'true');
+          showError('Podaj prawidłowy numer telefonu.');
           phoneInput.focus();
           return;
         }
-        phoneInput.removeAttribute('aria-invalid');
 
-        // TODO: podepnij fetch POST do backendu (np. /api/callback-request)
-        // fetch('/api/callback-request', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, name: form.elements.name.value }) });
+        // UI: loading
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = 'Wysyłam…';
+        }
 
-        dialog.setAttribute('data-state', 'success');
-        // window.dataLayer && window.dataLayer.push({ event: 'offer_form_submit' });
-        // Auto-close after 4s
-        setTimeout(() => { if (modal.getAttribute('data-open') === 'true') close(); }, 4000);
+        try {
+          const res = await fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              phone,
+              name,
+              source: 'LegalFlo landing — Otrzymaj ofertę',
+            }),
+          });
+
+          if (!res.ok) {
+            let msg = 'Coś poszło nie tak. Spróbuj ponownie za chwilę.';
+            try { const data = await res.json(); if (data && data.error) msg = data.error === 'Provide a valid email or phone' ? 'Podaj prawidłowy numer telefonu.' : msg; } catch (_) {}
+            throw new Error(msg);
+          }
+
+          dialog.setAttribute('data-state', 'success');
+          // window.dataLayer && window.dataLayer.push({ event: 'offer_form_submit' });
+          setTimeout(() => { if (modal.getAttribute('data-open') === 'true') close(); }, 4000);
+        } catch (err) {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = submitBtnText;
+          }
+          showError(err.message || 'Nie udało się wysłać. Spróbuj ponownie.');
+        }
       });
     }
   })();
