@@ -1,619 +1,1156 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kancelaria restrukturyzacyjna — pełna automatyzacja | Booster AI</title>
-  <meta name="description" content="Case study: 5 obszarów, 45+ automatyzacji dla kancelarii restrukturyzacyjnej. Od leada do zamknięcia sprawy — pełne pokrycie procesu z CRM." />
-  <meta property="og:title" content="Kancelaria restrukturyzacyjna — pełna automatyzacja | Booster AI" />
-  <meta property="og:description" content="5 obszarów, 45+ wdrożonych automatyzacji. Case study automatyzacji kancelarii restrukturyzacyjnej od Booster AI." />
-  <meta property="og:type" content="website" />
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LegalFlo — automatyzacja kancelarii restrukturyzacyjnej</title>
+<meta name="description" content="Jeden system, który łączy CRM, KRZ, SharePoint i płatności. Prowadź więcej spraw restrukturyzacyjnych bez dokładania ludzi. Od leada do archiwizacji bez ręcznej roboty.">
+<meta name="robots" content="index,follow">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="LegalFlo — automatyzacja kancelarii restrukturyzacyjnej">
+<meta property="og:description" content="Jeden system, który łączy CRM, KRZ, SharePoint i płatności. Prowadź więcej spraw restrukturyzacyjnych bez dokładania ludzi.">
+<meta property="og:url" content="https://restrukturyzacja.boosterai.pl/">
+<meta property="og:site_name" content="LegalFlo">
+
+<!-- Favicon: lokalny white_favicon.png + inline SVG fallback -->
+<link rel="icon" type="image/png" href="/white_favicon.png">
+<link rel="apple-touch-icon" href="/white_favicon.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='1'><stop offset='0' stop-color='%230b2240'/><stop offset='1' stop-color='%2300a6ff'/></linearGradient></defs><rect width='64' height='64' rx='14' fill='url(%23g)'/><path d='M18 44V20h6v18h14v6H18zm28 0 8-24h-6l-5 16-5-16h-6l8 24h6z' fill='white'/></svg>">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!--
+  ===========================================================================
+  A/B VARIANTS — do podmiany w A/B testach (main = wariant A)
+
+  H1 VARIANTS:
+  A) Prowadź 3× więcej spraw restrukturyzacyjnych. Bez nowych ludzi.           [MAIN]
+  B) Twoja kancelaria dopina terminy, zanim o nich pomyślisz.
+  C) Od pierwszego leada do archiwizacji — bez ręcznej roboty.
+
+  SUBHEADLINE VARIANTS:
+  A) Dla partnerów kancelarii restrukturyzacyjnych: pięć modułów, które łączą
+     CRM, KRZ, SharePoint i płatności w jeden system. Średnio –70% czasu
+     na administrację, bez dokładania etatów.                                  [MAIN]
+  B) Jeden ekosystem: CRM rozmawia z KRZ, SharePoint pilnuje dokumentów,
+     płatności same się windykują. Ty prowadzisz sprawy, nie pilnujesz ich.
+  C) Kompletna automatyzacja procesu restrukturyzacji — od wyceny po
+     archiwizację. Wdrożenie end-to-end, szkolenie zespołu w cenie.
+
+  CTA VARIANTS:
+  A) Omów wdrożenie →                                                          [MAIN]
+  B) Zobacz demo na żywo →
+  ===========================================================================
+-->
+
+<style>
+  /* ---------- Reset & base ---------- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: #0b2240;
+    background: #ffffff;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+  /* ---------- Design tokens ---------- */
+  :root {
+    --navy-900: #061530;
+    --navy-800: #0b2240;
+    --navy-700: #14315c;
+    --navy-100: #e8eef7;
+    --navy-50:  #f5f8fc;
+    --cyan:     #00a6ff;
+    --cyan-600: #0086d6;
+    --accent:   #25d0b6;
+    --ink-700:  #3b4a63;
+    --ink-500:  #667794;
+    --ink-300:  #b5c0d1;
+    --line:     #e4e9f2;
+    --danger:   #ff5566;
+    --radius:   14px;
+    --radius-lg:22px;
+    --shadow-sm: 0 1px 2px rgba(11,34,64,.06), 0 2px 6px rgba(11,34,64,.04);
+    --shadow-md: 0 8px 28px rgba(11,34,64,.08), 0 2px 6px rgba(11,34,64,.04);
+    --shadow-lg: 0 20px 60px rgba(11,34,64,.14);
+    --container: 1200px;
+  }
+
+  /* ---------- Layout ---------- */
+  .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 20px; }
+  section { padding: 72px 0; }
+  @media (min-width: 768px) { section { padding: 96px 0; } }
+
+  /* ---------- Typography ---------- */
+  h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; color: var(--navy-900); }
+  h1 { font-size: clamp(2rem, 5vw + .5rem, 3.6rem); font-weight: 800; }
+  h2 { font-size: clamp(1.6rem, 3vw + .4rem, 2.4rem); }
+  h3 { font-size: clamp(1.1rem, 1vw + .8rem, 1.35rem); }
+  p  { color: var(--ink-700); }
+  .eyebrow {
+    display: inline-block; font-size: .78rem; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--cyan-600); background: rgba(0,166,255,.08);
+    padding: 6px 12px; border-radius: 999px; margin-bottom: 18px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 22px; border-radius: 12px;
+    font-weight: 600; font-size: 1rem;
+    transition: transform .15s ease, box-shadow .2s ease, background-color .2s ease;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-600) 100%);
+    color: white;
+    box-shadow: 0 6px 18px rgba(0,134,214,.35);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,134,214,.45); }
+  .btn-primary:focus-visible { outline: 3px solid #99d9ff; outline-offset: 2px; }
+  .btn-ghost {
+    color: var(--navy-800);
+    border: 1.5px solid var(--line);
+    background: white;
+  }
+  .btn-ghost:hover { border-color: var(--navy-800); }
+  .btn-lg { padding: 18px 28px; font-size: 1.05rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-primary:hover { transform: none; }
+  }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,.85);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0; gap: 24px;
+  }
+  .logo {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-weight: 800; font-size: 1.25rem; color: var(--navy-900);
+    letter-spacing: -0.02em;
+  }
+  .logo-mark {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--navy-800) 0%, var(--cyan) 110%);
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 14px rgba(0,134,214,.28);
+  }
+  .logo-mark svg { width: 20px; height: 20px; }
+  .logo-text span { color: var(--cyan-600); }
+
+  .site-nav {
+    display: none; align-items: center; gap: 28px;
+  }
+  .site-nav a {
+    font-weight: 500; color: var(--ink-700); font-size: .95rem;
+    transition: color .15s ease;
+  }
+  .site-nav a:hover { color: var(--navy-900); }
+  .header-cta { display: none; }
+  @media (min-width: 900px) {
+    .site-nav, .header-cta { display: inline-flex; }
+    .mobile-toggle { display: none !important; }
+  }
+  .mobile-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px; border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .mobile-menu {
+    display: none;
+    border-top: 1px solid var(--line);
+    padding: 16px 0 20px;
+  }
+  .mobile-menu[data-open="true"] { display: block; }
+  .mobile-menu nav { display: flex; flex-direction: column; gap: 4px; }
+  .mobile-menu a { padding: 12px 4px; border-bottom: 1px solid var(--line); color: var(--navy-800); font-weight: 500; }
+  .mobile-menu .btn { margin-top: 16px; justify-content: center; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding: 60px 0 80px;
+    background:
+      radial-gradient(900px 400px at 85% -10%, rgba(0,166,255,.14), transparent 60%),
+      radial-gradient(700px 400px at 0% 0%, rgba(37,208,182,.10), transparent 60%),
+      linear-gradient(180deg, #f7faff 0%, #ffffff 100%);
+    overflow: hidden;
+  }
+  @media (min-width: 768px) { .hero { padding: 96px 0 120px; } }
+  .hero-grid {
+    display: grid; gap: 48px; align-items: center;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 1000px) {
+    .hero-grid { grid-template-columns: 1.05fr .95fr; gap: 64px; }
+  }
+  .hero h1 { margin: 14px 0 18px; }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--ink-700); max-width: 58ch; margin-bottom: 32px;
+  }
+  .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+  .hero-trust {
+    display: flex; gap: 22px; flex-wrap: wrap;
+    color: var(--ink-500); font-size: .9rem; align-items: center;
+  }
+  .hero-trust span { display: inline-flex; align-items: center; gap: 8px; }
+  .hero-trust svg { width: 16px; height: 16px; color: var(--accent); }
+
+  /* ---------- Hero mockup ---------- */
+  .mockup {
+    position: relative;
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .mockup-topbar {
+    background: var(--navy-900); color: white;
+    padding: 14px 18px; display: flex; align-items: center; gap: 12px;
+    font-size: .85rem;
+  }
+  .mockup-dots { display: flex; gap: 6px; }
+  .mockup-dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.25); }
+  .mockup-dots span:first-child { background: #ff5f57; }
+  .mockup-dots span:nth-child(2) { background: #febc2e; }
+  .mockup-dots span:nth-child(3) { background: #28c840; }
+  .mockup-title { font-weight: 600; opacity: .9; }
+  .mockup-body { padding: 22px; background: var(--navy-50); }
+  .kpi-row {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px;
+  }
+  @media (min-width: 480px) { .kpi-row { grid-template-columns: repeat(4, 1fr); } }
+  .kpi-card {
+    background: white; padding: 14px; border-radius: 10px; border: 1px solid var(--line);
+  }
+  .kpi-card .num { font-weight: 800; font-size: 1.3rem; color: var(--navy-900); }
+  .kpi-card .lbl { font-size: .75rem; color: var(--ink-500); margin-top: 2px; }
+  .pipeline {
+    background: white; border: 1px solid var(--line); border-radius: 12px; padding: 14px;
+  }
+  .pipeline-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .pipeline-head h4 { font-size: .85rem; color: var(--navy-800); font-weight: 600; }
+  .pipeline-head .tag { font-size: .7rem; color: var(--cyan-600); background: rgba(0,166,255,.1); padding: 3px 8px; border-radius: 999px; font-weight: 600; }
+  .pipeline-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 10px; border-radius: 8px; font-size: .82rem;
+    background: var(--navy-50); margin-bottom: 6px;
+  }
+  .pipeline-row:last-child { margin-bottom: 0; }
+  .pipeline-row .name { font-weight: 600; color: var(--navy-800); }
+  .pipeline-row .stage {
+    font-size: .7rem; padding: 2px 8px; border-radius: 999px; font-weight: 600;
+  }
+  .stage.blue { background: rgba(0,166,255,.14); color: var(--cyan-600); }
+  .stage.green { background: rgba(37,208,182,.15); color: #0a8f7b; }
+  .stage.amber { background: rgba(255,176,0,.15); color: #b67b00; }
+
+  /* Floating pills on mockup */
+  .pill-float {
+    position: absolute; background: white; border: 1px solid var(--line);
+    border-radius: 12px; padding: 10px 14px; font-size: .82rem;
+    box-shadow: var(--shadow-md); display: flex; gap: 10px; align-items: center;
+    max-width: 220px;
+  }
+  .pill-float .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .pill-1 { top: 14%; left: -14px; }
+  .pill-2 { bottom: 12%; right: -18px; }
+  @media (max-width: 700px) { .pill-float { display: none; } }
+
+  /* ---------- Integrations strip ---------- */
+  .integrations {
+    padding: 56px 0;
+    background: white;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .integrations h2 {
+    text-align: center; font-size: 1rem; font-weight: 600;
+    color: var(--ink-500); letter-spacing: .08em; text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .logos-viewport { overflow: hidden; position: relative; mask-image: linear-gradient(90deg, transparent 0, black 10%, black 90%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, black 10%, black 90%, transparent 100%); }
+  .logos-track {
+    display: flex; gap: 60px; width: max-content;
+    animation: scroll-x 28s linear infinite;
+  }
+  @keyframes scroll-x {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .logo-item {
+    display: inline-flex; align-items: center; gap: 10px;
+    height: 56px; padding: 0 10px;
+    color: var(--ink-500); font-weight: 700; font-size: 1.1rem;
+    white-space: nowrap; letter-spacing: -0.01em;
+    filter: grayscale(100%);
+    opacity: .7;
+    transition: filter .25s ease, opacity .25s ease, color .25s ease;
+  }
+  .logo-item:hover { filter: grayscale(0); opacity: 1; color: var(--navy-900); }
+  .logo-item .badge {
+    font-size: .6rem; padding: 2px 8px; border-radius: 999px;
+    background: var(--navy-50); color: var(--ink-500); font-weight: 600; letter-spacing: .02em;
+    text-transform: uppercase;
+  }
+  .logo-item svg { height: 26px; width: auto; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logos-viewport { mask: none; -webkit-mask: none; }
+    .logos-track { animation: none; width: 100%; flex-wrap: wrap; justify-content: center; gap: 28px 40px; }
+  }
+
+  /* ---------- Metrics ---------- */
+  .metrics-grid {
+    display: grid; gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 820px) { .metrics-grid { grid-template-columns: repeat(4, 1fr); } }
+  .metric-card {
+    padding: 28px;
+    background: linear-gradient(180deg, #ffffff 0%, var(--navy-50) 100%);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .metric-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .metric-num {
+    font-size: clamp(1.8rem, 2.4vw + 1rem, 2.6rem);
+    font-weight: 800; color: var(--navy-900);
+    letter-spacing: -0.03em; line-height: 1;
+  }
+  .metric-lbl { color: var(--ink-700); font-size: .95rem; margin-top: 10px; }
+  .metric-num small { font-weight: 700; font-size: .5em; color: var(--cyan-600); }
+
+  /* ---------- Section heads ---------- */
+  .section-head { max-width: 760px; margin: 0 auto 56px; text-align: center; }
+  .section-head h2 { margin-bottom: 16px; }
+  .section-head p { font-size: 1.08rem; color: var(--ink-700); }
+  .section-head.left { text-align: left; margin-left: 0; }
+
+  /* ---------- Modules ---------- */
+  .modules { background: var(--navy-50); }
+  .module {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: grid; gap: 28px;
+    grid-template-columns: 1fr;
+    margin-bottom: 18px;
+    transition: box-shadow .2s ease, transform .2s ease;
+  }
+  .module:hover { box-shadow: var(--shadow-md); }
+  .module:last-child { margin-bottom: 0; }
+  @media (min-width: 820px) {
+    .module { grid-template-columns: 180px 1fr; padding: 40px; gap: 40px; }
+  }
+  .module-num {
+    font-size: .78rem; color: var(--cyan-600); font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .module h3 {
+    font-size: clamp(1.3rem, 1vw + 1rem, 1.7rem); margin-bottom: 10px;
+  }
+  .module-lead { color: var(--ink-700); margin-bottom: 22px; font-size: 1.02rem; }
+  .module-icon {
+    width: 80px; height: 80px; border-radius: 18px;
+    background: linear-gradient(135deg, var(--navy-800), var(--cyan));
+    display: inline-flex; align-items: center; justify-content: center;
+    color: white;
+    box-shadow: 0 10px 28px rgba(0,134,214,.28);
+  }
+  .module-icon svg { width: 40px; height: 40px; }
+  .module-meta {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    font-size: .78rem; color: var(--ink-500); margin-bottom: 18px;
+    padding-top: 14px; border-top: 1px dashed var(--line);
+  }
+  .module-meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .module-features {
+    list-style: none; display: grid; gap: 10px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 700px) { .module-features { grid-template-columns: 1fr 1fr; } }
+  .module-features li {
+    position: relative; padding-left: 26px; font-size: .93rem; color: var(--ink-700);
+  }
+  .module-features li::before {
+    content: ""; position: absolute; left: 0; top: 6px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: rgba(37,208,182,.18);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230a8f7b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='3.5 8.5 6.5 11.5 12.5 5'/></svg>");
+    background-size: 12px 12px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  /* ---------- Ecosystem callout ---------- */
+  .ecosystem {
+    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-700) 100%);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 48px 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  @media (min-width: 768px) { .ecosystem { padding: 64px; } }
+  .ecosystem::before {
+    content: ""; position: absolute; inset: auto -140px -160px auto;
+    width: 420px; height: 420px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,166,255,.35), transparent 70%);
+  }
+  .ecosystem h2 { color: white; margin-bottom: 18px; max-width: 22ch; }
+  .ecosystem blockquote {
+    font-size: clamp(1.1rem, .5vw + 1rem, 1.3rem);
+    color: #d7e4f6; line-height: 1.6; max-width: 62ch;
+    position: relative; z-index: 1;
+  }
+  .ecosystem .tags {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px;
+    position: relative; z-index: 1;
+  }
+  .ecosystem .tags span {
+    font-size: .8rem; font-weight: 600; padding: 6px 14px;
+    border-radius: 999px; background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.18);
+  }
+
+  /* ---------- How it works ---------- */
+  .steps {
+    display: grid; gap: 18px;
+    grid-template-columns: 1fr;
+    counter-reset: step;
+  }
+  @media (min-width: 720px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .steps { grid-template-columns: repeat(5, 1fr); gap: 12px; } }
+  .step {
+    padding: 26px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    position: relative;
+    counter-increment: step;
+  }
+  .step::before {
+    content: counter(step, decimal-leading-zero);
+    font-weight: 800; font-size: .95rem; color: var(--cyan-600);
+    display: block; margin-bottom: 12px; letter-spacing: .1em;
+  }
+  .step h4 { font-size: 1.02rem; margin-bottom: 8px; color: var(--navy-900); }
+  .step p { font-size: .88rem; color: var(--ink-700); }
+
+  /* ---------- Why LegalFlo ---------- */
+  .why-grid {
+    display: grid; gap: 18px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 700px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1050px) { .why-grid { grid-template-columns: repeat(3, 1fr); } }
+  .why-item {
+    display: flex; gap: 14px; padding: 20px;
+    background: white; border: 1px solid var(--line); border-radius: var(--radius);
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .why-item:hover { border-color: var(--cyan); transform: translateY(-2px); }
+  .why-check {
+    flex: 0 0 32px; height: 32px; border-radius: 50%;
+    background: rgba(37,208,182,.15);
+    color: #0a8f7b;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .why-check svg { width: 18px; height: 18px; }
+  .why-item h4 { font-size: 1rem; margin-bottom: 6px; }
+  .why-item p  { font-size: .92rem; color: var(--ink-700); }
+
+  /* ---------- Benefits 2x2 ---------- */
+  .benefits { background: var(--navy-50); }
+  .benefits-grid {
+    display: grid; gap: 20px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) { .benefits-grid { grid-template-columns: 1fr 1fr; } }
+  .benefit-card {
+    padding: 32px; background: white; border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .benefit-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .benefit-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: linear-gradient(135deg, #e8f7ff, #d1efff);
+    color: var(--cyan-600);
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+  }
+  .benefit-icon svg { width: 24px; height: 24px; }
+  .benefit-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+  .benefit-card p  { color: var(--ink-700); }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta {
+    background:
+      radial-gradient(500px 300px at 80% 20%, rgba(0,166,255,.22), transparent 60%),
+      linear-gradient(135deg, var(--navy-900), var(--navy-700));
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 56px 32px;
+    text-align: center;
+  }
+  @media (min-width: 768px) { .final-cta { padding: 80px; } }
+  .final-cta h2 { color: white; margin-bottom: 18px; max-width: 22ch; margin-inline: auto; }
+  .final-cta p  { color: #d7e4f6; max-width: 54ch; margin: 0 auto 32px; font-size: 1.08rem; }
+  .final-cta .btn-primary {
+    background: white; color: var(--navy-900);
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  }
+  .final-cta .btn-primary:hover { background: #f2faff; }
+  .final-cta .small {
+    display: block; margin-top: 18px; color: #9ab3d6; font-size: .85rem;
+  }
+
+  /* ---------- Footer ---------- */
+  .site-footer {
+    background: var(--navy-900); color: #9ab3d6;
+    padding: 56px 0 28px;
+  }
+  .footer-grid {
+    display: grid; gap: 32px;
+    grid-template-columns: 1fr;
+    padding-bottom: 36px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  @media (min-width: 720px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+  .site-footer h4 { color: white; font-size: .9rem; margin-bottom: 14px; letter-spacing: .04em; }
+  .site-footer a { color: #9ab3d6; font-size: .9rem; display: block; padding: 4px 0; }
+  .site-footer a:hover { color: white; }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    padding-top: 24px; flex-wrap: wrap;
+    font-size: .82rem; color: #6f88ab;
+  }
+  .footer-bottom .brand-note { color: #9ab3d6; }
+
+  /* ---------- A11y ---------- */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  :focus-visible { outline: 3px solid #99d9ff; outline-offset: 2px; border-radius: 4px; }
+
+  /* ---------- Anim helpers ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
 </head>
 <body>
 
-<!-- ================================================================
-     NAVIGATION
-     ================================================================ -->
-<nav class="nav">
-  <a href="#" class="nav-logo">
-    <img src="https://boosterai.pl/wp-content/uploads/2025/01/cropped-Blue-sygnet-with-background-1x1-1.png" alt="Booster AI sygnet" class="nav-logo-sygnet" />
-    <img src="https://boosterai.pl/wp-content/uploads/2025/01/Booster-logo-blue-no-background-e1736610804903.png" alt="Booster AI" class="nav-logo-wordmark" />
-  </a>
-  <ul class="nav-links">
-    <li><a href="#case-study">Case Study</a></li>
-    <li><a href="#obszary">Moduły</a></li>
-    <li><a href="#korzysci">Korzyści</a></li>
-    <li><a href="#kontakt">Kontakt</a></li>
-  </ul>
-  <a href="#kontakt" class="nav-cta">Umów konsultację</a>
-</nav>
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a href="#top" class="logo" aria-label="LegalFlo — strona główna">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Stylizowany paragraf + przepływ (dwa węzły połączone) -->
+          <path d="M7 5h9a3 3 0 0 1 0 6H9v3h9" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="7" cy="19" r="2" fill="white"/>
+          <circle cx="18" cy="19" r="2" fill="white"/>
+          <path d="M9 19h7" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="logo-text">Legal<span>Flo</span></span>
+    </a>
 
-<!-- ================================================================
+    <nav class="site-nav" aria-label="Nawigacja główna">
+      <a href="#moduly">Moduły</a>
+      <a href="#jak-to-dziala">Jak to działa</a>
+      <a href="#dlaczego">Dlaczego LegalFlo</a>
+      <a href="#korzysci">Korzyści</a>
+    </nav>
+
+    <a class="btn btn-primary header-cta"
+       href="https://cal.com/szymon-bazan-iahn2z/30min"
+       target="_blank" rel="noopener"
+       data-cta="header">
+      Omów wdrożenie
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+
+    <button class="mobile-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Otwórz menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu container" data-open="false">
+    <nav aria-label="Nawigacja mobilna">
+      <a href="#moduly">Moduły</a>
+      <a href="#jak-to-dziala">Jak to działa</a>
+      <a href="#dlaczego">Dlaczego LegalFlo</a>
+      <a href="#korzysci">Korzyści</a>
+    </nav>
+    <a class="btn btn-primary"
+       href="https://cal.com/szymon-bazan-iahn2z/30min"
+       target="_blank" rel="noopener"
+       data-cta="mobile-menu">
+      Omów wdrożenie →
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============================================================
      HERO
-     ================================================================ -->
-<section class="hero" id="case-study">
-  <div class="hero-inner">
-
-    <!-- Left: copy + form -->
-    <div class="hero-content">
-      <div class="hero-badge fade-up">
-        <div class="hero-badge-dot"></div>
-        Case Study · Booster AI
-      </div>
-
-      <h1 class="hero-title fade-up delay-1">
-        Kancelaria
-        restrukturyzacyjna
-        <em class="hero-title-accent"> pełna<br>automatyzacja</em>
-      </h1>
-
-      <p class="hero-desc fade-up delay-2">
-        5 obszarów, 45+ wdrożonych automatyzacji. Od leada do zamknięcia sprawy - każdy etap zoptymalizowany i połączony z CRM.
+     ============================================================ -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">LegalFlo · dla kancelarii restrukturyzacyjnych</span>
+      <h1>Prowadź 3× więcej spraw restrukturyzacyjnych. Bez nowych ludzi.</h1>
+      <p class="hero-sub">
+        Dla partnerów kancelarii restrukturyzacyjnych: pięć modułów, które łączą CRM, KRZ, SharePoint
+        i płatności w jeden system. Średnio <strong>–70% czasu</strong> na administrację — bez dokładania etatów.
       </p>
-
-      <form class="hero-form fade-up delay-3" id="leadForm">
-        <div class="hero-form-row">
-          <input
-            class="hero-input"
-            id="leadEmail"
-            type="email"
-            placeholder="Twój adres e-mail"
-            aria-label="Adres e-mail"
-            required
-          />
-          <button class="btn-primary" id="leadBtn" type="submit">
-            Umów konsultację <span class="btn-arrow">→</span>
-          </button>
-        </div>
-        <div class="hero-consent">
-          <input type="checkbox" id="consent" required />
-          <label for="consent">
-            Wyrażam zgodę na przetwarzanie moich danych osobowych zgodnie z
-            <a href="https://boosterai.pl/privacy-policy/">regulaminem i polityką prywatności</a>.
-          </label>
-        </div>
-        <div class="hero-form-msg" id="formMsg" aria-live="polite"></div>
-      </form>
-    </div>
-
-    <!-- Right: image -->
-    <div class="hero-visual fade-up delay-2">
-      <div class="hero-image-wrap">
-        <!-- Dashboard UI mockup -->
-        <div class="hero-dashboard">
-
-          <!-- Top bar -->
-          <div class="hd-topbar">
-            <div class="hd-topbar-dots">
-              <span class="hd-dot" style="background:#ff5f57;"></span>
-              <span class="hd-dot" style="background:#febc2e;"></span>
-              <span class="hd-dot" style="background:#28c840;"></span>
-            </div>
-            <div class="hd-topbar-title">Booster AI — Panel kancelarii</div>
-            <div class="hd-topbar-live"><span class="hd-live-dot"></span>Na żywo</div>
-          </div>
-
-          <!-- Metric cards row -->
-          <div class="hd-metrics">
-            <div class="hd-metric">
-              <div class="hd-metric-label">Aktywne sprawy</div>
-              <div class="hd-metric-value">24</div>
-              <div class="hd-metric-delta hd-up">↑ +3 ten tydzień</div>
-            </div>
-            <div class="hd-metric">
-              <div class="hd-metric-label">Czas odpowiedzi</div>
-              <div class="hd-metric-value">4 min</div>
-              <div class="hd-metric-delta hd-up">↑ −82% vs. przed</div>
-            </div>
-            <div class="hd-metric">
-              <div class="hd-metric-label">Konwersja</div>
-              <div class="hd-metric-value">68%</div>
-              <div class="hd-metric-delta hd-up">↑ +35%</div>
-            </div>
-          </div>
-
-          <!-- Pipeline list -->
-          <div class="hd-pipeline">
-            <div class="hd-pipe-header">Pipeline spraw</div>
-            <div class="hd-pipe-row">
-              <div class="hd-pipe-dot" style="background:#3b5bdb;"></div>
-              <div class="hd-pipe-name">Kowalski & Syn Sp. z o.o.</div>
-              <div class="hd-pipe-stage" style="color:#3b5bdb;background:#eef1fd;">Nowy lead</div>
-              <div class="hd-pipe-bar"><div class="hd-pipe-fill" style="width:15%;background:#3b5bdb;"></div></div>
-            </div>
-            <div class="hd-pipe-row">
-              <div class="hd-pipe-dot" style="background:#0ea5e9;"></div>
-              <div class="hd-pipe-name">TechStart Polska S.A.</div>
-              <div class="hd-pipe-stage" style="color:#0369a1;background:#e0f2fe;">Wycena</div>
-              <div class="hd-pipe-bar"><div class="hd-pipe-fill" style="width:40%;background:#0ea5e9;"></div></div>
-            </div>
-            <div class="hd-pipe-row">
-              <div class="hd-pipe-dot" style="background:#f79009;"></div>
-              <div class="hd-pipe-name">Restaurant Group</div>
-              <div class="hd-pipe-stage" style="color:#b45309;background:#fffaeb;">Dokumenty</div>
-              <div class="hd-pipe-bar"><div class="hd-pipe-fill" style="width:65%;background:#f79009;"></div></div>
-            </div>
-            <div class="hd-pipe-row">
-              <div class="hd-pipe-dot" style="background:#12b76a;"></div>
-              <div class="hd-pipe-name">Logistyka Express Sp. k.</div>
-              <div class="hd-pipe-stage" style="color:#065f46;background:#ecfdf5;">Zamknięta</div>
-              <div class="hd-pipe-bar"><div class="hd-pipe-fill" style="width:100%;background:#12b76a;"></div></div>
-            </div>
-          </div>
-
-          <!-- Bottom automation notification -->
-          <div class="hd-notif">
-            <div class="hd-notif-icon">⚡</div>
-            <div class="hd-notif-text">
-              <strong>Automatyzacja uruchomiona</strong> — faktura wystawiona dla Logistyka Express · 1 min temu
-            </div>
-          </div>
-
-        </div>
+      <div class="hero-cta-row">
+        <a class="btn btn-primary btn-lg"
+           href="https://cal.com/szymon-bazan-iahn2z/30min"
+           target="_blank" rel="noopener"
+           data-cta="hero">
+          Omów wdrożenie
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a class="btn btn-ghost btn-lg" href="#moduly" data-cta="hero-secondary">
+          Zobacz moduły
+        </a>
+      </div>
+      <div class="hero-trust" aria-label="Zaufanie">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Wdrożenie end-to-end</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Szkolenie zespołu w cenie</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Integracja z KRZ</span>
       </div>
     </div>
 
+    <!-- Mockup panelu kancelarii -->
+    <div class="mockup" aria-hidden="true">
+      <div class="mockup-topbar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-title">Panel kancelarii — LegalFlo</div>
+      </div>
+      <div class="mockup-body">
+        <div class="kpi-row">
+          <div class="kpi-card"><div class="num">42</div><div class="lbl">Aktywne sprawy</div></div>
+          <div class="kpi-card"><div class="num">4 min</div><div class="lbl">Czas do 1. kontaktu</div></div>
+          <div class="kpi-card"><div class="num">18</div><div class="lbl">Alerty KRZ dziś</div></div>
+          <div class="kpi-card"><div class="num">98%</div><div class="lbl">Terminowość</div></div>
+        </div>
+        <div class="pipeline">
+          <div class="pipeline-head">
+            <h4>Pipeline spraw</h4>
+            <span class="tag">Live</span>
+          </div>
+          <div class="pipeline-row">
+            <span class="name">Nowak Logistyka sp. z o.o.</span>
+            <span class="stage blue">Wycena</span>
+          </div>
+          <div class="pipeline-row">
+            <span class="name">Meridian Bud sp. k.</span>
+            <span class="stage green">Plan układu</span>
+          </div>
+          <div class="pipeline-row">
+            <span class="name">Alfa Trans sp. z o.o.</span>
+            <span class="stage amber">KRZ · obwieszczenie</span>
+          </div>
+          <div class="pipeline-row">
+            <span class="name">Polver S.A.</span>
+            <span class="stage green">Nadzór układu</span>
+          </div>
+        </div>
+      </div>
+      <div class="pill-float pill-1"><span class="dot"></span>Nowy lead z formularza → CRM</div>
+      <div class="pill-float pill-2"><span class="dot"></span>Alert KRZ: obwieszczenie w SP-324/25</div>
+    </div>
   </div>
 </section>
 
-<!-- ================================================================
-     STATS BAR
-     ================================================================ -->
-<div class="stats-bar">
-  <div class="stats-inner">
-
-    <div class="stat-item" data-animate="fade-up" data-delay="0">
-      <div class="stat-icon-wrap" style="background:#eef1fd;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b5bdb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+<!-- ============================================================
+     INTEGRATIONS STRIP
+     ============================================================ -->
+<section class="integrations" aria-label="Integracje">
+  <div class="container">
+    <h2>Integrujemy się z narzędziami, których już używasz</h2>
+    <div class="logos-viewport">
+      <div class="logos-track" id="logos-track">
+        <!-- Zestaw A -->
+        <div class="logo-item"><span>HubSpot</span></div>
+        <div class="logo-item"><span>ClickUp</span><span class="badge">Verified Consultant</span></div>
+        <div class="logo-item"><span>Pipedrive</span><span class="badge">Authorized Partner</span></div>
+        <div class="logo-item"><span>Microsoft Dynamics 365</span></div>
+        <div class="logo-item"><span>monday.com</span><span class="badge">Certified Partner</span></div>
+        <div class="logo-item"><span>Tillio</span></div>
+        <!-- Zestaw B (duplikat dla pętli) -->
+        <div class="logo-item" aria-hidden="true"><span>HubSpot</span></div>
+        <div class="logo-item" aria-hidden="true"><span>ClickUp</span><span class="badge">Verified Consultant</span></div>
+        <div class="logo-item" aria-hidden="true"><span>Pipedrive</span><span class="badge">Authorized Partner</span></div>
+        <div class="logo-item" aria-hidden="true"><span>Microsoft Dynamics 365</span></div>
+        <div class="logo-item" aria-hidden="true"><span>monday.com</span><span class="badge">Certified Partner</span></div>
+        <div class="logo-item" aria-hidden="true"><span>Tillio</span></div>
       </div>
-      <div class="stat-num" style="color:#3b5bdb;">5</div>
-      <div class="stat-label">obszarów procesu</div>
-      <div class="stat-bar-line"><div class="stat-bar-fill" style="background:#3b5bdb;width:40%;"></div></div>
     </div>
-
-    <div class="stat-item" data-animate="fade-up" data-delay="100">
-      <div class="stat-icon-wrap" style="background:#ecfdf5;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      </div>
-      <div class="stat-num" style="color:#10b981;">45+</div>
-      <div class="stat-label">wdrożonych automatyzacji</div>
-      <div class="stat-bar-line"><div class="stat-bar-fill" style="background:#10b981;width:90%;"></div></div>
-    </div>
-
-    <div class="stat-item" data-animate="fade-up" data-delay="200">
-      <div class="stat-icon-wrap" style="background:#fffaeb;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      </div>
-      <div class="stat-num" style="color:#f59e0b;">−70%</div>
-      <div class="stat-label">czasu administracyjnego</div>
-      <div class="stat-bar-line"><div class="stat-bar-fill" style="background:#f59e0b;width:70%;"></div></div>
-    </div>
-
-    <div class="stat-item" data-animate="fade-up" data-delay="300">
-      <div class="stat-icon-wrap" style="background:#f5f3ff;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
-      </div>
-      <div class="stat-num" style="color:#8b5cf6;">100%</div>
-      <div class="stat-label">pokrycia procesu</div>
-      <div class="stat-bar-line"><div class="stat-bar-fill" style="background:#8b5cf6;width:100%;"></div></div>
-    </div>
-
   </div>
-</div>
+</section>
 
-<!-- ================================================================
-     MODULES — INTERACTIVE TABS
-     ================================================================ -->
-<div class="modules-section" id="obszary">
-  <div class="modules-header">
-    <div class="section-tag">Moduły automatyzacji</div>
-    <h2 class="section-title">5 modułów. <em>Pełne pokrycie.</em></h2>
-    <p class="section-desc">
-      Każdy etap pracy kancelarii - od pozyskania leada po zamknięcie sprawy dobjęty automatyzacją. Łącznie 45+ wdrożonych funkcji.
-    </p>
+<!-- ============================================================
+     METRICS
+     ============================================================ -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Zakres wdrożenia</span>
+      <h2>Pełny cykl życia sprawy — od leada do archiwizacji</h2>
+      <p>Pięć zintegrowanych modułów, które działają jako jeden system.</p>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-num">5</div>
+        <div class="metric-lbl">modułów obejmujących cały proces: sprzedaż, restrukturyzacja, sąd, płatności, nadzór</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">~4 <small>min</small></div>
+        <div class="metric-lbl">średni czas reakcji na nowego leada — od formularza do rozmowy</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">–70<small>%</small></div>
+        <div class="metric-lbl">mniej czasu zespołu na administrację, powtarzalną pracę biurową</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">0</div>
+        <div class="metric-lbl">przeoczonych terminów KRZ, płatności i sprawozdań — system pilnuje sam</div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="modules-layout">
-
-    <!-- LEFT: sticky tab nav -->
-    <div class="modules-nav">
-      <button class="mod-tab active" onclick="switchModule(0)" data-idx="0">
-        <div class="mod-tab-color" style="background:#3b5bdb;"></div>
-        <div class="mod-tab-icon" style="color:#3b5bdb;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-        </div>
-        <div class="mod-tab-text">
-          <span class="mod-tab-title">Automatyzacja sprzedaży</span>
-          <span class="mod-tab-sub">Lead → CRM → wycena</span>
-        </div>
-        <span class="mod-tab-badge" style="background:#eef1fd;color:#3b5bdb;">15</span>
-      </button>
-
-      <button class="mod-tab" onclick="switchModule(1)" data-idx="1">
-        <div class="mod-tab-color" style="background:#10b981;"></div>
-        <div class="mod-tab-icon" style="color:#10b981;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-        </div>
-        <div class="mod-tab-text">
-          <span class="mod-tab-title">Proces restrukturyzacji</span>
-          <span class="mod-tab-sub">Dłużnik · wierzyciele</span>
-        </div>
-        <span class="mod-tab-badge" style="background:#ecfdf5;color:#10b981;">5</span>
-      </button>
-
-      <button class="mod-tab" onclick="switchModule(2)" data-idx="2">
-        <div class="mod-tab-color" style="background:#f59e0b;"></div>
-        <div class="mod-tab-icon" style="color:#f59e0b;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 12.5-8 8a2.119 2.119 0 1 1-3-3l8-8"/><path d="m16 16 6-6"/><path d="m8 8 6-6"/><path d="m9 7 8 8"/><path d="m21 11-8-8"/></svg>
-        </div>
-        <div class="mod-tab-text">
-          <span class="mod-tab-title">Etap sądowy</span>
-          <span class="mod-tab-sub">KRZ · obwieszczenia</span>
-        </div>
-        <span class="mod-tab-badge" style="background:#fffaeb;color:#f59e0b;">3</span>
-      </button>
-
-      <button class="mod-tab" onclick="switchModule(3)" data-idx="3">
-        <div class="mod-tab-color" style="background:#ef4444;"></div>
-        <div class="mod-tab-icon" style="color:#ef4444;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-        </div>
-        <div class="mod-tab-text">
-          <span class="mod-tab-title">Płatności i windykacja</span>
-          <span class="mod-tab-sub">Wyciągi · wezwania</span>
-        </div>
-        <span class="mod-tab-badge" style="background:#fef2f2;color:#ef4444;">9</span>
-      </button>
-
-      <button class="mod-tab" onclick="switchModule(4)" data-idx="4">
-        <div class="mod-tab-color" style="background:#8b5cf6;"></div>
-        <div class="mod-tab-icon" style="color:#8b5cf6;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
-        </div>
-        <div class="mod-tab-text">
-          <span class="mod-tab-title">Nadzór nad układem</span>
-          <span class="mod-tab-sub">Harmonogramy · archiwizacja</span>
-        </div>
-        <span class="mod-tab-badge" style="background:#f5f3ff;color:#8b5cf6;">7</span>
-      </button>
-
-
+<!-- ============================================================
+     MODULES
+     ============================================================ -->
+<section class="modules" id="moduly">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">5 modułów, jeden system</span>
+      <h2>Każdy moduł rozwiązuje konkretny odcinek procesu</h2>
+      <p>Wdróż je jako komplet lub pojedynczo. Integrują się nawzajem i z narzędziami, których już używasz.</p>
     </div>
 
-    <!-- RIGHT: panels -->
-    <div class="modules-panel-wrap">
-
-      <!-- Panel 0 -->
-      <div class="mod-panel active" data-panel="0">
-        <div class="mod-panel-head" style="--accent:#3b5bdb;--accent-pale:#eef1fd;">
-          <div class="mod-panel-tag">Moduł 01</div>
-          <h3 class="mod-panel-title">Automatyzacja sprzedaży</h3>
-          <p class="mod-panel-desc">Od pierwszego kontaktu do podpisanej umowy — każdy krok zautomatyzowany i zsynchronizowany z CRM.</p>
+    <!-- Moduł 01 -->
+    <article class="module">
+      <div>
+        <div class="module-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z"/></svg>
         </div>
-        <ul class="mod-features">
-          <li><span>Automatyczne tworzenie leadów w CRM z wielu źródeł</span></li>
-          <li><span>Transkrypcje rozmów telefonicznych + zapis automatyczny w CRM</span></li>
-          <li><span>Uzupełnianie danych firmy po NIP — integracja z API Regon (GUS)</span></li>
-          <li><span>Połączenie leadów mailowych z CRM (automatyczne przypisanie)</span></li>
-          <li><span>Połączenie leadów telefonicznych z CRM</span></li>
-          <li><span>Dynamiczna, interaktywna ankieta restrukturyzacyjna</span></li>
-          <li><span>Automatyczne drafty maili przy braku aktywności (1, 2 i 4 dni)</span></li>
-          <li><span>Integracja z Mailerlite (segmentacja i kampanie)</span></li>
-          <li><span>Automatyczny email do zarządu o konieczności wykonania wyceny</span></li>
-          <li><span>Teczka klienta na SharePoint z automatycznym odkładaniem dokumentów</span></li>
-          <li><span>Automatyczny draft szablonu ankiety restrukturyzacyjnej (.doc)</span></li>
-          <li><span>Automatyczny draft wstępnego planu restrukturyzacji (.doc)</span></li>
-          <li><span>Przypomnienia w CRM dotyczące follow-upu do klienta</span></li>
-          <li><span>Automatyczny status «Oczekiwanie na płatność» + draft maila</span></li>
-          <li><span>Przesłanie szansy do lejka + powiadomienie managera</span></li>
+      </div>
+      <div>
+        <div class="module-num">Moduł 01 · Sprzedaż</div>
+        <h3>Leady, na które odpowiadasz w 4 minuty</h3>
+        <p class="module-lead">Lead → CRM → wycena → onboarding. Od pierwszego kontaktu do podpisanej umowy — bez ręcznej pracy biurowej.</p>
+        <ul class="module-features">
+          <li>Leady z maila i telefonu trafiają do CRM natychmiast, z automatycznym przypisaniem</li>
+          <li>Uzupełnianie danych firmy po NIP (API GUS/Regon) — zero ręcznego wpisywania</li>
+          <li>Transkrypcje rozmów telefonicznych zapisywane w CRM</li>
+          <li>Dynamiczna ankieta restrukturyzacyjna (handlowiec + klient)</li>
+          <li>Automatyczne drafty follow-upów po 1, 2 i 4 dniach</li>
+          <li>Teczka klienta na SharePoint — automatyczne odkładanie dokumentów</li>
+          <li>Segmentacja i kampanie w Mailerlite</li>
+          <li>Draft ankiety i wstępnego planu restrukturyzacji w .doc</li>
         </ul>
-        <div class="mod-panel-footer">
-          <div class="mod-training-badge">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
-            Szkolenie: 2h
-          </div>
-          <div class="mod-count-badge" style="background:#eef1fd;color:#3b5bdb;">15 funkcji</div>
+        <div class="module-meta">
+          <span>15 funkcji</span><span>·</span><span>Szkolenie: 2 godziny</span>
         </div>
       </div>
+    </article>
 
-      <!-- Panel 1 -->
-      <div class="mod-panel" data-panel="1">
-        <div class="mod-panel-head" style="--accent:#10b981;--accent-pale:#ecfdf5;">
-          <div class="mod-panel-tag">Moduł 02</div>
-          <h3 class="mod-panel-title">Proces restrukturyzacji</h3>
-          <p class="mod-panel-desc">Automatyczne generowanie dokumentów układowych, komunikacja z wierzycielami i dłużnikiem bez manualnej pracy.</p>
+    <!-- Moduł 02 -->
+    <article class="module">
+      <div>
+        <div class="module-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
         </div>
-        <ul class="mod-features">
-          <li><span>Automatyczne wysyłki wiadomości powitalnych do dłużnika, wierzycieli i komorników</span></li>
-          <li><span>Automatyczny draft planu restrukturyzacyjnego na podstawie wywiadu z dłużnikiem</span></li>
-          <li><span>Automatyczny szablon i draft testu prywatnego wierzyciela z gotowymi formułami</span></li>
-          <li><span>Automatyczne drafty do wierzycieli z propozycjami układowymi</span></li>
-          <li><span>Szablon pliku Excel do propozycji układowych (formatka)</span></li>
+      </div>
+      <div>
+        <div class="module-num">Moduł 02 · Restrukturyzacja</div>
+        <h3>Plany i wezwania układowe piszą się same</h3>
+        <p class="module-lead">Dłużnik, wierzyciele, dokumenty układowe — gotowe drafty na bazie danych z CRM.</p>
+        <ul class="module-features">
+          <li>Automatyczne wiadomości powitalne do dłużnika, wierzycieli i komorników</li>
+          <li>Draft planu restrukturyzacyjnego na podstawie wywiadu z dłużnikiem</li>
+          <li>Szablon i draft testu prywatnego wierzyciela z gotowymi formułami</li>
+          <li>Drafty do wierzycieli z propozycjami układowymi</li>
+          <li>Formatka Excel do propozycji układowych</li>
         </ul>
-        <div class="mod-panel-footer">
-          <div class="mod-training-badge">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
-            Szkolenie: 2h
-          </div>
-          <div class="mod-count-badge" style="background:#ecfdf5;color:#10b981;">5 funkcji</div>
+        <div class="module-meta">
+          <span>5 funkcji</span><span>·</span><span>Szkolenie: 2 godziny</span>
         </div>
       </div>
+    </article>
 
-      <!-- Panel 2 -->
-      <div class="mod-panel" data-panel="2">
-        <div class="mod-panel-head" style="--accent:#f59e0b;--accent-pale:#fffaeb;">
-          <div class="mod-panel-tag">Moduł 03</div>
-          <h3 class="mod-panel-title">Etap sądowy</h3>
-          <p class="mod-panel-desc">Automatyczny monitoring KRZ, alerty o zmianach statusów i obwieszczeniach — zero przeoczonych terminów.</p>
+    <!-- Moduł 03 -->
+    <article class="module">
+      <div>
+        <div class="module-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10m14 11V10M3 10l9-7 9 7M9 14h6M9 18h6"/></svg>
         </div>
-        <ul class="mod-features">
-          <li><span>Automatyczne «nasłuchiwanie» publicznego KRZ — pobieranie obwieszczeń do folderu klienta na SharePoint z linkiem do CRM</span></li>
-          <li><span>Alert w CRM o każdej aktualizacji statusu sprawy w KRZ</span></li>
-          <li><span>Automatyczne zadanie o przygotowaniu maila informującego o obwieszczeniu w KRZ</span></li>
+      </div>
+      <div>
+        <div class="module-num">Moduł 03 · Etap sądowy</div>
+        <h3>KRZ pilnuje się sam</h3>
+        <p class="module-lead">Nasłuchiwanie publicznego Krajowego Rejestru Zadłużonych — monitoring sądowy bez angażowania prawnika.</p>
+        <ul class="module-features">
+          <li>Pobieranie obwieszczeń z KRZ do folderu klienta na SharePoint (z linkiem do CRM)</li>
+          <li>Alert w CRM o każdej aktualizacji statusu sprawy w KRZ</li>
+          <li>Automatyczne zadanie: przygotowanie maila informującego o obwieszczeniu</li>
         </ul>
-        <div class="mod-panel-footer">
-          <div class="mod-training-badge">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
-            Szkolenie: 2h
-          </div>
-          <div class="mod-count-badge" style="background:#fffaeb;color:#f59e0b;">3 funkcje</div>
+        <div class="module-meta">
+          <span>3 funkcje</span><span>·</span><span>Szkolenie: 2 godziny</span>
         </div>
       </div>
+    </article>
 
-      <!-- Panel 3 -->
-      <div class="mod-panel" data-panel="3">
-        <div class="mod-panel-head" style="--accent:#ef4444;--accent-pale:#fef2f2;">
-          <div class="mod-panel-tag">Moduł 04</div>
-          <h3 class="mod-panel-title">Płatności i windykacja</h3>
-          <p class="mod-panel-desc">Monitoring przelewów, automatyczne wezwania do zapłaty i eskalacja windykacji bez angażowania prawnika.</p>
+    <!-- Moduł 04 -->
+    <article class="module">
+      <div>
+        <div class="module-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg>
         </div>
-        <ul class="mod-features">
-          <li><span>Automatyczne sprawdzanie przelewów na podstawie wyciągów z konta (tygodniowo)</span></li>
-          <li><span>Automatyczne przypomnienie o zbliżającej się płatności (mail + SMS)</span></li>
-          <li><span>Alerty przy niezaksięgowanej płatności w terminie</span></li>
-          <li><span>Automatyczne tworzenie zadania windykacyjnego w CRM (przypisanie do opiekuna)</span></li>
-          <li><span>Automatyczne wysyłki przypomnień o zaległościach do wierzycieli/dłużników</span></li>
-          <li><span>Tagowanie opóźnionych płatników + przesyłanie do etapu «Windykacja» w CRM</span></li>
-          <li><span>Automatyczna wysyłka wezwań do zapłaty (wersja uprzejma i formalna)</span></li>
-          <li><span>Automatyczny draft wypowiedzenia umowy z gotową strukturą</span></li>
+      </div>
+      <div>
+        <div class="module-num">Moduł 04 · Płatności i windykacja</div>
+        <h3>Windykacja, która nie zajmuje prawnika</h3>
+        <p class="module-lead">Wyciągi, przypomnienia, wezwania do zapłaty — automatycznie i we właściwej kolejności.</p>
+        <ul class="module-features">
+          <li>Tygodniowe sprawdzanie przelewów na podstawie wyciągów z konta</li>
+          <li>Przypomnienia o zbliżających się płatnościach (mail + SMS)</li>
+          <li>Alerty o niezaksięgowanych płatnościach w terminie</li>
+          <li>Automatyczne zadania windykacyjne w CRM</li>
+          <li>Tagowanie opóźnionych płatników + etap „Windykacja"</li>
+          <li>Wezwania do zapłaty — wersja uprzejma i formalna</li>
+          <li>Draft wypowiedzenia umowy z gotową strukturą</li>
         </ul>
-        <div class="mod-panel-footer">
-          <div class="mod-training-badge">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
-            Szkolenie: 2h
-          </div>
-          <div class="mod-count-badge" style="background:#fef2f2;color:#ef4444;">9 funkcji</div>
+        <div class="module-meta">
+          <span>9 funkcji</span><span>·</span><span>Szkolenie: 2 godziny</span>
         </div>
       </div>
+    </article>
 
-      <!-- Panel 4 -->
-      <div class="mod-panel" data-panel="4">
-        <div class="mod-panel-head" style="--accent:#8b5cf6;--accent-pale:#f5f3ff;">
-          <div class="mod-panel-tag">Moduł 05</div>
-          <h3 class="mod-panel-title">Nadzór nad wykonywaniem układu</h3>
-          <p class="mod-panel-desc">Automatyczne harmonogramy, kwartalne sprawozdania i archiwizacja zamkniętych spraw bez ręcznej obsługi.</p>
+    <!-- Moduł 05 -->
+    <article class="module">
+      <div>
+        <div class="module-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
-        <ul class="mod-features">
-          <li><span>Automatyczne generowanie harmonogramu spłat na podstawie planu układu</span></li>
-          <li><span>Automatyczny draft maila z harmonogramem spłat dla dłużnika</span></li>
-          <li><span>Przypomnienia do dłużnika o konieczności przesłania potwierdzeń przelewów</span></li>
-          <li><span>Kwartalne przypomnienia o sprawozdaniach</span></li>
-          <li><span>Cykliczne prośby o potwierdzenia przelewów</span></li>
-          <li><span>Automatyczna archiwizacja po zamknięciu sprawy</span></li>
-          <li><span>Powiadomienie managera o zamknięciu sprawy</span></li>
+      </div>
+      <div>
+        <div class="module-num">Moduł 05 · Nadzór nad układem</div>
+        <h3>Układ działa, nawet gdy śpisz</h3>
+        <p class="module-lead">Harmonogramy, sprawozdania, archiwizacja — system pilnuje terminów długo po zamknięciu etapu sądowego.</p>
+        <ul class="module-features">
+          <li>Generowanie harmonogramu spłat na podstawie planu układu</li>
+          <li>Draft maila z harmonogramem do dłużnika</li>
+          <li>Cykliczne maile z prośbą o potwierdzenia przelewów (co miesiąc)</li>
+          <li>Kwartalne przypomnienia do opiekuna sprawy o zebraniu danych do sprawozdania</li>
+          <li>Automatyczny harmonogram przypomnień w CRM</li>
+          <li>Automatyczna archiwizacja dokumentów po zamknięciu sprawy</li>
         </ul>
-        <div class="mod-panel-footer">
-          <div class="mod-training-badge">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
-            Szkolenie: 2h
-          </div>
-          <div class="mod-count-badge" style="background:#f5f3ff;color:#8b5cf6;">7 funkcji</div>
+        <div class="module-meta">
+          <span>7 funkcji</span><span>·</span><span>Szkolenie: 2 godziny</span>
         </div>
       </div>
-
-    </div><!-- /panels -->
-  </div><!-- /layout -->
-</div>
-
-
-
-<!-- ================================================================
-     PROCESS TIMELINE + CRM MOCK
-     ================================================================ -->
-<div class="split-section-wrap">
-<div class="section">
-  <div class="split-section">
-
-    <!-- Timeline -->
-    <div>
-      <div class="section-tag">Jak to działa</div>
-      <h2 class="section-title">Od leada do <em>zamknięcia sprawy</em></h2>
-      <p class="section-desc">
-        Każdy krok wyzwalany jest automatycznie — bez e-maili wewnętrznych, bez ręcznego przekazywania zadań.
-      </p>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <h3>Lead wpada do systemu</h3>
-          <p>Formularz, telefon, e-mail — wszystko ląduje w CRM i jest automatycznie tagowane oraz przypisywane do prawnika.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <h3>Kwalifikacja i wycena</h3>
-          <p>AI ocenia rodzaj sprawy, generuje wstępną wycenę i wysyła ofertę w ciągu kilku minut od zapytania.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <h3>Podpisanie umowy</h3>
-          <p>Umowa generowana automatycznie, wysyłana do e-podpisu i archiwizowana bez udziału człowieka.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <h3>Prowadzenie sprawy</h3>
-          <p>Terminy, dokumenty, komunikacja z klientem — wszystko zarządzane przez workflow w CRM.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <h3>Zamknięcie i faktura</h3>
-          <p>Faktura wystawiana automatycznie po zamknięciu sprawy. Prośba o opinię wysyłana 7 dni później.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- CRM Mock -->
-    <div>
-      <div class="crm-panel">
-        <div class="crm-panel-header">
-          Widok CRM — Aktywne sprawy
-          <span>● Na żywo</span>
-        </div>
-        <div class="crm-rows">
-          <div class="crm-row">
-            <div class="crm-dot" style="background:#3b5bdb;"></div>
-            <div class="crm-name">Kowalski & Syn Sp. z o.o.</div>
-            <div class="crm-badge badge-new">Nowy lead</div>
-          </div>
-          <div class="crm-row">
-            <div class="crm-dot" style="background:#0ea5e9;"></div>
-            <div class="crm-name">Firma Budowlana M. Nowak</div>
-            <div class="crm-badge badge-proc">Wycena wysłana</div>
-          </div>
-          <div class="crm-row">
-            <div class="crm-dot" style="background:#12b76a;"></div>
-            <div class="crm-name">TechStart Polska S.A.</div>
-            <div class="crm-badge badge-done">Umowa podpisana</div>
-          </div>
-          <div class="crm-row">
-            <div class="crm-dot" style="background:#f79009;"></div>
-            <div class="crm-name">Restaurant Group Wiśniewscy</div>
-            <div class="crm-badge badge-wait">Dok. w trakcie</div>
-          </div>
-          <div class="crm-row">
-            <div class="crm-dot" style="background:#6b7280;"></div>
-            <div class="crm-name">Logistyka Express Sp. k.</div>
-            <div class="crm-badge badge-closed">Sprawa zamknięta</div>
-          </div>
-          <div class="crm-row">
-            <div class="crm-dot" style="background:#3b5bdb;"></div>
-            <div class="crm-name">Auto-Handel Zieliński</div>
-            <div class="crm-badge badge-inv">Faktura wystawiona</div>
-          </div>
-        </div>
-        <div class="crm-notify">
-          <div class="crm-notify-label">⚡ Ostatnia automatyzacja</div>
-          <div class="crm-notify-text">Prośba o opinię Google wysłana do Logistyka Express · 2 min temu</div>
-        </div>
-      </div>
-    </div>
-
+    </article>
   </div>
-</div>
-</div>
+</section>
 
-<!-- ================================================================
-     BENEFITS
-     ================================================================ -->
-<div class="section-alt" id="korzysci">
-  <div class="section">
-    <div class="section-tag">Korzyści</div>
-    <h2 class="section-title">Co zyskuje <em>kancelaria?</em></h2>
-    <p class="section-desc">
-      Konkretne wyniki, które obserwujemy u każdego klienta po wdrożeniu systemu automatyzacji.
-    </p>
+<!-- ============================================================
+     ECOSYSTEM CALLOUT
+     ============================================================ -->
+<section>
+  <div class="container">
+    <div class="ecosystem">
+      <span class="eyebrow" style="background: rgba(255,255,255,.1); color: #99d9ff;">Co wyróżnia to wdrożenie</span>
+      <h2>Jeden zintegrowany ekosystem, nie zestaw skryptów</h2>
+      <blockquote>
+        CRM, SharePoint, API GUS/Regon, KRZ, Mailerlite, SMS i poczta email działają razem —
+        automatycznie przekazując dane przez cały cykl życia sprawy restrukturyzacyjnej.
+        Żaden element nie działa w oderwaniu od pozostałych.
+      </blockquote>
+      <div class="tags">
+        <span>CRM</span>
+        <span>SharePoint</span>
+        <span>API GUS/Regon</span>
+        <span>KRZ</span>
+        <span>Mailerlite</span>
+        <span>SMS</span>
+        <span>Email</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HOW IT WORKS
+     ============================================================ -->
+<section id="jak-to-dziala">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Jak to działa</span>
+      <h2>Pięć kroków od pierwszego leada do zamkniętej sprawy</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <h4>Lead wpada do CRM</h4>
+        <p>Email, telefon, formularz — każdy kanał trafia do CRM z uzupełnionymi danymi z GUS.</p>
+      </div>
+      <div class="step">
+        <h4>Wycena i onboarding</h4>
+        <p>Ankieta restrukturyzacyjna, drafty dokumentów, teczka na SharePoint — gotowe w minutę.</p>
+      </div>
+      <div class="step">
+        <h4>Dokumenty układowe</h4>
+        <p>Plan, test prywatnego wierzyciela, propozycje — automatyczne drafty na bazie wywiadu.</p>
+      </div>
+      <div class="step">
+        <h4>KRZ i płatności</h4>
+        <p>System nasłuchuje sądu i monitoruje przelewy. Windykacja rusza się bez prawnika.</p>
+      </div>
+      <div class="step">
+        <h4>Nadzór i archiwizacja</h4>
+        <p>Harmonogramy, kwartalne sprawozdania, automatyczne zamknięcie teczki na SharePoint.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHY LEGALFLO
+     ============================================================ -->
+<section id="dlaczego" style="background: var(--navy-50);">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Dlaczego LegalFlo</span>
+      <h2>Nie robimy automatyzacji „w ogóle". Robimy restrukturyzacje.</h2>
+      <p>Sześć rzeczy, które odróżniają LegalFlo od ogólnych zestawów narzędzi no-code.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-item">
+        <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div>
+          <h4>Wdrożenie end-to-end</h4>
+          <p>Od pierwszego kontaktu z klientem do archiwizacji sprawy. Żaden etap nie wypada z systemu.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div>
+          <h4>Dokumenty .doc bez przepisywania</h4>
+          <p>Plan restrukturyzacji, ankieta, propozycje układowe — generowane z danych w CRM. Zero Ctrl+C / Ctrl+V.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div>
+          <h4>Integracja z publicznym KRZ</h4>
+          <p>Monitoring sądowy bez angażowania prawnika. Obwieszczenia lądują w CRM, zanim zdążysz sprawdzić.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div>
+          <h4>Branżowe know-how</h4>
+          <p>Rozumiemy prawo restrukturyzacyjne i insolvency workflow. Nie uczymy się Twojej specyfiki na Twoim koszcie.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div>
+          <h4>Szkolenie zespołu w cenie</h4>
+          <p>8 godzin szkoleń wdrożeniowych. Zespół działa samodzielnie od pierwszego dnia po starcie.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div>
+          <h4>Skalowalność modułowa</h4>
+          <p>Każdy moduł możesz wdrożyć niezależnie. Albo wziąć komplet — jako spójny, połączony system.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BENEFITS 2x2
+     ============================================================ -->
+<section class="benefits" id="korzysci">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Korzyści biznesowe</span>
+      <h2>Co się zmienia w Twojej kancelarii</h2>
+    </div>
 
     <div class="benefits-grid">
-      <div class="benefit-card bc-blue">
-        <div class="benefit-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <div class="benefit-card">
+        <div class="benefit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
-        <h3>Czas odzysku −70%</h3>
-        <p>Prawnicy przestają tracić czas na administrację i wracają do pracy merytorycznej, która generuje przychód.</p>
+        <h3>Czas reakcji na leada</h3>
+        <p>Leady z maila i telefonu trafiają do CRM natychmiast, z danymi z GUS. Handlowiec dzwoni w minutę — zanim klient zdąży napisać do konkurencji.</p>
       </div>
-      <div class="benefit-card bc-green">
-        <div class="benefit-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+      <div class="benefit-card">
+        <div class="benefit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         </div>
-        <h3>Konwersja leadów +35%</h3>
-        <p>Błyskawiczne odpowiedzi na zapytania i automatyczne follow-upy dramatycznie zwiększają skuteczność pozyskiwania klientów.</p>
+        <h3>Dokumenty bez przepisywania</h3>
+        <p>Plan restrukturyzacji, ankieta, propozycje układowe — gotowe drafty w CRM. Prawnik recenzuje, nie pisze od zera.</p>
       </div>
-      <div class="benefit-card bc-amber">
-        <div class="benefit-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="benefit-card">
+        <div class="benefit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
-        <h3>Zero przeoczeń terminów</h3>
-        <p>Automatyczne kalendarze i przypomnienia eliminują ryzyko przeoczenia krytycznych terminów sądowych i procesowych.</p>
+        <h3>Zero przeoczonych terminów</h3>
+        <p>Alerty KRZ, przypomnienia o płatnościach, zadania windykacyjne, sprawozdania kwartalne. System pilnuje — zamiast ludzi.</p>
       </div>
-      <div class="benefit-card bc-violet">
-        <div class="benefit-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <div class="benefit-card">
+        <div class="benefit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <h3>Więcej spraw, ten sam zespół</h3>
-        <p>Wzrost obrotów bez proporcjonalnego wzrostu kosztów — kancelaria obsługuje więcej spraw tą samą liczbą pracowników.</p>
-      </div>
-      <div class="benefit-card bc-rose">
-        <div class="benefit-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h3>Wyższy NPS klientów</h3>
-        <p>Klienci otrzymują szybsze odpowiedzi, regularny status sprawy i proaktywną komunikację — co buduje lojalność i polecenia.</p>
-      </div>
-      <div class="benefit-card bc-sky">
-        <div class="benefit-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-        </div>
-        <h3>Dane w czasie rzeczywistym</h3>
-        <p>Pełny podgląd lejka sprzedaży, statusów spraw i wyników finansowych — bez ręcznego zbierania raportów.</p>
+        <h3>Porządek w dokumentacji</h3>
+        <p>Każda sprawa to teczka na SharePoint. Dokumenty odkładają się same, a po zamknięciu — automatyczna archiwizacja.</p>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ================================================================
-     TESTIMONIAL
-     ================================================================ -->
-
-
-<!-- ================================================================
-     CTA
-     ================================================================ -->
-<div class="cta-section" id="kontakt">
-  <div class="cta-inner">
-    <div class="section-tag">Gotowy na automatyzację?</div>
-    <h2 class="section-title">Zbudujmy <em>Twój system</em><br>od podstaw</h2>
-    <p>Bezpłatna konsultacja - analizujemy Twój proces i pokazujemy, ile czasu i pieniędzy możesz odzyskać.</p>
-
-    <div class="cta-buttons">
-      <a href="#case-study" class="btn-white" id="ctaScrollBtn">
-        Umów bezpłatną konsultację →
+<!-- ============================================================
+     FINAL CTA
+     ============================================================ -->
+<section>
+  <div class="container">
+    <div class="final-cta">
+      <span class="eyebrow" style="background: rgba(255,255,255,.1); color: #99d9ff;">Następny krok</span>
+      <h2>30 minut rozmowy. Zero zobowiązań. Konkretny plan wdrożenia.</h2>
+      <p>Pokażemy, jak Twoja kancelaria wyglądałaby po wdrożeniu LegalFlo — na Twoich realnych przykładach spraw. Bez prezentacji marketingowych.</p>
+      <a class="btn btn-primary btn-lg"
+         href="https://cal.com/szymon-bazan-iahn2z/30min"
+         target="_blank" rel="noopener"
+         data-cta="final">
+        Omów wdrożenie
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <a href="#obszary" class="btn-outline-white">
-        Wróć do case study
-      </a>
-    </div>
-
-    <div class="cta-checks">
-      <span class="cta-check">Bezpłatna analiza procesu</span>
-      <span class="cta-check">Wdrożenie pod klucz</span>
-      <span class="cta-check">Wsparcie po wdrożeniu</span>
+      <span class="small">Rozmowa przez Cal.com — wybierasz termin w swoim kalendarzu.</span>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ================================================================
+</main>
+
+<!-- ============================================================
      FOOTER
-     ================================================================ -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-logo">
-      <img src="https://boosterai.pl/wp-content/uploads/2025/01/cropped-Blue-sygnet-with-background-1x1-1.png" alt="Booster AI sygnet" class="footer-logo-sygnet" />
-      <img src="https://boosterai.pl/wp-content/uploads/2025/01/Booster-logo-blue-no-background-e1736610804903.png" alt="Booster AI" class="footer-logo-wordmark" />
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color: white;">
+          <span class="logo-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 5h9a3 3 0 0 1 0 6H9v3h9" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="7" cy="19" r="2" fill="white"/>
+              <circle cx="18" cy="19" r="2" fill="white"/>
+              <path d="M9 19h7" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="logo-text" style="color: white;">Legal<span style="color: #66d0ff;">Flo</span></span>
+        </div>
+        <p style="margin-top: 16px; color: #9ab3d6; max-width: 36ch; font-size: .92rem;">
+          Automatyzacja kancelarii restrukturyzacyjnej — od leada do archiwizacji. LegalFlo by Booster AI.
+        </p>
+      </div>
+      <div>
+        <h4>Nawigacja</h4>
+        <a href="#moduly">Moduły</a>
+        <a href="#jak-to-dziala">Jak to działa</a>
+        <a href="#dlaczego">Dlaczego LegalFlo</a>
+        <a href="#korzysci">Korzyści</a>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <a href="https://cal.com/szymon-bazan-iahn2z/30min" target="_blank" rel="noopener" data-cta="footer">Umów rozmowę</a>
+        <a href="mailto:kontakt@boosterai.pl">kontakt@boosterai.pl</a>
+        <a href="/polityka-prywatnosci">Polityka prywatności</a>
+      </div>
     </div>
-    <p>© 2026 Booster AI · Automatyzacja procesów biznesowych</p>
-    <p><a href="mailto:hello@boosterai.pl">kontakt@boosterai.pl</a></p>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> Booster AI. Wszelkie prawa zastrzeżone.</span>
+      <span class="brand-note">LegalFlo by Booster AI</span>
+    </div>
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+  // Mobile menu toggle
+  (function() {
+    const btn = document.querySelector('.mobile-toggle');
+    const menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', () => {
+      const open = menu.getAttribute('data-open') === 'true';
+      menu.setAttribute('data-open', String(!open));
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.setAttribute('aria-label', !open ? 'Zamknij menu' : 'Otwórz menu');
+    });
+    // Close on link click
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      menu.setAttribute('data-open', 'false');
+      btn.setAttribute('aria-expanded', 'false');
+    }));
+  })();
+
+  // Current year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // CTA analytics hook (placeholder)
+  document.querySelectorAll('[data-cta]').forEach(el => {
+    el.addEventListener('click', () => {
+      // window.dataLayer && window.dataLayer.push({ event: 'cta_click', section: el.dataset.cta });
+    });
+  });
+</script>
 </body>
 </html>
