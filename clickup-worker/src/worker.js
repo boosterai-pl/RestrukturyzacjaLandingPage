@@ -46,6 +46,8 @@ export default {
         );
       }
 
+      const isPhoneOnlyLead = (source || "").includes("Zostaw numer") && hasValidPhone;
+
       const now = new Date();
       const dateStr = now.toLocaleDateString("pl-PL", {
         day: "2-digit",
@@ -64,7 +66,7 @@ export default {
       const lines = [];
       if (name)           lines.push(`**Imię:** ${name}`);
       if (hasValidPhone)  lines.push(`**Telefon:** ${phoneRaw}`);
-      if (hasValidEmail)  lines.push(`**Email:** ${email}`);
+      if (hasValidEmail && !isPhoneOnlyLead) lines.push(`**Email:** ${email}`);
       lines.push(`**Źródło:** ${source || "Landing page - Kancelaria Restrukturyzacyjna"}`);
       if (origin)         lines.push(`**Origin:** ${origin}`);
       lines.push(`**Data:** ${dateStr}`);
