@@ -40,7 +40,7 @@
   B) Jeden ekosystem: CRM rozmawia z KRZ, SharePoint pilnuje dokumentów,
      płatności same się windykują. Ty prowadzisz sprawy, nie pilnujesz ich.
   C) Kompletna automatyzacja procesu restrukturyzacji — od wyceny po
-     archiwizację. Wdrożenie end-to-end, szkolenie zespołu w cenie.
+     archiwizację. Wdrożenie end-to-end.
 
   CTA VARIANTS:
   A) Omów wdrożenie →                                                          [MAIN]
@@ -136,55 +136,129 @@
   /* ---------- Header ---------- */
   .site-header {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(255,255,255,.85);
+    background: rgba(255,255,255,.92);
     backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
     border-bottom: 1px solid var(--line);
+  }
+  /* Gwarantowany odstęp od krawędzi na mobile */
+  .site-header .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  @media (min-width: 480px) {
+    .site-header .container {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
   }
   .header-inner {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 0; gap: 24px;
+    padding: 12px 0; gap: 16px;
   }
+
+  /* Logo */
   .logo {
     display: inline-flex; align-items: center; gap: 10px;
-    font-weight: 800; font-size: 1.25rem; color: var(--navy-900);
-    letter-spacing: -0.02em;
+    font-weight: 800; font-size: 1.2rem; color: var(--navy-900);
+    letter-spacing: -0.02em; flex-shrink: 0;
+    white-space: nowrap;
   }
   .logo-mark {
     width: 34px; height: 34px; border-radius: 9px;
     background: linear-gradient(135deg, var(--navy-800) 0%, var(--cyan) 110%);
     display: inline-flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 14px rgba(0,134,214,.28);
+    box-shadow: 0 4px 14px rgba(0,134,214,.28); flex-shrink: 0;
   }
   .logo-mark svg { width: 20px; height: 20px; }
   .logo-text span { color: var(--cyan-600); }
 
+  /* Desktop nav */
   .site-nav {
-    display: none; align-items: center; gap: 28px;
+    display: none; align-items: center; gap: 20px;
+    flex: 1; justify-content: center;
   }
   .site-nav a {
-    font-weight: 500; color: var(--ink-700); font-size: .95rem;
-    transition: color .15s ease;
+    font-weight: 500; color: var(--ink-700); font-size: .9rem;
+    transition: color .15s ease; white-space: nowrap;
   }
   .site-nav a:hover { color: var(--navy-900); }
-  .header-cta { display: none; }
-  @media (min-width: 900px) {
-    .site-nav, .header-cta { display: inline-flex; }
+
+  /* Desktop CTA */
+  .header-cta { display: none; flex-shrink: 0; }
+
+  /* Show desktop nav + CTA, hide hamburger */
+  @media (min-width: 860px) {
+    .site-nav { display: flex; }
+    .header-cta { display: inline-flex; }
     .mobile-toggle { display: none !important; }
   }
+
+  /* Reduce gap on mid-range screens (860–1060px) */
+  @media (min-width: 860px) and (max-width: 1060px) {
+    .site-nav { gap: 14px; }
+    .site-nav a { font-size: .85rem; }
+    .header-inner { gap: 12px; }
+    .btn-lg { padding: 14px 18px; font-size: .95rem; }
+  }
+
+  /* Hamburger button */
   .mobile-toggle {
     display: inline-flex; align-items: center; justify-content: center;
     width: 42px; height: 42px; border-radius: 10px;
-    border: 1px solid var(--line);
+    border: 1px solid var(--line); flex-shrink: 0;
+    background: white; cursor: pointer;
+    transition: border-color .15s ease, background .15s ease;
   }
+  .mobile-toggle:hover { border-color: var(--navy-800); background: var(--navy-50); }
+
+  /* Hamburger icon lines — animated to X */
+  .mobile-toggle .bar {
+    display: block; width: 18px; height: 2px;
+    background: var(--navy-900); border-radius: 2px;
+    transition: transform .25s ease, opacity .2s ease;
+    transform-origin: center;
+  }
+  .mobile-toggle .bars {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .mobile-toggle[aria-expanded="true"] .bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .mobile-toggle[aria-expanded="true"] .bar:nth-child(2) {
+    opacity: 0; transform: scaleX(0);
+  }
+  .mobile-toggle[aria-expanded="true"] .bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* Mobile menu drawer */
   .mobile-menu {
-    display: none;
-    border-top: 1px solid var(--line);
-    padding: 16px 0 20px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .3s ease, padding-top .3s ease, padding-bottom .3s ease;
+    border-top: 1px solid transparent;
+    padding-top: 0;
+    padding-bottom: 0;
+    /* padding-left/right pochodzi z .site-header .container */
   }
-  .mobile-menu[data-open="true"] { display: block; }
-  .mobile-menu nav { display: flex; flex-direction: column; gap: 4px; }
-  .mobile-menu a { padding: 12px 4px; border-bottom: 1px solid var(--line); color: var(--navy-800); font-weight: 500; }
-  .mobile-menu .btn { margin-top: 16px; justify-content: center; }
+  .mobile-menu[data-open="true"] {
+    max-height: 400px;
+    border-top-color: var(--line);
+    padding-top: 12px;
+    padding-bottom: 24px;
+  }
+  .mobile-menu nav {
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .mobile-menu nav a {
+    padding: 13px 4px; border-bottom: 1px solid var(--line);
+    color: var(--navy-800); font-weight: 500; font-size: 1rem;
+    display: block; transition: color .15s ease;
+  }
+  .mobile-menu nav a:last-child { border-bottom: none; }
+  .mobile-menu nav a:hover { color: var(--cyan-600); }
+  .mobile-menu .btn { margin-top: 16px; justify-content: center; width: 100%; box-sizing: border-box; }
 
   /* ---------- Hero ---------- */
   .hero {
@@ -201,6 +275,7 @@
     display: grid; gap: 48px; align-items: center;
     grid-template-columns: 1fr;
   }
+  .hero-grid > * { min-width: 0; }
   @media (min-width: 1000px) {
     .hero-grid { grid-template-columns: 1.05fr .95fr; gap: 64px; }
   }
@@ -217,6 +292,9 @@
   .hero-trust svg { width: 16px; height: 16px; color: var(--accent); }
 
   /* ---------- Hero mockup ---------- */
+  .mockup-wrap {
+    position: relative;
+  }
   .mockup {
     position: relative;
     background: white;
@@ -236,7 +314,7 @@
   .mockup-dots span:nth-child(2) { background: #febc2e; }
   .mockup-dots span:nth-child(3) { background: #28c840; }
   .mockup-title { font-weight: 600; opacity: .9; }
-  .mockup-body { padding: 22px; background: var(--navy-50); }
+  .mockup-body { padding: 22px; background: var(--navy-50); overflow-x: hidden; }
   .kpi-row {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px;
   }
@@ -258,25 +336,29 @@
     background: var(--navy-50); margin-bottom: 6px;
   }
   .pipeline-row:last-child { margin-bottom: 0; }
-  .pipeline-row .name { font-weight: 600; color: var(--navy-800); }
+  .pipeline-row .name {
+    font-weight: 600; color: var(--navy-800);
+    flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
   .pipeline-row .stage {
     font-size: .7rem; padding: 2px 8px; border-radius: 999px; font-weight: 600;
+    flex-shrink: 0; margin-left: 8px;
   }
   .stage.blue { background: rgba(0,166,255,.14); color: var(--cyan-600); }
   .stage.green { background: rgba(37,208,182,.15); color: #0a8f7b; }
   .stage.amber { background: rgba(255,176,0,.15); color: #b67b00; }
 
-  /* Floating pills on mockup */
+  /* Floating pills — pozycjonowane względem .mockup-wrap, NIE .mockup */
   .pill-float {
     position: absolute; background: white; border: 1px solid var(--line);
-    border-radius: 12px; padding: 10px 14px; font-size: .82rem;
-    box-shadow: var(--shadow-md); display: flex; gap: 10px; align-items: center;
-    max-width: 220px;
+    border-radius: 12px; padding: 10px 14px; font-size: .78rem;
+    box-shadow: var(--shadow-md); display: flex; gap: 8px; align-items: center;
+    white-space: nowrap; z-index: 2; pointer-events: none;
   }
-  .pill-float .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-  .pill-1 { top: 14%; left: -14px; }
-  .pill-2 { bottom: 12%; right: -18px; }
-  @media (max-width: 700px) { .pill-float { display: none; } }
+  .pill-float .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .pill-1 { top: -16px; left: 20px; }
+  .pill-2 { bottom: -16px; right: 20px; }
+  @media (max-width: 999px) { .pill-float { display: none; } }
 
   /* ---------- Integrations strip ---------- */
   .integrations {
@@ -681,9 +763,11 @@
     </a>
 
     <button class="mobile-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Otwórz menu">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-        <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
-      </svg>
+      <span class="bars" aria-hidden="true">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </span>
     </button>
   </div>
 
@@ -731,44 +815,46 @@
       </div>
       <div class="hero-trust" aria-label="Zaufanie">
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Wdrożenie end-to-end</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Szkolenie zespołu w cenie</span>
+
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Integracja z KRZ</span>
       </div>
     </div>
 
     <!-- Mockup panelu kancelarii -->
-    <div class="mockup" aria-hidden="true">
-      <div class="mockup-topbar">
-        <div class="mockup-dots"><span></span><span></span><span></span></div>
-        <div class="mockup-title">Panel kancelarii — LegalFlo</div>
-      </div>
-      <div class="mockup-body">
-        <div class="kpi-row">
-          <div class="kpi-card"><div class="num">42</div><div class="lbl">Aktywne sprawy</div></div>
-          <div class="kpi-card"><div class="num">4 min</div><div class="lbl">Czas do 1. kontaktu</div></div>
-          <div class="kpi-card"><div class="num">18</div><div class="lbl">Alerty KRZ dziś</div></div>
-          <div class="kpi-card"><div class="num">98%</div><div class="lbl">Terminowość</div></div>
+    <div class="mockup-wrap" aria-hidden="true">
+      <div class="mockup">
+        <div class="mockup-topbar">
+          <div class="mockup-dots"><span></span><span></span><span></span></div>
+          <div class="mockup-title">Panel kancelarii — LegalFlo</div>
         </div>
-        <div class="pipeline">
-          <div class="pipeline-head">
-            <h4>Pipeline spraw</h4>
-            <span class="tag">Live</span>
+        <div class="mockup-body">
+          <div class="kpi-row">
+            <div class="kpi-card"><div class="num">42</div><div class="lbl">Aktywne sprawy</div></div>
+            <div class="kpi-card"><div class="num">4 min</div><div class="lbl">Czas do 1. kontaktu</div></div>
+            <div class="kpi-card"><div class="num">18</div><div class="lbl">Alerty KRZ dziś</div></div>
+            <div class="kpi-card"><div class="num">98%</div><div class="lbl">Terminowość</div></div>
           </div>
-          <div class="pipeline-row">
-            <span class="name">Nowak Logistyka sp. z o.o.</span>
-            <span class="stage blue">Wycena</span>
-          </div>
-          <div class="pipeline-row">
-            <span class="name">Meridian Bud sp. k.</span>
-            <span class="stage green">Plan układu</span>
-          </div>
-          <div class="pipeline-row">
-            <span class="name">Alfa Trans sp. z o.o.</span>
-            <span class="stage amber">KRZ · obwieszczenie</span>
-          </div>
-          <div class="pipeline-row">
-            <span class="name">Polver S.A.</span>
-            <span class="stage green">Nadzór układu</span>
+          <div class="pipeline">
+            <div class="pipeline-head">
+              <h4>Pipeline spraw</h4>
+              <span class="tag">Live</span>
+            </div>
+            <div class="pipeline-row">
+              <span class="name">Nowak Logistyka sp. z o.o.</span>
+              <span class="stage blue">Wycena</span>
+            </div>
+            <div class="pipeline-row">
+              <span class="name">Meridian Bud sp. k.</span>
+              <span class="stage green">Plan układu</span>
+            </div>
+            <div class="pipeline-row">
+              <span class="name">Alfa Trans sp. z o.o.</span>
+              <span class="stage amber">KRZ · obwieszczenie</span>
+            </div>
+            <div class="pipeline-row">
+              <span class="name">Polver S.A.</span>
+              <span class="stage green">Nadzór układu</span>
+            </div>
           </div>
         </div>
       </div>
@@ -880,7 +966,7 @@
           <li>Draft ankiety i wstępnego planu restrukturyzacji w .doc</li>
         </ul>
         <div class="module-meta">
-          <span>15 funkcji</span><span>·</span><span>Szkolenie: 2 godziny</span>
+          <span>15 funkcji</span>
         </div>
       </div>
     </article>
@@ -904,7 +990,7 @@
           <li>Formatka Excel do propozycji układowych</li>
         </ul>
         <div class="module-meta">
-          <span>5 funkcji</span><span>·</span><span>Szkolenie: 2 godziny</span>
+          <span>5 funkcji</span>
         </div>
       </div>
     </article>
@@ -926,7 +1012,7 @@
           <li>Automatyczne zadanie: przygotowanie maila informującego o obwieszczeniu</li>
         </ul>
         <div class="module-meta">
-          <span>3 funkcje</span><span>·</span><span>Szkolenie: 2 godziny</span>
+          <span>3 funkcje</span>
         </div>
       </div>
     </article>
@@ -952,7 +1038,7 @@
           <li>Draft wypowiedzenia umowy z gotową strukturą</li>
         </ul>
         <div class="module-meta">
-          <span>9 funkcji</span><span>·</span><span>Szkolenie: 2 godziny</span>
+          <span>9 funkcji</span>
         </div>
       </div>
     </article>
@@ -977,7 +1063,7 @@
           <li>Automatyczna archiwizacja dokumentów po zamknięciu sprawy</li>
         </ul>
         <div class="module-meta">
-          <span>7 funkcji</span><span>·</span><span>Szkolenie: 2 godziny</span>
+          <span>7 funkcji</span>
         </div>
       </div>
     </article>
@@ -1095,13 +1181,7 @@
           <p>Rozumiemy prawo restrukturyzacyjne i insolvency workflow. Nie uczymy się Twojej specyfiki na Twoim koszcie.</p>
         </div>
       </div>
-      <div class="why-item">
-        <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-        <div>
-          <h4>Szkolenie zespołu w cenie</h4>
-          <p>8 godzin szkoleń wdrożeniowych. Zespół działa samodzielnie od pierwszego dnia po starcie.</p>
-        </div>
-      </div>
+
       <div class="why-item">
         <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
         <div>
