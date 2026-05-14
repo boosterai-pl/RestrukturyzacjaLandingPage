@@ -652,6 +652,29 @@
   }
   .alert-dot.warning { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,.15); }
   .alert-dot.danger  { background: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,.15); }
+  .alert-dot.success { background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,.15); }
+
+  /* Windykator — KPI strip + trend pill */
+  .kpi-strip {
+    display: grid; grid-template-columns: 1.5fr 1fr; gap: 12px;
+    padding: 12px 14px; margin-bottom: 14px;
+    background: var(--navy-50);
+    border-radius: 10px;
+  }
+  .kpi-block { display: flex; flex-direction: column; gap: 4px; }
+  .kpi-block .kpi-num {
+    font-size: 1.15rem; font-weight: 800; color: var(--navy-900);
+    letter-spacing: -0.02em; line-height: 1.1;
+  }
+  .kpi-block .kpi-lbl {
+    font-size: .65rem; color: var(--ink-500);
+    text-transform: uppercase; letter-spacing: .04em; font-weight: 600;
+  }
+  .mini-pill.trend-down {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: rgba(34,197,94,.14); color: #15803d;
+  }
+  .mini-pill.trend-down svg { width: 11px; height: 11px; }
   .alert-body { flex: 1; min-width: 0; }
   .alert-title { font-size: .78rem; font-weight: 600; color: var(--navy-900); line-height: 1.3; }
   .alert-meta  { font-size: .68rem; color: var(--ink-500); margin-top: 2px; }
@@ -1205,8 +1228,8 @@
   <div class="container">
     <div class="section-head left">
       <span class="eyebrow">Platforma LegalFlow</span>
-      <h2>Trzy filary nowoczesnej kancelarii restrukturyzacyjnej</h2>
-      <p>Transparentna współpraca z klientem. Zautomatyzowana dokumentacja postępowania. Stały monitoring finansów dłużnika. W jednym audytowalnym systemie — bez silosów i ręcznej pracy.</p>
+      <h2>Cztery filary nowoczesnej kancelarii restrukturyzacyjnej</h2>
+      <p>Transparentna współpraca z klientem. Zautomatyzowana dokumentacja postępowania. Monitoring finansów dłużnika i własnej płynności kancelarii. W jednym audytowalnym systemie — bez silosów i ręcznej pracy.</p>
     </div>
 
     <!-- Pillar 01 — Strefa Klienta -->
@@ -1402,13 +1425,98 @@
       </div>
     </article>
 
+    <!-- Pillar 04 — AI Windykator -->
+    <article class="pillar pillar-reverse">
+      <div class="pillar-num" aria-hidden="true">04</div>
+      <div class="pillar-content">
+        <span class="pillar-eyebrow">
+          Płynność finansowa kancelarii
+          <span class="status-live"><span class="status-dot"></span>Dostępne</span>
+        </span>
+        <h3>AI Windykator</h3>
+        <p class="pillar-headline">Twoja kancelaria zawsze wie, kto i ile jest jej winien — i działa, zanim faktura stanie się problemem.</p>
+        <p class="pillar-lead">AI Windykator monitoruje wszystkie wystawione faktury, śledzi należności od klientów kancelarii i automatycznie inicjuje proces odzyskiwania zaległości — zanim wpłyną na płynność firmy. To nie windykacja w imieniu klienta. To kontrola własnych należności kancelarii, prowadzona w tle, bez angażowania prawnika.</p>
+        <ul class="pillar-features">
+          <li>Pełny widok należności: kto, ile, jak długo zalega — w jednym dashboardzie</li>
+          <li>Automatyczne wezwania do zapłaty w eskalacji ustalonej przez partnera kancelarii (e-mail, SMS, telefon)</li>
+          <li>Klasyfikacja klientów według ryzyka opóźnienia — system rozpoznaje niewypłacalność wcześniej</li>
+          <li>Wczesne alerty: faktura zagrożona zanim stanie się sprawą windykacyjną</li>
+          <li>Integracja z systemem fakturowania kancelarii oraz KSeF</li>
+          <li>Ślad audytowy każdej akcji windykacyjnej — od pierwszego monitu po wezwanie formalne</li>
+        </ul>
+        <div class="pillar-trust">KSeF · Auto-wezwania · Pełen audyt operacji</div>
+      </div>
+      <div class="pillar-visual" aria-hidden="true">
+        <div class="mini mini-windykator">
+          <div class="mini-head">
+            <span class="mini-title">Opóźnione należności</span>
+            <span class="mini-pill trend-down">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              –42% MoM
+            </span>
+          </div>
+          <div class="kpi-strip">
+            <div class="kpi-block">
+              <div class="kpi-num">28 460 zł</div>
+              <div class="kpi-lbl">Aktualne saldo zaległości</div>
+            </div>
+            <div class="kpi-block">
+              <div class="kpi-num">7</div>
+              <div class="kpi-lbl">Faktur w procesie</div>
+            </div>
+          </div>
+          <svg class="cfo-chart" viewBox="0 0 320 120" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="win-area" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#22c55e" stop-opacity="0.26"/>
+                <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <!-- area: linia spada — overdue maleje -->
+            <path d="M0,28 L40,32 L80,40 L120,48 L160,58 L200,68 L240,78 L280,86 L320,92 L320,120 L0,120 Z" fill="url(#win-area)"/>
+            <!-- line trending DOWN (= less overdue = good) -->
+            <path d="M0,28 L40,32 L80,40 L120,48 L160,58 L200,68 L240,78 L280,86 L320,92" fill="none" stroke="#22c55e" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+            <!-- last dot -->
+            <circle cx="320" cy="92" r="4" fill="#22c55e"/>
+            <circle cx="320" cy="92" r="9" fill="#22c55e" opacity="0.18"/>
+            <!-- start label (subtelny) -->
+            <text x="6" y="22" font-size="9" fill="#94a3b8" font-family="inherit">Q3</text>
+            <text x="296" y="86" font-size="9" fill="#15803d" font-family="inherit" font-weight="600">Teraz</text>
+          </svg>
+          <div class="cfo-alerts">
+            <div class="cfo-alert">
+              <span class="alert-dot success"></span>
+              <div class="alert-body">
+                <div class="alert-title">FV/2025/0167 — Spłacone</div>
+                <div class="alert-meta">8 200 zł · po 2. monicie e-mail</div>
+              </div>
+            </div>
+            <div class="cfo-alert">
+              <span class="alert-dot warning"></span>
+              <div class="alert-body">
+                <div class="alert-title">FV/2025/0184 — Wezwanie 1</div>
+                <div class="alert-meta">4 500 zł · 12 dni opóźnienia</div>
+              </div>
+            </div>
+            <div class="cfo-alert">
+              <span class="alert-dot danger"></span>
+              <div class="alert-body">
+                <div class="alert-title">FV/2025/0152 — Eskalacja: wezwanie formalne</div>
+                <div class="alert-meta">15 760 zł · 38 dni · ryzyko wysokie</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
     <div class="pillars-roadmap" role="note">
       <span class="roadmap-pill">W przygotowaniu</span>
       Bezpośrednia integracja z Krajowym Rejestrem Zadłużonych — monitoring obwieszczeń sądowych i automatyczne alerty w CRM.
     </div>
 
     <div class="pillars-cta">
-      <h3>Sprawdź, jak te trzy filary działają na realnej sprawie z Twojej kancelarii.</h3>
+      <h3>Sprawdź, jak te cztery filary działają na realnej sprawie z Twojej kancelarii.</h3>
       <div class="pillars-cta-row">
         <a class="btn btn-primary btn-lg"
            href="https://cal.com/szymon-bazan-iahn2z/15min"
