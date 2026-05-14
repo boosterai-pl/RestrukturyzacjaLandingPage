@@ -278,6 +278,15 @@
   .pill-2 { bottom: 12%; right: -18px; }
   @media (max-width: 700px) { .pill-float { display: none; } }
 
+  /* ---------- Intro strip (krotka sekcja pod hero) ---------- */
+  .intro-strip { padding: 56px 0 24px; background: white; }
+  .intro-strip-text {
+    max-width: 700px; margin: 0 auto; text-align: center;
+    font-size: clamp(1.05rem, .6vw + .9rem, 1.25rem);
+    color: var(--ink-700); line-height: 1.55;
+    font-weight: 500;
+  }
+
   /* ---------- Integrations strip ---------- */
   .integrations {
     padding: 56px 0;
@@ -711,28 +720,28 @@
 <section class="hero">
   <div class="container hero-grid">
     <div>
-      <span class="eyebrow">LegalFlow · dla kancelarii restrukturyzacyjnych</span>
-      <h1>Prowadź 3× więcej spraw restrukturyzacyjnych. Bez nowych ludzi.</h1>
+      <span class="eyebrow">Dla kancelarii restrukturyzacyjnych</span>
+      <h1>Automatyzacja, która odciąża kancelarię — nie zastępuje prawnika.</h1>
       <p class="hero-sub">
-        Dla partnerów kancelarii restrukturyzacyjnych: pięć modułów, które łączą CRM, KRZ, SharePoint
-        i płatności w jeden system. Średnio <strong>–70% czasu</strong> na administrację — bez dokładania etatów.
+        LegalFlow porządkuje dokumentację, kontakty z wierzycielami i nadzór nad układem.
+        Twój zespół skupia się na prawie — nie na administracji.
       </p>
       <div class="hero-cta-row">
         <a class="btn btn-primary btn-lg"
-           href="https://cal.com/szymon-bazan-iahn2z/30min"
+           href="https://cal.com/szymon-bazan-iahn2z/15min"
            target="_blank" rel="noopener"
            data-cta="hero">
-          Omów wdrożenie
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          Zobacz demo
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </a>
         <a class="btn btn-ghost btn-lg" href="#moduly" data-cta="hero-secondary">
-          Zobacz moduły
+          Poznaj moduły
         </a>
       </div>
       <div class="hero-trust" aria-label="Zaufanie">
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Wdrożenie end-to-end</span>
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Szkolenie zespołu w cenie</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Integracja z KRZ</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Integracja z Twoim CRM</span>
       </div>
     </div>
 
@@ -746,7 +755,7 @@
         <div class="kpi-row">
           <div class="kpi-card"><div class="num">42</div><div class="lbl">Aktywne sprawy</div></div>
           <div class="kpi-card"><div class="num">4 min</div><div class="lbl">Czas do 1. kontaktu</div></div>
-          <div class="kpi-card"><div class="num">18</div><div class="lbl">Alerty KRZ dziś</div></div>
+          <div class="kpi-card"><div class="num">12</div><div class="lbl">Dokumenty dziś</div></div>
           <div class="kpi-card"><div class="num">98%</div><div class="lbl">Terminowość</div></div>
         </div>
         <div class="pipeline">
@@ -764,17 +773,29 @@
           </div>
           <div class="pipeline-row">
             <span class="name">Alfa Trans sp. z o.o.</span>
-            <span class="stage amber">KRZ · obwieszczenie</span>
+            <span class="stage blue">Onboarding</span>
           </div>
           <div class="pipeline-row">
             <span class="name">Polver S.A.</span>
-            <span class="stage green">Nadzór układu</span>
+            <span class="stage green">Propozycje układowe</span>
           </div>
         </div>
       </div>
       <div class="pill-float pill-1"><span class="dot"></span>Nowy lead z formularza → CRM</div>
-      <div class="pill-float pill-2"><span class="dot"></span>Alert KRZ: obwieszczenie w SP-324/25</div>
+      <div class="pill-float pill-2"><span class="dot"></span>Draft planu układu dla Meridian Bud</div>
     </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INTRO STRIP — krótkie zdanie pod hero
+     ============================================================ -->
+<section class="intro-strip" aria-label="Wprowadzenie">
+  <div class="container">
+    <p class="intro-strip-text">
+      System dla kancelarii restrukturyzacyjnych, które chcą prowadzić więcej spraw —
+      bez proporcjonalnego zwiększania pracy administracyjnej.
+    </p>
   </div>
 </section>
 
