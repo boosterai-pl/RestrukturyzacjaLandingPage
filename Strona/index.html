@@ -373,6 +373,34 @@
     grid-template-columns: 1fr;
     margin-bottom: 18px;
     transition: box-shadow .2s ease, transform .2s ease;
+    position: relative;
+  }
+  /* Coming soon module — wyszarzenie + badge */
+  .module-coming-soon {
+    opacity: 0.55;
+    filter: grayscale(20%);
+  }
+  .module-coming-soon:hover {
+    box-shadow: none;
+    transform: none;
+  }
+  .module-coming-soon::after {
+    content: "Wkrótce";
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: #e5e7eb;
+    color: #4b5563;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    opacity: 1.2; /* counteract parent opacity slightly */
+  }
+  @media (max-width: 700px) {
+    .module-coming-soon::after { top: 10px; right: 10px; font-size: 10px; padding: 3px 8px; }
   }
   .module:hover { box-shadow: var(--shadow-md); }
   .module:last-child { margin-bottom: 0; }
@@ -881,7 +909,7 @@
 <section class="modules" id="moduly">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">5 modułów, jeden system</span>
+      <span class="eyebrow">Modułowy system</span>
       <h2>Każdy moduł rozwiązuje konkretny odcinek procesu</h2>
       <p>Wdróż je jako komplet lub pojedynczo. Integrują się nawzajem i z narzędziami, których już używasz.</p>
     </div>
@@ -894,9 +922,9 @@
         </div>
       </div>
       <div>
-        <div class="module-num">Moduł 01 · Sprzedaż</div>
-        <h3>Leady, na które odpowiadasz w 4 minuty</h3>
-        <p class="module-lead">Lead → CRM → wycena → onboarding. Od pierwszego kontaktu do podpisanej umowy — bez ręcznej pracy biurowej.</p>
+        <div class="module-num">Moduł 01 · Sprzedaż i onboarding</div>
+        <h3>Nowe sprawy bez ręcznego wpisywania danych</h3>
+        <p class="module-lead">Od pierwszego kontaktu do podpisanej umowy — z automatycznym uzupełnianiem danych, dynamiczną ankietą restrukturyzacyjną i gotowymi dokumentami onboardingowymi.</p>
         <ul class="module-features">
           <li>Leady z maila i telefonu trafiają do CRM natychmiast, z automatycznym przypisaniem</li>
           <li>Uzupełnianie danych firmy po NIP (API GUS/Regon) — zero ręcznego wpisywania</li>
@@ -921,9 +949,9 @@
         </div>
       </div>
       <div>
-        <div class="module-num">Moduł 02 · Restrukturyzacja</div>
-        <h3>Plany i wezwania układowe piszą się same</h3>
-        <p class="module-lead">Dłużnik, wierzyciele, dokumenty układowe — gotowe drafty na bazie danych z CRM.</p>
+        <div class="module-num">Moduł 02 · Dokumenty i układ</div>
+        <h3>Dokumenty układowe generują się z danych — nie z klawiatury</h3>
+        <p class="module-lead">Drafty planu restrukturyzacyjnego, testu prywatnego wierzyciela i propozycji układowych — gotowe na podstawie wywiadu z dłużnikiem. Prawnik recenzuje, nie pisze od zera.</p>
         <ul class="module-features">
           <li>Automatyczne wiadomości powitalne do dłużnika, wierzycieli i komorników</li>
           <li>Draft planu restrukturyzacyjnego na podstawie wywiadu z dłużnikiem</li>
@@ -937,17 +965,17 @@
       </div>
     </article>
 
-    <!-- Moduł 03 -->
-    <article class="module">
+    <!-- Moduł 03 — Coming soon -->
+    <article class="module module-coming-soon">
       <div>
         <div class="module-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10m14 11V10M3 10l9-7 9 7M9 14h6M9 18h6"/></svg>
         </div>
       </div>
       <div>
-        <div class="module-num">Moduł 03 · Etap sądowy</div>
-        <h3>KRZ pilnuje się sam</h3>
-        <p class="module-lead">Nasłuchiwanie publicznego Krajowego Rejestru Zadłużonych — monitoring sądowy bez angażowania prawnika.</p>
+        <div class="module-num">Moduł 03 · Etap sądowy i KRZ</div>
+        <h3>Monitoring KRZ i etap sądowy</h3>
+        <p class="module-lead">Automatyczne pobieranie obwieszczeń, alerty o zmianach statusu sprawy i zadania procesowe — bez ręcznego sprawdzania rejestru.</p>
         <ul class="module-features">
           <li>Pobieranie obwieszczeń z KRZ do folderu klienta na SharePoint (z linkiem do CRM)</li>
           <li>Alert w CRM o każdej aktualizacji statusu sprawy w KRZ</li>
@@ -959,8 +987,8 @@
       </div>
     </article>
 
-    <!-- Moduł 04 -->
-    <article class="module">
+    <!-- Moduł 04 — Coming soon -->
+    <article class="module module-coming-soon">
       <div>
         <div class="module-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg>
@@ -968,8 +996,8 @@
       </div>
       <div>
         <div class="module-num">Moduł 04 · Płatności i windykacja</div>
-        <h3>Windykacja, która nie zajmuje prawnika</h3>
-        <p class="module-lead">Wyciągi, przypomnienia, wezwania do zapłaty — automatycznie i we właściwej kolejności.</p>
+        <h3>Windykacja, która nie angażuje prawnika</h3>
+        <p class="module-lead">Monitoring przelewów, przypomnienia, wezwania do zapłaty i automatyczne zadania windykacyjne — system pilnuje terminów i eskaluje sprawy we właściwej kolejności.</p>
         <ul class="module-features">
           <li>Tygodniowe sprawdzanie przelewów na podstawie wyciągów z konta</li>
           <li>Przypomnienia o zbliżających się płatnościach (mail + SMS)</li>
@@ -985,17 +1013,17 @@
       </div>
     </article>
 
-    <!-- Moduł 05 -->
-    <article class="module">
+    <!-- Moduł 05 — Coming soon -->
+    <article class="module module-coming-soon">
       <div>
         <div class="module-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
       </div>
       <div>
-        <div class="module-num">Moduł 05 · Nadzór nad układem</div>
-        <h3>Układ działa, nawet gdy śpisz</h3>
-        <p class="module-lead">Harmonogramy, sprawozdania, archiwizacja — system pilnuje terminów długo po zamknięciu etapu sądowego.</p>
+        <div class="module-num">Moduł 05 · Nadzór posprzedażowy</div>
+        <h3>Układ działa — nadzór pilnuje się sam</h3>
+        <p class="module-lead">Harmonogramy spłat, cykliczne potwierdzenia przelewów, kwartalne sprawozdania i automatyczna archiwizacja po zamknięciu sprawy.</p>
         <ul class="module-features">
           <li>Generowanie harmonogramu spłat na podstawie planu układu</li>
           <li>Draft maila z harmonogramem do dłużnika</li>
