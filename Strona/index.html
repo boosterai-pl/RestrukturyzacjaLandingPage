@@ -381,89 +381,345 @@
   .section-head p { font-size: 1.08rem; color: var(--ink-700); }
   .section-head.left { text-align: left; margin-left: 0; }
 
-  /* ---------- Modules ---------- */
-  .modules { background: var(--navy-50); }
-  .module {
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: 32px;
-    display: grid; gap: 28px;
-    grid-template-columns: 1fr;
-    margin-bottom: 18px;
-    transition: box-shadow .2s ease, transform .2s ease;
+  /* ---------- Pillars (3 filary platformy) ---------- */
+  .pillars {
+    background: #FAFBFE;
     position: relative;
+    overflow: hidden;
   }
-  /* Coming soon module — wyszarzenie + badge */
-  .module-coming-soon {
-    opacity: 0.55;
-    filter: grayscale(20%);
+  /* Subtle dot-grid texture */
+  .pillars::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(rgba(11,34,64,0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+    mask-image: linear-gradient(180deg, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 8%, black 92%, transparent 100%);
+    opacity: .6;
   }
-  .module-coming-soon:hover {
-    box-shadow: none;
-    transform: none;
+  .pillars .container { position: relative; z-index: 1; }
+
+  .pillar {
+    position: relative;
+    background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+    border: 1.5px solid rgba(11,34,64,.06);
+    border-radius: 24px;
+    padding: 40px 28px;
+    margin-bottom: 28px;
+    overflow: hidden;
+    display: grid; gap: 36px;
+    grid-template-columns: 1fr;
+    transition: transform .25s ease, box-shadow .3s ease, border-color .25s ease;
   }
-  .module-coming-soon::after {
-    content: "Wkrótce";
+  .pillar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 64px rgba(11,34,64,.08), 0 2px 8px rgba(11,34,64,.04);
+    border-color: rgba(0,166,255,.28);
+  }
+  @media (min-width: 980px) {
+    .pillar {
+      grid-template-columns: 1.05fr 1fr;
+      align-items: center;
+      padding: 64px;
+      gap: 64px;
+    }
+    .pillar-reverse .pillar-visual { order: -1; }
+  }
+  /* Watermark numer */
+  .pillar-num {
     position: absolute;
-    top: 14px;
-    right: 14px;
-    background: #e5e7eb;
-    color: #4b5563;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 999px;
-    opacity: 1.2; /* counteract parent opacity slightly */
+    top: 18px; right: 28px;
+    font-size: clamp(5.5rem, 9vw, 9.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: rgba(0, 166, 255, 0.07);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
   }
   @media (max-width: 700px) {
-    .module-coming-soon::after { top: 10px; right: 10px; font-size: 10px; padding: 3px 8px; }
+    .pillar-num { top: 12px; right: 16px; font-size: 4.5rem; }
   }
-  .module:hover { box-shadow: var(--shadow-md); }
-  .module:last-child { margin-bottom: 0; }
-  @media (min-width: 820px) {
-    .module { grid-template-columns: 180px 1fr; padding: 40px; gap: 40px; }
+  .pillar-content, .pillar-visual { position: relative; z-index: 1; }
+
+  .pillar-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    font-size: .78rem; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--cyan-600);
+    margin-bottom: 14px;
   }
-  .module-num {
-    font-size: .78rem; color: var(--cyan-600); font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-    margin-bottom: 8px;
+  .pillar h3 {
+    font-size: clamp(1.7rem, 1.5vw + 1.1rem, 2.3rem);
+    font-weight: 800; letter-spacing: -0.025em;
+    margin-bottom: 12px;
+    color: var(--navy-900);
   }
-  .module h3 {
-    font-size: clamp(1.3rem, 1vw + 1rem, 1.7rem); margin-bottom: 10px;
+  .pillar-headline {
+    font-size: clamp(1.1rem, .6vw + .95rem, 1.3rem);
+    font-weight: 600; color: var(--navy-800);
+    line-height: 1.35;
+    margin-bottom: 18px;
   }
-  .module-lead { color: var(--ink-700); margin-bottom: 22px; font-size: 1.02rem; }
-  .module-icon {
-    width: 80px; height: 80px; border-radius: 18px;
-    background: linear-gradient(135deg, var(--navy-800), var(--cyan));
-    display: inline-flex; align-items: center; justify-content: center;
-    color: white;
-    box-shadow: 0 10px 28px rgba(0,134,214,.28);
+  .pillar-lead {
+    color: var(--ink-700); font-size: 1rem; line-height: 1.6;
+    margin-bottom: 24px;
+    max-width: 56ch;
   }
-  .module-icon svg { width: 40px; height: 40px; }
-  .module-meta {
-    display: flex; gap: 14px; flex-wrap: wrap;
-    font-size: .78rem; color: var(--ink-500); margin-bottom: 18px;
-    padding-top: 14px; border-top: 1px dashed var(--line);
-  }
-  .module-meta span { display: inline-flex; align-items: center; gap: 6px; }
-  .module-features {
-    list-style: none; display: grid; gap: 10px;
+  .pillar-features {
+    list-style: none; display: grid; gap: 12px;
     grid-template-columns: 1fr;
+    margin-bottom: 26px;
   }
-  @media (min-width: 700px) { .module-features { grid-template-columns: 1fr 1fr; } }
-  .module-features li {
-    position: relative; padding-left: 26px; font-size: .93rem; color: var(--ink-700);
+  .pillar-features li {
+    position: relative; padding-left: 28px;
+    font-size: .94rem; color: var(--ink-700); line-height: 1.5;
   }
-  .module-features li::before {
-    content: ""; position: absolute; left: 0; top: 6px;
-    width: 16px; height: 16px; border-radius: 50%;
-    background: rgba(37,208,182,.18);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230a8f7b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='3.5 8.5 6.5 11.5 12.5 5'/></svg>");
+  .pillar-features li::before {
+    content: ""; position: absolute; left: 0; top: 4px;
+    width: 18px; height: 18px; border-radius: 6px;
+    background: rgba(0, 166, 255, 0.1);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230086d6' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='3.5 8.5 6.5 11.5 12.5 5'/></svg>");
     background-size: 12px 12px;
     background-repeat: no-repeat;
     background-position: center;
+  }
+  .pillar-trust {
+    display: inline-block;
+    font-size: .8rem;
+    color: var(--ink-500);
+    padding: 10px 14px;
+    background: rgba(11,34,64,0.03);
+    border-radius: 8px;
+    letter-spacing: 0.01em;
+  }
+
+  /* Status live badge */
+  .status-live {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(34, 197, 94, 0.12);
+    color: #15803d;
+    padding: 3px 10px 3px 8px;
+    border-radius: 999px;
+    font-size: .72rem; font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .status-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 0 rgba(34,197,94,.45);
+    animation: live-pulse 2s infinite ease-out;
+    flex-shrink: 0;
+  }
+  @keyframes live-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.55); }
+    70%  { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+  }
+
+  /* ---------- Mini-mockups w pillarach ---------- */
+  .pillar-visual { display: flex; justify-content: center; }
+  .mini {
+    width: 100%; max-width: 460px;
+    background: white;
+    border: 1px solid rgba(11,34,64,.08);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 16px 40px rgba(11,34,64,.08), 0 2px 6px rgba(11,34,64,.04);
+    font-size: .9rem;
+  }
+  .mini-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 16px;
+  }
+  .mini-title { font-size: .82rem; font-weight: 700; color: var(--navy-800); }
+  .mini-pill {
+    font-size: .65rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px;
+    background: rgba(34,197,94,.12); color: #15803d;
+  }
+  .mini-pill.cyan { background: rgba(0,166,255,.12); color: var(--cyan-600); }
+  .mini-pill.live { display: inline-flex; align-items: center; gap: 6px; background: rgba(34,197,94,.12); color: #15803d; }
+
+  /* Strefa Klienta — progress stages */
+  .progress-stages {
+    list-style: none; display: flex; align-items: flex-start; gap: 6px;
+    margin-bottom: 18px;
+  }
+  .progress-stages .stage {
+    flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+    position: relative;
+  }
+  .progress-stages .stage:not(:last-child)::after {
+    content: ""; position: absolute;
+    top: 7px; left: 22px; right: -6px; height: 2px;
+    background: var(--line);
+    border-radius: 2px;
+  }
+  .progress-stages .stage.done::after { background: #22c55e; }
+  .progress-stages .stage.active::after { background: linear-gradient(90deg, var(--cyan) 60%, var(--line) 60%); }
+  .stage-dot {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--navy-50); border: 2px solid var(--line);
+    flex-shrink: 0; transition: all .2s ease;
+  }
+  .stage.done .stage-dot {
+    background: #22c55e; border-color: #22c55e;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='3.5 8.5 6.5 11.5 12.5 5'/></svg>");
+    background-size: 10px 10px; background-repeat: no-repeat; background-position: center;
+  }
+  .stage.active .stage-dot {
+    background: var(--cyan); border-color: var(--cyan);
+    box-shadow: 0 0 0 4px rgba(0,166,255,.18);
+    animation: stage-pulse 2s infinite ease-in-out;
+  }
+  @keyframes stage-pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(0,166,255,.18); }
+    50%      { box-shadow: 0 0 0 6px rgba(0,166,255,.28); }
+  }
+  .stage-label {
+    font-size: .72rem; font-weight: 600; color: var(--ink-700);
+    line-height: 1.25;
+  }
+  .stage.active .stage-label { color: var(--navy-900); }
+
+  /* Mini list (rows) */
+  .mini-list { display: flex; flex-direction: column; gap: 8px; }
+  .mini-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px;
+    background: var(--navy-50);
+    border-radius: 10px;
+  }
+  .mini-icon {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: white;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--cyan-600);
+    flex-shrink: 0;
+  }
+  .mini-icon svg { width: 16px; height: 16px; }
+  .mini-row-body { flex: 1; min-width: 0; }
+  .mini-row-title { font-size: .82rem; font-weight: 600; color: var(--navy-900); line-height: 1.3; }
+  .mini-row-meta  { font-size: .7rem; color: var(--ink-500); margin-top: 2px; }
+  .mini-badge {
+    font-size: .65rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 6px; white-space: nowrap;
+  }
+  .mini-badge.attention { background: rgba(255,176,0,.15); color: #b67b00; }
+  .mini-badge.done      { background: rgba(34,197,94,.15); color: #15803d; }
+  .mini-badge.draft     { background: rgba(11,34,64,.08); color: var(--ink-500); }
+
+  /* Generator — flow */
+  .flow {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin-bottom: 16px;
+    padding: 14px; background: var(--navy-50); border-radius: 10px;
+  }
+  .flow-step {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;
+    text-align: center;
+  }
+  .flow-icon {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: white;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--cyan-600);
+    box-shadow: 0 2px 6px rgba(11,34,64,.06);
+  }
+  .flow-icon svg { width: 18px; height: 18px; }
+  .flow-step span:not(.flow-icon) { font-size: .68rem; font-weight: 600; color: var(--navy-800); line-height: 1.2; }
+  .flow-arrow { color: var(--ink-300); flex-shrink: 0; }
+  .flow-arrow svg { width: 16px; height: 16px; }
+  .mini-generator .mini-row { justify-content: space-between; }
+  .mini-generator .mini-row-title { font-size: .78rem; }
+
+  /* CFO — chart */
+  .cfo-chart {
+    width: 100%; height: 110px;
+    display: block;
+    margin-bottom: 14px;
+  }
+  .cfo-alerts { display: flex; flex-direction: column; gap: 8px; }
+  .cfo-alert {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px;
+    background: var(--navy-50);
+    border-radius: 10px;
+  }
+  .alert-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .alert-dot.warning { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,.15); }
+  .alert-dot.danger  { background: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,.15); }
+  .alert-body { flex: 1; min-width: 0; }
+  .alert-title { font-size: .78rem; font-weight: 600; color: var(--navy-900); line-height: 1.3; }
+  .alert-meta  { font-size: .68rem; color: var(--ink-500); margin-top: 2px; }
+
+  /* Roadmap note (KRZ) */
+  .pillars-roadmap {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    margin: 8px 0 40px;
+    padding: 16px 20px;
+    background: rgba(11,34,64,.03);
+    border: 1px dashed rgba(11,34,64,.12);
+    border-radius: 12px;
+    font-size: .92rem; color: var(--ink-700); line-height: 1.5;
+  }
+  .roadmap-pill {
+    font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 999px;
+    background: rgba(0,166,255,.12); color: var(--cyan-600);
+    flex-shrink: 0;
+  }
+
+  /* Pillars CTA — premium closing block */
+  .pillars-cta {
+    margin-top: 40px;
+    padding: 48px 32px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-700) 100%);
+    border-radius: var(--radius-lg);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) { .pillars-cta { padding: 64px 48px; } }
+  .pillars-cta::before {
+    content: ""; position: absolute;
+    top: -60%; right: -10%;
+    width: 60%; height: 200%;
+    background: radial-gradient(circle, rgba(0,166,255,.32), transparent 60%);
+    pointer-events: none;
+  }
+  .pillars-cta h3 {
+    color: white;
+    font-size: clamp(1.4rem, 1vw + 1rem, 1.85rem);
+    margin-bottom: 28px;
+    max-width: 26ch; margin-inline: auto;
+    position: relative;
+  }
+  .pillars-cta-row {
+    display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    position: relative;
+  }
+  .pillars-cta .btn-primary {
+    background: white; color: var(--navy-900);
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  }
+  .pillars-cta .btn-primary:hover { background: #f2faff; }
+  .pillars-cta .btn-ghost {
+    background: transparent; color: white; border: 1.5px solid rgba(255,255,255,.35);
+  }
+  .pillars-cta .btn-ghost:hover { border-color: white; background: rgba(255,255,255,.08); }
+  .pillars-cta-hint {
+    color: #cfe0f4; margin-top: 18px; font-size: .9rem;
+    position: relative;
+  }
+  .pillars-trust-bar {
+    color: #99b7d8; margin-top: 6px; font-size: .78rem;
+    letter-spacing: .04em;
+    position: relative;
   }
 
   /* ---------- Ecosystem callout ---------- */
@@ -506,6 +762,7 @@
   }
   @media (min-width: 720px) { .steps { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1100px) { .steps { grid-template-columns: repeat(5, 1fr); gap: 12px; } }
+  @media (min-width: 1000px) { .steps-4 { grid-template-columns: repeat(4, 1fr); } }
   .step {
     padding: 26px;
     background: white;
@@ -521,14 +778,6 @@
   }
   .step h4 { font-size: 1.02rem; margin-bottom: 8px; color: var(--navy-900); }
   .step p { font-size: .88rem; color: var(--ink-700); }
-  .step-coming-soon { opacity: 0.55; position: relative; }
-  .step-coming-soon::after {
-    content: "Wkrótce";
-    position: absolute; top: 14px; right: 14px;
-    background: #e5e7eb; color: #4b5563;
-    font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 3px 8px; border-radius: 999px;
-  }
 
   /* ---------- Why LegalFlow ---------- */
   .why-grid {
@@ -829,8 +1078,8 @@
       <span class="eyebrow">Dla kancelarii restrukturyzacyjnych</span>
       <h1>Automatyzacja, która odciąża kancelarię — nie zastępuje prawnika.</h1>
       <p class="hero-sub">
-        LegalFlow porządkuje dokumentację, kontakty z wierzycielami i nadzór nad układem.
-        Twój zespół skupia się na prawie — nie na administracji.
+        Komunikacja z klientem, dokumentacja postępowania i monitoring finansowy dłużnika — w jednym audytowalnym systemie.
+        Twój zespół skupia się na prawie, nie na administracji.
       </p>
       <div class="hero-cta-row">
         <a class="btn btn-primary btn-lg"
@@ -950,139 +1199,233 @@
 </section>
 
 <!-- ============================================================
-     MODULES
+     PILLARS — 3 filary platformy
      ============================================================ -->
-<section class="modules" id="moduly">
+<section class="pillars" id="moduly" aria-label="Trzy filary platformy LegalFlow">
   <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Modułowy system</span>
-      <h2>Każdy moduł rozwiązuje konkretny odcinek procesu</h2>
-      <p>Wdróż je jako komplet lub pojedynczo. Integrują się nawzajem i z narzędziami, których już używasz.</p>
+    <div class="section-head left">
+      <span class="eyebrow">Platforma LegalFlow</span>
+      <h2>Trzy filary nowoczesnej kancelarii restrukturyzacyjnej</h2>
+      <p>Transparentna współpraca z klientem. Zautomatyzowana dokumentacja postępowania. Stały monitoring finansów dłużnika. W jednym audytowalnym systemie — bez silosów i ręcznej pracy.</p>
     </div>
 
-    <!-- Moduł 01 -->
-    <article class="module">
-      <div>
-        <div class="module-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z"/></svg>
-        </div>
-      </div>
-      <div>
-        <div class="module-num">Moduł 01 · Sprzedaż i onboarding</div>
-        <h3>Nowe sprawy bez ręcznego wpisywania danych</h3>
-        <p class="module-lead">Od pierwszego kontaktu do podpisanej umowy — z automatycznym uzupełnianiem danych, dynamiczną ankietą restrukturyzacyjną i gotowymi dokumentami onboardingowymi.</p>
-        <ul class="module-features">
-          <li>Leady z maila i telefonu trafiają do CRM natychmiast, z automatycznym przypisaniem</li>
-          <li>Uzupełnianie danych firmy po NIP (API GUS/Regon) — zero ręcznego wpisywania</li>
-          <li>Transkrypcje rozmów telefonicznych zapisywane w CRM</li>
-          <li>Dynamiczna ankieta restrukturyzacyjna (handlowiec + klient)</li>
-          <li>Automatyczne drafty follow-upów po 1, 2 i 4 dniach</li>
-          <li>Teczka klienta na SharePoint — automatyczne odkładanie dokumentów</li>
-          <li>Segmentacja i kampanie w Mailerlite</li>
-          <li>Draft ankiety i wstępnego planu restrukturyzacji w .doc</li>
+    <!-- Pillar 01 — Strefa Klienta -->
+    <article class="pillar">
+      <div class="pillar-num" aria-hidden="true">01</div>
+      <div class="pillar-content">
+        <span class="pillar-eyebrow">Komunikacja klient ↔ kancelaria</span>
+        <h3>Strefa Klienta</h3>
+        <p class="pillar-headline">Klient zawsze wie, na jakim etapie jest jego sprawa.</p>
+        <p class="pillar-lead">Dedykowana, zabezpieczona przestrzeń, w której klient kancelarii widzi status postępowania, otrzymuje dokumenty i komunikuje się z prawnikiem — w jednym kanale, z pełną historią. To nie samoobsługa. To uporządkowana współpraca, w której nikt nie szuka maili.</p>
+        <ul class="pillar-features">
+          <li>Status postępowania w czasie rzeczywistym — bez pytań „jak idzie sprawa?"</li>
+          <li>Centralne repozytorium dokumentów z historią wersji i kontrolą dostępu</li>
+          <li>Bezpieczne przesyłanie plików w obie strony</li>
+          <li>Powiadomienia o terminach, decyzjach i dokumentach do podpisu</li>
+          <li>Komunikacja zawsze w kontekście sprawy — nigdy „w którym mailu to było"</li>
+          <li>Pełna ścieżka audytu: kto, kiedy, co przekazał</li>
         </ul>
-        <div class="module-meta">
-          <span>15 funkcji</span><span>·</span><span>Szkolenie: 2 godziny</span>
+        <div class="pillar-trust">Audytowalne · RODO · Kontrola dostępów</div>
+      </div>
+      <div class="pillar-visual" aria-hidden="true">
+        <div class="mini mini-portal">
+          <div class="mini-head">
+            <span class="mini-title">Twoja sprawa — SR-184/25</span>
+            <span class="mini-pill">Aktywna</span>
+          </div>
+          <ol class="progress-stages">
+            <li class="stage done"><span class="stage-dot"></span><span class="stage-label">Wniosek złożony</span></li>
+            <li class="stage active"><span class="stage-dot"></span><span class="stage-label">Postępowanie układowe</span></li>
+            <li class="stage"><span class="stage-dot"></span><span class="stage-label">Zatwierdzenie układu</span></li>
+          </ol>
+          <div class="mini-list">
+            <div class="mini-row">
+              <span class="mini-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </span>
+              <div class="mini-row-body">
+                <div class="mini-row-title">Plan układu — wersja 3</div>
+                <div class="mini-row-meta">Dodano 2h temu · Wymaga podpisu</div>
+              </div>
+              <span class="mini-badge attention">Do akcji</span>
+            </div>
+            <div class="mini-row">
+              <span class="mini-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              </span>
+              <div class="mini-row-body">
+                <div class="mini-row-title">Spotkanie z prawnikiem</div>
+                <div class="mini-row-meta">Jutro, 11:00 · Online</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </article>
 
-    <!-- Moduł 02 -->
-    <article class="module">
-      <div>
-        <div class="module-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
-        </div>
-      </div>
-      <div>
-        <div class="module-num">Moduł 02 · Dokumenty i układ</div>
-        <h3>Dokumenty układowe generują się z danych — nie z klawiatury</h3>
-        <p class="module-lead">Drafty planu restrukturyzacyjnego, testu prywatnego wierzyciela i propozycji układowych — gotowe na podstawie wywiadu z dłużnikiem. Prawnik recenzuje, nie pisze od zera.</p>
-        <ul class="module-features">
-          <li>Automatyczne wiadomości powitalne do dłużnika, wierzycieli i komorników</li>
-          <li>Draft planu restrukturyzacyjnego na podstawie wywiadu z dłużnikiem</li>
-          <li>Szablon i draft testu prywatnego wierzyciela z gotowymi formułami</li>
-          <li>Drafty do wierzycieli z propozycjami układowymi</li>
-          <li>Formatka Excel do propozycji układowych</li>
+    <!-- Pillar 02 — Generator Układów i Dokumentów -->
+    <article class="pillar pillar-reverse">
+      <div class="pillar-num" aria-hidden="true">02</div>
+      <div class="pillar-content">
+        <span class="pillar-eyebrow">Automatyzacja dokumentacji procesowej</span>
+        <h3>Generator Układów i Dokumentów</h3>
+        <p class="pillar-headline">Dokumentacja postępowania powstaje sama — na Twoich szablonach.</p>
+        <p class="pillar-lead">Kancelaria definiuje własne wzory pism, ankiet i planów. System wypełnia je danymi sprawy i generuje wersje robocze gotowe do akceptacji prawnika. Plan układu, propozycja układowa, wniosek do sądu, plan PZU — powstają w minutach, w standardzie Twojej kancelarii.</p>
+        <ul class="pillar-features">
+          <li>Twoje wzorce, nie szablony „pudełkowe" — pełna kontrola nad formatem i językiem</li>
+          <li>Plany restrukturyzacyjne, propozycje układowe, ankiety, pisma procesowe</li>
+          <li>Drafty gotowe do recenzji prawnika, nie do pisania od zera</li>
+          <li>Spójność w całej kancelarii — eliminacja literówek i niespójnych klauzul</li>
+          <li>Podpis elektroniczny i wersjonowanie wbudowane</li>
+          <li>Ścieżka audytu od draftu po podpisany oryginał</li>
         </ul>
-        <div class="module-meta">
-          <span>5 funkcji</span><span>·</span><span>Szkolenie: 2 godziny</span>
+        <div class="pillar-trust">Twoje szablony · Twoja kontrola · Plan układu w ok. 8 minut</div>
+      </div>
+      <div class="pillar-visual" aria-hidden="true">
+        <div class="mini mini-generator">
+          <div class="mini-head">
+            <span class="mini-title">Generator dokumentów</span>
+            <span class="mini-pill cyan">Auto</span>
+          </div>
+          <div class="flow">
+            <div class="flow-step">
+              <span class="flow-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+              </span>
+              <span>Dane sprawy</span>
+            </div>
+            <span class="flow-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+            <div class="flow-step">
+              <span class="flow-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg>
+              </span>
+              <span>Twój szablon</span>
+            </div>
+            <span class="flow-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+            <div class="flow-step">
+              <span class="flow-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </span>
+              <span>Draft .doc/.pdf</span>
+            </div>
+          </div>
+          <div class="mini-list">
+            <div class="mini-row">
+              <span class="mini-row-title">Plan układu — Nowak Logistyka</span>
+              <span class="mini-badge attention">Do akceptacji</span>
+            </div>
+            <div class="mini-row">
+              <span class="mini-row-title">Test prywatnego wierzyciela — Polver</span>
+              <span class="mini-badge done">Podpisany</span>
+            </div>
+            <div class="mini-row">
+              <span class="mini-row-title">Propozycje układowe — Meridian Bud</span>
+              <span class="mini-badge draft">Draft</span>
+            </div>
+          </div>
         </div>
       </div>
     </article>
 
-    <!-- Moduł 03 — Coming soon -->
-    <article class="module module-coming-soon">
-      <div>
-        <div class="module-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10m14 11V10M3 10l9-7 9 7M9 14h6M9 18h6"/></svg>
-        </div>
-      </div>
-      <div>
-        <div class="module-num">Moduł 03 · Etap sądowy i KRZ</div>
-        <h3>Monitoring KRZ i etap sądowy</h3>
-        <p class="module-lead">Automatyczne pobieranie obwieszczeń, alerty o zmianach statusu sprawy i zadania procesowe — bez ręcznego sprawdzania rejestru.</p>
-        <ul class="module-features">
-          <li>Pobieranie obwieszczeń z KRZ do folderu klienta na SharePoint (z linkiem do CRM)</li>
-          <li>Alert w CRM o każdej aktualizacji statusu sprawy w KRZ</li>
-          <li>Automatyczne zadanie: przygotowanie maila informującego o obwieszczeniu</li>
+    <!-- Pillar 03 — CFO Restrukturyzacyjny -->
+    <article class="pillar">
+      <div class="pillar-num" aria-hidden="true">03</div>
+      <div class="pillar-content">
+        <span class="pillar-eyebrow">
+          Kontrola finansowa dłużnika
+          <span class="status-live"><span class="status-dot"></span>Dostępne</span>
+        </span>
+        <h3>CFO Restrukturyzacyjny</h3>
+        <p class="pillar-headline">Kancelaria ma pełną kontrolę nad finansami klienta.</p>
+        <p class="pillar-lead">Bezpośrednie połączenie z bankiem klienta, KSeF, dokumentami finansowymi i systemem płatności. System monitoruje płynność, terminy rat układowych i należności w czasie rzeczywistym. Gdy coś odbiega od planu — kancelaria wie pierwsza. Nie klient. Nie wierzyciel. Nie sąd.</p>
+        <ul class="pillar-features">
+          <li>Bieżący widok płynności dłużnika — bez raportów z opóźnieniem</li>
+          <li>Integracja z KSeF i wyciągami bankowymi — dane prosto ze źródła</li>
+          <li>Wykrywanie odchyleń od planu układu, zanim staną się problemem procesowym</li>
+          <li>Automatyczne monity i przypomnienia: e-mail, SMS, telefon — w eskalacji ustalonej przez kancelarię</li>
+          <li>Windykacja miękka prowadzona zgodnie z polityką kancelarii</li>
+          <li>Pełen ślad audytowy operacji finansowych i komunikacji z wierzycielami</li>
         </ul>
-        <div class="module-meta">
-          <span>3 funkcje</span><span>·</span><span>Szkolenie: 2 godziny</span>
+        <div class="pillar-trust">KSeF · Open Banking · Monitoring 24/7 · Alerty w 60 s</div>
+      </div>
+      <div class="pillar-visual" aria-hidden="true">
+        <div class="mini mini-cfo">
+          <div class="mini-head">
+            <span class="mini-title">Płynność dłużnika</span>
+            <span class="mini-pill live"><span class="status-dot"></span>Live</span>
+          </div>
+          <svg class="cfo-chart" viewBox="0 0 320 120" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="cfo-area" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#00A6FF" stop-opacity="0.28"/>
+                <stop offset="100%" stop-color="#00A6FF" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <!-- threshold dashed -->
+            <line x1="0" y1="78" x2="320" y2="78" stroke="#ff5566" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.7"/>
+            <!-- area -->
+            <path d="M0,40 L40,30 L80,46 L120,38 L160,55 L200,50 L240,72 L280,68 L320,82 L320,120 L0,120 Z" fill="url(#cfo-area)"/>
+            <!-- line -->
+            <path d="M0,40 L40,30 L80,46 L120,38 L160,55 L200,50 L240,72 L280,68 L320,82" fill="none" stroke="#00A6FF" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+            <!-- last dot -->
+            <circle cx="320" cy="82" r="4" fill="#00A6FF"/>
+            <circle cx="320" cy="82" r="9" fill="#00A6FF" opacity="0.18"/>
+          </svg>
+          <div class="cfo-alerts">
+            <div class="cfo-alert">
+              <span class="alert-dot warning"></span>
+              <div class="alert-body">
+                <div class="alert-title">Nadchodząca rata układu — Meridian Bud</div>
+                <div class="alert-meta">Termin za 2 dni · 18 400 zł</div>
+              </div>
+            </div>
+            <div class="cfo-alert">
+              <span class="alert-dot danger"></span>
+              <div class="alert-body">
+                <div class="alert-title">KSeF: faktura przeterminowana</div>
+                <div class="alert-meta">12 480 zł · 4 dni opóźnienia</div>
+              </div>
+            </div>
+            <div class="cfo-alert">
+              <span class="alert-dot warning"></span>
+              <div class="alert-body">
+                <div class="alert-title">Spadek płynności –18% MoM</div>
+                <div class="alert-meta">Alfa Trans · zalecana interwencja</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </article>
 
-    <!-- Moduł 04 — Coming soon -->
-    <article class="module module-coming-soon">
-      <div>
-        <div class="module-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg>
-        </div>
-      </div>
-      <div>
-        <div class="module-num">Moduł 04 · Płatności i windykacja</div>
-        <h3>Windykacja, która nie angażuje prawnika</h3>
-        <p class="module-lead">Monitoring przelewów, przypomnienia, wezwania do zapłaty i automatyczne zadania windykacyjne — system pilnuje terminów i eskaluje sprawy we właściwej kolejności.</p>
-        <ul class="module-features">
-          <li>Tygodniowe sprawdzanie przelewów na podstawie wyciągów z konta</li>
-          <li>Przypomnienia o zbliżających się płatnościach (mail + SMS)</li>
-          <li>Alerty o niezaksięgowanych płatnościach w terminie</li>
-          <li>Automatyczne zadania windykacyjne w CRM</li>
-          <li>Tagowanie opóźnionych płatników + etap „Windykacja"</li>
-          <li>Wezwania do zapłaty — wersja uprzejma i formalna</li>
-          <li>Draft wypowiedzenia umowy z gotową strukturą</li>
-        </ul>
-        <div class="module-meta">
-          <span>9 funkcji</span><span>·</span><span>Szkolenie: 2 godziny</span>
-        </div>
-      </div>
-    </article>
+    <div class="pillars-roadmap" role="note">
+      <span class="roadmap-pill">W przygotowaniu</span>
+      Bezpośrednia integracja z Krajowym Rejestrem Zadłużonych — monitoring obwieszczeń sądowych i automatyczne alerty w CRM.
+    </div>
 
-    <!-- Moduł 05 — Coming soon -->
-    <article class="module module-coming-soon">
-      <div>
-        <div class="module-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
+    <div class="pillars-cta">
+      <h3>Sprawdź, jak te trzy filary działają na realnej sprawie z Twojej kancelarii.</h3>
+      <div class="pillars-cta-row">
+        <a class="btn btn-primary btn-lg"
+           href="https://cal.com/szymon-bazan-iahn2z/15min"
+           target="_blank" rel="noopener"
+           data-cta="pillars-demo">
+          Zobacz demo
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </a>
+        <a class="btn btn-ghost btn-lg"
+           href="mailto:kontakt@boosterai.pl"
+           data-cta="pillars-contact">
+          Skontaktuj się
+        </a>
       </div>
-      <div>
-        <div class="module-num">Moduł 05 · Nadzór posprzedażowy</div>
-        <h3>Układ działa — nadzór pilnuje się sam</h3>
-        <p class="module-lead">Harmonogramy spłat, cykliczne potwierdzenia przelewów, kwartalne sprawozdania i automatyczna archiwizacja po zamknięciu sprawy.</p>
-        <ul class="module-features">
-          <li>Generowanie harmonogramu spłat na podstawie planu układu</li>
-          <li>Draft maila z harmonogramem do dłużnika</li>
-          <li>Cykliczne maile z prośbą o potwierdzenia przelewów (co miesiąc)</li>
-          <li>Kwartalne przypomnienia do opiekuna sprawy o zebraniu danych do sprawozdania</li>
-          <li>Automatyczny harmonogram przypomnień w CRM</li>
-          <li>Automatyczna archiwizacja dokumentów po zamknięciu sprawy</li>
-        </ul>
-        <div class="module-meta">
-          <span>7 funkcji</span><span>·</span><span>Szkolenie: 2 godziny</span>
-        </div>
-      </div>
-    </article>
+      <p class="pillars-cta-hint">15-minutowe demo · bez prezentacji · działający system na Twoich danych.</p>
+      <p class="pillars-trust-bar">Polski cloud · Audytowalne · RODO · Standardy sektora prawnego</p>
+    </div>
   </div>
 </section>
 
@@ -1119,28 +1462,24 @@
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">Jak to działa</span>
-      <h2>Pięć kroków od pierwszego leada do zamkniętej sprawy</h2>
+      <h2>Cztery kroki od pierwszego kontaktu do zatwierdzonego układu</h2>
     </div>
-    <div class="steps">
+    <div class="steps steps-4">
       <div class="step">
-        <h4>Lead trafia do CRM</h4>
-        <p>Każdy kontakt — z maila, telefonu lub formularza — trafia do CRM z automatycznie uzupełnionymi danymi firmy.</p>
-      </div>
-      <div class="step">
-        <h4>Wycena i onboarding</h4>
-        <p>Dynamiczna ankieta restrukturyzacyjna, drafty dokumentów i teczka na SharePoint — gotowe w kilka minut.</p>
+        <h4>Onboarding klienta</h4>
+        <p>Klient trafia do Strefy Klienta. Widzi status sprawy, ankietę restrukturyzacyjną i pierwsze dokumenty — w jednym, zabezpieczonym kanale.</p>
       </div>
       <div class="step">
-        <h4>Dokumenty układowe</h4>
-        <p>Plan restrukturyzacji, test prywatnego wierzyciela, propozycje — automatyczne drafty na podstawie danych z CRM.</p>
+        <h4>Generowanie dokumentacji</h4>
+        <p>Plan układu, propozycje układowe, pisma procesowe — automatyczne drafty na Twoich szablonach. Prawnik recenzuje, nie pisze od zera.</p>
       </div>
-      <div class="step step-coming-soon">
-        <h4>Płatności i windykacja</h4>
-        <p>Monitoring przelewów i automatyczne wezwania we właściwej kolejności.</p>
+      <div class="step">
+        <h4>Postępowanie sądowe</h4>
+        <p>Obsługa wniosków, korespondencji z wierzycielami i terminów procesowych w systemie. Klient widzi każdy kluczowy ruch.</p>
       </div>
-      <div class="step step-coming-soon">
-        <h4>Nadzór i archiwizacja</h4>
-        <p>Harmonogramy spłat, kwartalne sprawozdania i automatyczne zamknięcie teczki po zakończeniu sprawy.</p>
+      <div class="step">
+        <h4>Monitoring i windykacja</h4>
+        <p>CFO Restrukturyzacyjny pilnuje płynności dłużnika, terminów rat układowych i należności. Odchylenia trafiają do kancelarii zanim staną się problemem.</p>
       </div>
     </div>
 
@@ -1357,7 +1696,7 @@
           <svg class="faq-chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </summary>
         <div class="faq-content">
-          <p>Integracja z Krajowym Rejestrem Zadłużonych jest w przygotowaniu. Pojawi się w jednej z kolejnych wersji systemu. Możesz zostawić kontakt — poinformujemy Cię o uruchomieniu.</p>
+          <p>Bezpośrednia integracja z Krajowym Rejestrem Zadłużonych jest w przygotowaniu jako rozszerzenie filaru postępowania sądowego — automatyczny monitoring obwieszczeń i alerty w CRM. Pojawi się w jednej z kolejnych wersji. Możesz zostawić kontakt — poinformujemy o uruchomieniu.</p>
         </div>
       </details>
     </div>
@@ -1507,6 +1846,30 @@
 
   // Current year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Pillars — staggered entry animation
+  (function() {
+    const pillars = document.querySelectorAll('.pillar');
+    if (!pillars.length || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    pillars.forEach((p, i) => {
+      p.style.opacity = '0';
+      p.style.transform = 'translateY(18px)';
+      p.style.transition = `opacity .6s ease ${i * 120}ms, transform .6s ease ${i * 120}ms, box-shadow .3s ease, border-color .25s ease`;
+    });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    pillars.forEach(p => io.observe(p));
+  })();
 
   // CTA analytics hook (placeholder)
   document.querySelectorAll('[data-cta]').forEach(el => {
