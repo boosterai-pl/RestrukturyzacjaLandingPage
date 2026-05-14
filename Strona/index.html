@@ -502,6 +502,14 @@
   }
   .step h4 { font-size: 1.02rem; margin-bottom: 8px; color: var(--navy-900); }
   .step p { font-size: .88rem; color: var(--ink-700); }
+  .step-coming-soon { opacity: 0.55; position: relative; }
+  .step-coming-soon::after {
+    content: "Wkrótce";
+    position: absolute; top: 14px; right: 14px;
+    background: #e5e7eb; color: #4b5563;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px;
+  }
 
   /* ---------- Why LegalFlow ---------- */
   .why-grid {
@@ -533,6 +541,7 @@
     grid-template-columns: 1fr;
   }
   @media (min-width: 720px) { .benefits-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1050px) { .benefits-grid { grid-template-columns: repeat(3, 1fr); } }
   .benefit-card {
     padding: 32px; background: white; border-radius: var(--radius-lg);
     border: 1px solid var(--line);
@@ -568,8 +577,52 @@
     box-shadow: 0 10px 30px rgba(0,0,0,.35);
   }
   .final-cta .btn-primary:hover { background: #f2faff; }
+  .final-cta-row {
+    display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+  }
+  .btn-secondary-final {
+    color: white; border: 1.5px solid rgba(255,255,255,.35); background: transparent;
+  }
+  .btn-secondary-final:hover { border-color: white; background: rgba(255,255,255,.08); }
   .final-cta .small {
     display: block; margin-top: 18px; color: #9ab3d6; font-size: .85rem;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq { background: var(--navy-50); }
+  .faq-list { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: white; border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; transition: border-color .2s ease, box-shadow .2s ease;
+  }
+  .faq-item[open] { border-color: var(--cyan); box-shadow: var(--shadow-sm); }
+  .faq-item summary {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    padding: 20px 24px; cursor: pointer;
+    font-weight: 600; color: var(--navy-900); font-size: 1.02rem;
+    list-style: none;
+    transition: background-color .15s ease;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary:hover { background: var(--navy-50); }
+  .faq-chev { color: var(--ink-500); transition: transform .25s ease, color .15s ease; flex-shrink: 0; }
+  .faq-item[open] .faq-chev { transform: rotate(180deg); color: var(--cyan-600); }
+  .faq-content { padding: 0 24px 22px; }
+  .faq-content p { color: var(--ink-700); line-height: 1.6; }
+
+  /* ---------- Social proof placeholder ---------- */
+  .social-proof { padding: 64px 0; background: white; }
+  .social-proof .section-label {
+    text-align: center; font-size: .82rem; font-weight: 600;
+    color: var(--ink-500); letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .social-proof-placeholder {
+    max-width: 720px; margin: 0 auto;
+    padding: 36px 24px; text-align: center;
+    border: 1.5px dashed var(--line); border-radius: var(--radius);
+    color: var(--ink-500); font-size: .95rem; font-style: italic;
+    background: var(--navy-50);
   }
 
   /* ---------- Footer ---------- */
@@ -711,6 +764,7 @@
       <a href="#jak-to-dziala">Jak to działa</a>
       <a href="#dlaczego">Dlaczego LegalFlow</a>
       <a href="#korzysci">Korzyści</a>
+      <a href="#faq">FAQ</a>
     </nav>
 
     <a class="btn btn-primary header-cta"
@@ -734,6 +788,7 @@
       <a href="#jak-to-dziala">Jak to działa</a>
       <a href="#dlaczego">Dlaczego LegalFlow</a>
       <a href="#korzysci">Korzyści</a>
+      <a href="#faq">FAQ</a>
     </nav>
     <a class="btn btn-primary"
        href="https://cal.com/szymon-bazan-iahn2z/15min"
@@ -887,7 +942,7 @@
       </div>
       <div class="metric-card">
         <div class="metric-num">0</div>
-        <div class="metric-lbl">przeoczonych terminów KRZ, płatności i sprawozdań — system pilnuje sam</div>
+        <div class="metric-lbl">przeoczonych terminów, dokumentów i kontaktów z wierzycielami — system pilnuje sam</div>
       </div>
     </div>
 
@@ -1049,15 +1104,15 @@
       <span class="eyebrow" style="background: rgba(255,255,255,.1); color: #99d9ff;">Co wyróżnia to wdrożenie</span>
       <h2>Jeden zintegrowany ekosystem, nie zestaw skryptów</h2>
       <blockquote>
-        CRM, SharePoint, API GUS/Regon, KRZ, Mailerlite, SMS i poczta email działają razem —
+        CRM, SharePoint, API GUS/Regon, Mailerlite, SMS i poczta email działają razem —
         automatycznie przekazując dane przez cały cykl życia sprawy restrukturyzacyjnej.
         Żaden element nie działa w oderwaniu od pozostałych.
+        <span style="display:block;margin-top:14px;font-size:.92em;opacity:.75;">Integracja z KRZ — w przygotowaniu.</span>
       </blockquote>
       <div class="tags">
         <span>CRM</span>
         <span>SharePoint</span>
         <span>API GUS/Regon</span>
-        <span>KRZ</span>
         <span>Mailerlite</span>
         <span>SMS</span>
         <span>Email</span>
@@ -1077,24 +1132,24 @@
     </div>
     <div class="steps">
       <div class="step">
-        <h4>Lead wpada do CRM</h4>
-        <p>Email, telefon, formularz — każdy kanał trafia do CRM z uzupełnionymi danymi z GUS.</p>
+        <h4>Lead trafia do CRM</h4>
+        <p>Każdy kontakt — z maila, telefonu lub formularza — trafia do CRM z automatycznie uzupełnionymi danymi firmy.</p>
       </div>
       <div class="step">
         <h4>Wycena i onboarding</h4>
-        <p>Ankieta restrukturyzacyjna, drafty dokumentów, teczka na SharePoint — gotowe w minutę.</p>
+        <p>Dynamiczna ankieta restrukturyzacyjna, drafty dokumentów i teczka na SharePoint — gotowe w kilka minut.</p>
       </div>
       <div class="step">
         <h4>Dokumenty układowe</h4>
-        <p>Plan, test prywatnego wierzyciela, propozycje — automatyczne drafty na bazie wywiadu.</p>
+        <p>Plan restrukturyzacji, test prywatnego wierzyciela, propozycje — automatyczne drafty na podstawie danych z CRM.</p>
       </div>
-      <div class="step">
-        <h4>KRZ i płatności</h4>
-        <p>System nasłuchuje sądu i monitoruje przelewy. Windykacja rusza się bez prawnika.</p>
+      <div class="step step-coming-soon">
+        <h4>Płatności i windykacja</h4>
+        <p>Monitoring przelewów i automatyczne wezwania we właściwej kolejności.</p>
       </div>
-      <div class="step">
+      <div class="step step-coming-soon">
         <h4>Nadzór i archiwizacja</h4>
-        <p>Harmonogramy, kwartalne sprawozdania, automatyczne zamknięcie teczki na SharePoint.</p>
+        <p>Harmonogramy spłat, kwartalne sprawozdania i automatyczne zamknięcie teczki po zakończeniu sprawy.</p>
       </div>
     </div>
 
@@ -1118,51 +1173,51 @@
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">Dlaczego LegalFlow</span>
-      <h2>Nie robimy automatyzacji „w ogóle". Robimy restrukturyzacje.</h2>
-      <p>Sześć rzeczy, które odróżniają LegalFlow od ogólnych zestawów narzędzi no-code.</p>
+      <h2>Co odróżnia LegalFlow od ogólnych narzędzi automatyzacji</h2>
+      <p>Sześć rzeczy, które robią różnicę w realnej pracy kancelarii restrukturyzacyjnej.</p>
     </div>
 
     <div class="why-grid">
       <div class="why-item">
         <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
         <div>
+          <h4>Personalizacja pod procesy kancelarii</h4>
+          <p>LegalFlow dopasowuje się do Twojego flow — nie na odwrót. Dokumenty, szablony i automatyzacje odzwierciedlają realne procesy Twojej kancelarii.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div>
+          <h4>Bezpieczeństwo danych klientów</h4>
+          <p>Dane sprawy, dokumenty i korespondencja są przechowywane zgodnie ze standardami bezpieczeństwa dla sektora prawnego. Pełna kontrola dostępów i audytowalność.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div>
+          <h4>Integracja z narzędziami, których już używasz</h4>
+          <p>LegalFlow łączy się z Twoim CRM, SharePoint, systemem płatności i pocztą. Jeden spójny ekosystem — bez powielania pracy między systemami.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div>
           <h4>Wdrożenie end-to-end</h4>
-          <p>Od pierwszego kontaktu z klientem do archiwizacji sprawy. Żaden etap nie wypada z systemu.</p>
-        </div>
-      </div>
-      <div class="why-item">
-        <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-        <div>
-          <h4>Dokumenty .doc bez przepisywania</h4>
-          <p>Plan restrukturyzacji, ankieta, propozycje układowe — generowane z danych w CRM. Zero Ctrl+C / Ctrl+V.</p>
-        </div>
-      </div>
-      <div class="why-item">
-        <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-        <div>
-          <h4>Integracja z publicznym KRZ</h4>
-          <p>Monitoring sądowy bez angażowania prawnika. Obwieszczenia lądują w CRM, zanim zdążysz sprawdzić.</p>
+          <p>Od onboardingu po archiwizację — każdy etap sprawy jest w systemie. Żaden dokument, termin ani kontakt nie wypada między etapami.</p>
         </div>
       </div>
       <div class="why-item">
         <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
         <div>
           <h4>Branżowe know-how</h4>
-          <p>Rozumiemy prawo restrukturyzacyjne i insolvency workflow. Nie uczymy się Twojej specyfiki na Twoim koszcie.</p>
+          <p>System jest zbudowany z rozumieniem prawa restrukturyzacyjnego i insolvency workflow — nie jako ogólna automatyzacja skrojona pod restrukturyzację.</p>
         </div>
       </div>
       <div class="why-item">
         <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
         <div>
-          <h4>Szkolenie zespołu w cenie</h4>
-          <p>8 godzin szkoleń wdrożeniowych. Zespół działa samodzielnie od pierwszego dnia po starcie.</p>
-        </div>
-      </div>
-      <div class="why-item">
-        <span class="why-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-        <div>
-          <h4>Skalowalność modułowa</h4>
-          <p>Każdy moduł możesz wdrożyć niezależnie. Albo wziąć komplet — jako spójny, połączony system.</p>
+          <h4>Skalowanie bez nowych etatów</h4>
+          <p>Więcej spraw, ten sam zespół. Automatyzacja administracji pozwala kancelarii rosnąć bez proporcjonalnego wzrostu kosztów operacyjnych.</p>
         </div>
       </div>
     </div>
@@ -1176,7 +1231,7 @@
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">Korzyści biznesowe</span>
-      <h2>Co się zmienia w Twojej kancelarii</h2>
+      <h2>Konkretne zmiany w codziennej pracy kancelarii</h2>
     </div>
 
     <div class="benefits-grid">
@@ -1184,29 +1239,43 @@
         <div class="benefit-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
-        <h3>Czas reakcji na leada</h3>
-        <p>Leady z maila i telefonu trafiają do CRM natychmiast, z danymi z GUS. Handlowiec dzwoni w minutę — zanim klient zdąży napisać do konkurencji.</p>
+        <h3>Nawet –70% mniej czasu administracyjnego</h3>
+        <p>Generowanie dokumentów, kontakty z wierzycielami, monitoring terminów — system wykonuje to automatycznie. Zespół zajmuje się sprawami, nie obsługą procesu.</p>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <h3>Dokumenty bez przepisywania</h3>
-        <p>Plan restrukturyzacji, ankieta, propozycje układowe — gotowe drafty w CRM. Prawnik recenzuje, nie pisze od zera.</p>
+        <h3>Więcej spraw bez nowych etatów</h3>
+        <p>Automatyzacja administracji pozwala obsługiwać większą liczbę postępowań przy tym samym zespole. Wzrost skali bez proporcjonalnego wzrostu kosztów.</p>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
         <h3>Zero przeoczonych terminów</h3>
-        <p>Alerty KRZ, przypomnienia o płatnościach, zadania windykacyjne, sprawozdania kwartalne. System pilnuje — zamiast ludzi.</p>
+        <p>Alerty o płatnościach, zadania windykacyjne, sprawozdania kwartalne — LegalFlow pilnuje kalendarza sprawy na każdym etapie postępowania.</p>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <h3>Porządek w dokumentacji</h3>
-        <p>Każda sprawa to teczka na SharePoint. Dokumenty odkładają się same, a po zamknięciu — automatyczna archiwizacja.</p>
+        <h3>Porządek w dokumentacji każdej sprawy</h3>
+        <p>Każda sprawa ma kompletną teczkę w SharePoint. Dokumenty odkładają się automatycznie — bez ręcznego porządkowania i szukania plików.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3>Automatyczny kontakt z wierzycielami i dłużnikiem</h3>
+        <p>Wiadomości powitalne, propozycje układowe, przypomnienia o płatnościach — wysyłane automatycznie, na właściwym etapie, do właściwych stron.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <h3>Pełna kontrola nad statusem każdej sprawy</h3>
+        <p>Jeden widok na pipeline spraw, aktywne postępowania i alerty. Bez sprawdzania kilku systemów jednocześnie.</p>
       </div>
     </div>
   </div>
@@ -1219,16 +1288,100 @@
   <div class="container">
     <div class="final-cta">
       <span class="eyebrow" style="background: rgba(255,255,255,.1); color: #99d9ff;">Następny krok</span>
-      <h2>30 minut rozmowy. Zero zobowiązań. Konkretny plan wdrożenia.</h2>
-      <p>Pokażemy, jak Twoja kancelaria wyglądałaby po wdrożeniu LegalFlow — na Twoich realnych przykładach spraw. Bez prezentacji marketingowych.</p>
-      <a class="btn btn-primary btn-lg"
-         href="https://cal.com/szymon-bazan-iahn2z/30min"
-         target="_blank" rel="noopener"
-         data-cta="final">
-        Omów wdrożenie
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <span class="small">Rozmowa przez Cal.com — wybierasz termin w swoim kalendarzu.</span>
+      <h2>Sprawdź, jak LegalFlow działa na realnych sprawach z Twojej kancelarii.</h2>
+      <p>Umów 15-minutowe demo — pokażemy system na żywo, bez slajdów i marketingu. Zobaczysz, co konkretnie zmienia się w codziennej pracy.</p>
+      <div class="final-cta-row">
+        <a class="btn btn-primary btn-lg"
+           href="https://cal.com/szymon-bazan-iahn2z/15min"
+           target="_blank" rel="noopener"
+           data-cta="final-demo">
+          Zobacz demo
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </a>
+        <a class="btn btn-secondary-final btn-lg"
+           href="mailto:kontakt@boosterai.pl"
+           data-cta="final-contact">
+          Skontaktuj się
+        </a>
+      </div>
+      <span class="small">15-minutowe demo · bez przygotowania · pokazujemy działający system.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>Najczęstsze pytania</h2>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>
+          <span>Czy LegalFlow zastępuje mój obecny CRM?</span>
+          <svg class="faq-chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-content">
+          <p>Nie. LegalFlow integruje się z CRM, którego już używasz (HubSpot, Pipedrive, monday.com i inne). Automatyzuje procesy na jego bazie — nie wymaga migracji danych ani zmiany systemu.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>Jak długo trwa wdrożenie?</span>
+          <svg class="faq-chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-content">
+          <p>Pierwsze moduły można uruchomić w ciągu kilku tygodni. Zakres i czas wdrożenia zależy od liczby modułów i specyfiki procesów kancelarii — omawiamy to indywidualnie.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>Czy system jest bezpieczny dla danych klientów kancelarii?</span>
+          <svg class="faq-chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-content">
+          <p>Tak. Dane są przechowywane zgodnie ze standardami bezpieczeństwa dla sektora prawnego, z kontrolą dostępów i pełną audytowalnością operacji.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>Czy mogę wdrożyć tylko wybrane moduły?</span>
+          <svg class="faq-chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-content">
+          <p>Tak. Każdy moduł działa niezależnie, choć integrują się ze sobą. Możesz zacząć od jednego modułu i rozszerzać system wraz z rozwojem kancelarii.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>Kiedy pojawi się integracja z KRZ?</span>
+          <svg class="faq-chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="faq-content">
+          <p>Integracja z Krajowym Rejestrem Zadłużonych jest w przygotowaniu. Pojawi się w jednej z kolejnych wersji systemu. Możesz zostawić kontakt — poinformujemy Cię o uruchomieniu.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOCIAL PROOF — placeholder do uzupełnienia
+     ============================================================ -->
+<section class="social-proof">
+  <div class="container">
+    <p class="section-label">Kancelarie, które już pracują z LegalFlow</p>
+    <!-- TODO: wstawić logotypy / cytaty / case study snippety -->
+    <div class="social-proof-placeholder" aria-hidden="true">
+      Sekcja zostanie uzupełniona — logotypy klientów lub krótkie cytaty referencyjne.
     </div>
   </div>
 </section>
@@ -1247,13 +1400,13 @@
 
     <div class="modal-badge" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      Oddzwonimy w ciągu 2 godzin
+      Odpiszemy w ciągu 1 dnia roboczego
     </div>
 
-    <h3 id="offer-modal-title">Zostaw numer — wrócimy z ofertą</h3>
+    <h3 id="offer-modal-title">Skontaktuj się z nami</h3>
     <p class="modal-lead">
-      Podaj numer telefonu, a skontaktujemy się w ciągu 2 godzin w godzinach roboczych (pn–pt 9:00–17:00)
-      i omówimy zakres wdrożenia dopasowany do Twojej kancelarii.
+      Podaj numer telefonu, a odezwiemy się w ciągu 1 dnia roboczego.
+      Krótko omówimy, jak LegalFlow może wesprzeć Twoją kancelarię.
     </p>
 
     <form id="offer-form" novalidate>
@@ -1281,11 +1434,11 @@
         >
       </div>
       <div class="form-consent">
-        Klikając „Wyślij" wyrażasz zgodę na kontakt telefoniczny w sprawie oferty LegalFlow.
+        Klikając „Skontaktuj się" wyrażasz zgodę na kontakt w sprawie LegalFlow.
         Szczegóły w <a href="https://boosterai.pl/privacy-policy/" target="_blank" rel="noopener">polityce prywatności</a>.
       </div>
       <button type="submit" class="btn btn-primary btn-lg" data-cta="offer-submit">
-        Wyślij prośbę o kontakt
+        Skontaktuj się
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </button>
     </form>
@@ -1293,7 +1446,7 @@
     <div class="form-success" role="status" aria-live="polite">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
       <h3>Dziękujemy!</h3>
-      <p>Zadzwonimy do Ciebie w ciągu 2 godzin w godzinach roboczych.</p>
+      <p>Odezwiemy się w ciągu 1 dnia roboczego.</p>
     </div>
   </div>
 </div>
@@ -1326,11 +1479,12 @@
         <a href="#jak-to-dziala">Jak to działa</a>
         <a href="#dlaczego">Dlaczego LegalFlow</a>
         <a href="#korzysci">Korzyści</a>
+        <a href="#faq">FAQ</a>
       </div>
       <div>
         <h4>Kontakt</h4>
-        <a href="https://cal.com/szymon-bazan-iahn2z/30min" target="_blank" rel="noopener" data-cta="footer">Umów rozmowę</a>
-        <a href="mailto:kontakt@boosterai.pl">kontakt@boosterai.pl</a>
+        <a href="https://cal.com/szymon-bazan-iahn2z/15min" target="_blank" rel="noopener" data-cta="footer-demo">Zobacz demo</a>
+        <a href="mailto:kontakt@boosterai.pl" data-cta="footer-contact">Skontaktuj się</a>
         <a href="https://boosterai.pl/privacy-policy/" target="_blank" rel="noopener">Polityka prywatności</a>
       </div>
     </div>
@@ -1457,7 +1611,7 @@
             body: JSON.stringify({
               phone,
               name,
-              source: 'LegalFlow landing — Otrzymaj ofertę',
+              source: 'LegalFlow landing — Skontaktuj się',
             }),
           });
 

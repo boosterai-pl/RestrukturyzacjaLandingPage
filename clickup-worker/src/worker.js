@@ -58,7 +58,7 @@ export default {
       // Task name: prefer phone (priority callback requests), then name, then email
       const taskLabel = hasValidPhone ? phoneRaw : (name || email);
       const taskName = hasValidPhone
-        ? `Oddzwoń w 2h: ${taskLabel}${name ? ` (${name})` : ""}`
+        ? `Nowy kontakt: ${taskLabel}${name ? ` (${name})` : ""}`
         : `Nowy lead: ${taskLabel}`;
 
       const lines = [];
