@@ -215,7 +215,27 @@
   .hero-trust span { display: inline-flex; align-items: center; gap: 8px; }
   .hero-trust svg { width: 16px; height: 16px; color: var(--accent); }
 
-  /* ---------- Hero mockup ---------- */
+  /* ---------- Hero photo ---------- */
+  .hero-photo-wrap {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--line);
+    background: white;
+    line-height: 0;
+  }
+  .hero-photo {
+    width: 100%; height: auto; display: block;
+  }
+  /* Subtelne gradientowe halo wokół obrazu — łagodzi przejście do hero bg */
+  .hero-photo-wrap::before {
+    content: ""; position: absolute; inset: -1px;
+    border-radius: inherit; pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.6);
+  }
+
+  /* ---------- Hero mockup (legacy — kept for fallback / future variants) ---------- */
   .mockup {
     position: relative;
     background: white;
@@ -831,44 +851,16 @@
       </div>
     </div>
 
-    <!-- Mockup panelu kancelarii -->
-    <div class="mockup" aria-hidden="true">
-      <div class="mockup-topbar">
-        <div class="mockup-dots"><span></span><span></span><span></span></div>
-        <div class="mockup-title">Panel kancelarii — LegalFlow</div>
-      </div>
-      <div class="mockup-body">
-        <div class="kpi-row">
-          <div class="kpi-card"><div class="num">42</div><div class="lbl">Aktywne sprawy</div></div>
-          <div class="kpi-card"><div class="num">4 min</div><div class="lbl">Czas do 1. kontaktu</div></div>
-          <div class="kpi-card"><div class="num">12</div><div class="lbl">Dokumenty dziś</div></div>
-          <div class="kpi-card"><div class="num">98%</div><div class="lbl">Terminowość</div></div>
-        </div>
-        <div class="pipeline">
-          <div class="pipeline-head">
-            <h4>Pipeline spraw</h4>
-            <span class="tag">Live</span>
-          </div>
-          <div class="pipeline-row">
-            <span class="name">Nowak Logistyka sp. z o.o.</span>
-            <span class="stage blue">Wycena</span>
-          </div>
-          <div class="pipeline-row">
-            <span class="name">Meridian Bud sp. k.</span>
-            <span class="stage green">Plan układu</span>
-          </div>
-          <div class="pipeline-row">
-            <span class="name">Alfa Trans sp. z o.o.</span>
-            <span class="stage blue">Onboarding</span>
-          </div>
-          <div class="pipeline-row">
-            <span class="name">Polver S.A.</span>
-            <span class="stage green">Propozycje układowe</span>
-          </div>
-        </div>
-      </div>
-      <div class="pill-float pill-1"><span class="dot"></span>Nowy lead z formularza → CRM</div>
-      <div class="pill-float pill-2"><span class="dot"></span>Draft planu układu dla Meridian Bud</div>
+    <!-- Hero photo — dashboard kancelarii -->
+    <div class="hero-photo-wrap">
+      <img
+        src="herophoto.png"
+        alt="Dashboard LegalFlow — widok kancelarii z aktywnymi sprawami, rekomendacjami AI i obciążeniem zespołu"
+        class="hero-photo"
+        width="2023" height="1281"
+        loading="eager"
+        fetchpriority="high"
+      >
     </div>
   </div>
 </section>
